@@ -456,7 +456,7 @@ hits:"Acertos",streak:"Sequência",review:"Para revisar: {list}. Esses achados a
 reset:"Zerar progresso",reset_real:"Zerar progresso dos casos reais",disc:"Ferramenta de estudo. Não use para diagnóstico.",
 src_demo:"Demonstração ({n})",hint_measure:"Compasso ativo: toque no traçado para posicionar A e B, e arraste para ajustar.",hint_zoom:"Amplie com + e −, pinça ou dois toques, e arraste o traçado para mover. A tela cheia mostra ainda maior.",adv_sum:"Opções avançadas: importar ou exportar ECGs",pack_loading:"Carregando os casos reais… (só na primeira vez)",
 skip:"Pular",next:"Próximo",result:"Ver resultado",see_expl:"Ver explicação",hide_expl:"Ocultar explicação",answer_is:"Resposta: {l}",
-laudo_h:"Laudo da base",orig:"Laudo original:",hr_auto:"FC estimada automaticamente: cerca de {n} bpm.",
+laudo_h:"Laudo completo deste ECG (todos os achados, não só a resposta)",axis_calc:"Eixo medido no traçado: cerca de {n}°.",bank_q:"Casos selecionados só entre laudos validados por cardiologista, com diagnóstico marcado como certo e traçado sem ruído.",orig:"Laudo original:",hr_auto:"FC estimada automaticamente: cerca de {n} bpm.",
 sess_done:"Sessão concluída",of:"{a} de {b}",msg90:"Excelente leitura.",msg70:"Bom resultado. Revise os casos que errou.",msg50:"No caminho certo. Os diagnósticos que você errou vão aparecer com mais frequência.",msg0:"Vale revisar a aba Aprender antes da próxima sessão. Os diagnósticos que você errou vão aparecer com mais frequência.",
 you_marked:"Você marcou:",new_sess:"Nova sessão",
 bank_h:"Banco de ECGs",bank_none:"Por enquanto há 4 casos reais de demonstração. Importe o PTB-XL para praticar com milhares de ECGs de 12 derivações.",bank_some:"{n} ECGs do PTB-XL guardados neste navegador, com {d} diagnósticos diferentes.",
@@ -497,7 +497,7 @@ hits:"Aciertos",streak:"Racha",review:"Para repasar: {list}. Estos hallazgos apa
 reset:"Reiniciar progreso",reset_real:"Reiniciar progreso de los casos reales",disc:"Herramienta de estudio. No la uses para diagnóstico.",
 src_demo:"Demostración ({n})",hint_measure:"Compás activo: toca el trazado para colocar A y B, y arrastra para ajustar.",hint_zoom:"Amplía con + y −, pellizcando o tocando dos veces, y arrastra el trazado para moverlo. La pantalla completa lo muestra aún más grande.",adv_sum:"Opciones avanzadas: importar o exportar ECG",pack_loading:"Cargando los casos reales… (solo la primera vez)",
 skip:"Saltar",next:"Siguiente",result:"Ver resultado",see_expl:"Ver explicación",hide_expl:"Ocultar explicación",answer_is:"Respuesta: {l}",
-laudo_h:"Informe de la base",orig:"Informe original:",hr_auto:"FC estimada automáticamente: unos {n} lpm.",
+laudo_h:"Informe completo de este ECG (todos los hallazgos, no solo la respuesta)",axis_calc:"Eje medido en el trazado: unos {n}°.",bank_q:"Casos seleccionados solo entre informes validados por cardiólogo, con diagnóstico marcado como seguro y trazado sin ruido.",orig:"Informe original:",hr_auto:"FC estimada automáticamente: unos {n} lpm.",
 sess_done:"Sesión completada",of:"{a} de {b}",msg90:"Excelente lectura.",msg70:"Buen resultado. Repasa los casos que fallaste.",msg50:"Vas por buen camino. Los diagnósticos que fallaste aparecerán con más frecuencia.",msg0:"Conviene repasar la pestaña Aprender antes de la próxima sesión. Los diagnósticos que fallaste aparecerán con más frecuencia.",
 you_marked:"Marcaste:",new_sess:"Nueva sesión",
 bank_h:"Banco de ECG",bank_none:"Por ahora hay 4 casos reales de demostración. Importa el PTB-XL para practicar con miles de ECG de 12 derivaciones.",bank_some:"{n} ECG del PTB-XL guardados en este navegador, con {d} diagnósticos distintos.",
@@ -1148,7 +1148,7 @@ function renderSrcBar(){
 }
 function renderBankInfo(){
   var d=Object.keys(RS.bank.reduce(function(a,m){a[m.label]=1;return a;},{})).length;
-  $("bankInfo").textContent=RS.bank.length?t("bank_some",{n:RS.bank.length,d:d}):t("bank_none");
+  $("bankInfo").textContent=RS.bank.length?t("bank_some",{n:RS.bank.length,d:d})+(RS.bank.some(function(m){return "axdeg" in m;})?" "+t("bank_q"):""):t("bank_none");
   $("rClear").hidden=!RS.bank.length;
   $("rExportBox").hidden=!RS.bank.length;
 }
@@ -1179,7 +1179,7 @@ function bankQuestion(){
     var C={id:M.id,fs:S.fs,leads:LEADS12,sig:sig},codes=M.codes;
     var q2={C:C,id:M.id};
     var ax=AXIS[M.axis];
-    if(ax&&Math.random()<0.22){
+    if(ax&&M.axdeg!=null&&Math.random()<0.3){
       q2.mode="axis";q2.key="AXIS:"+ax;q2.okKey=ax;q2.keys=shuffle(Object.keys(AXOPT));
       q2.optText=function(k2){return AXOPT[k2][LI()];};
     }else{
@@ -1204,7 +1204,7 @@ function bankQuestion(){
       if(M.age&&M.age<120)meta.push(t("years",{n:Math.round(M.age)}));else if(M.age>=120)meta.push(t("over89"));
       if(M.validated)meta.push(t("validated"));
       return {prompt:q2.mode==="axis"?t("q_axis"):(Lb==="NORM"?t("q_interp"):t("q_main")),
-        src:t("record",{id:String(M.id).padStart(5,"0"),fs:S.fs}),meta:meta.join(", "),laudo:laudo,orig:M.report||"",extra:q2.mode==="axis"?t("axis_tip"):""};
+        src:t("record",{id:String(M.id).padStart(5,"0"),fs:S.fs}),meta:meta.join(", "),laudo:laudo,orig:M.report||"",extra:(q2.mode==="axis"?t("axis_tip")+" ":"")+(M.axdeg!=null?t("axis_calc",{n:M.axdeg}):"")};
     };
     return q2;
   });
@@ -1539,7 +1539,7 @@ function storePack(meta,d){
     var n=c.n,out=new Int16Array(12*n);
     for(var k=0;k<12;k++){var acc=0;for(var j=0;j<n;j++){acc=(acc+d[pos++])<<16>>16;out[k*n+j]=acc;}}
     sigs.push({id:c.id,fs:c.fs,n:n,data:out});
-    metas.push({id:c.id,label:c.label,codes:c.codes,validated:c.validated,age:c.age,sex:c.sex,axis:c.axis,report:c.report});
+    metas.push({id:c.id,label:c.label,codes:c.codes,validated:c.validated,age:c.age,sex:c.sex,axis:c.axis,axdeg:c.axdeg!=null?c.axdeg:null,report:c.report});
   });
   return putMany("sig",sigs).then(function(){return putMany("meta",metas);});
 }
@@ -1684,7 +1684,7 @@ ZR=ZoomView({wrap:$("rScroll"),cv:$("cvReal"),slider:$("rZoom"),zin:$("rZoomIn")
   up:function(){RS.drag=null;}});
 
 /* ---------- casos reais embutidos (data/ptbxl.js) ---------- */
-var PACK_V="ptbxl-300-v1",PACK_SRC="data/ptbxl.js";
+var PACK_V="ptbxl-281-v2",PACK_SRC="data/ptbxl.js";
 function packBytes(s){var bin=atob(s),n=bin.length,u=new Uint8Array(n);for(var i=0;i<n;i++)u[i]=bin.charCodeAt(i);return u;}
 function packInflate(u8){
   if(typeof DecompressionStream==="undefined")return Promise.reject(new Error("DecompressionStream"));
@@ -1702,7 +1702,8 @@ function autoPack(){
     s.onerror=function(){rej(new Error("sem data/ptbxl.js"));};
     document.head.appendChild(s);
   }).then(function(P2){
-    return packInflate(packBytes(P2.sig)).then(function(ab){return storePack(P2,packPlanes(ab));});
+    var wipe=have?Promise.all([tx("meta","readwrite",function(s){s.clear();}),tx("sig","readwrite",function(s){s.clear();})]):Promise.resolve();
+    return wipe.then(function(){return packInflate(packBytes(P2.sig));}).then(function(ab){return storePack(P2,packPlanes(ab));});
   }).then(function(){
     try{localStorage.setItem("ecglab:pack",PACK_V);}catch(e){}
     try{delete window.ECGLAB_PACK;}catch(e){window.ECGLAB_PACK=null;}
