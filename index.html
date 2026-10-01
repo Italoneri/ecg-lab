@@ -111,6 +111,8 @@ ol.steps li{margin-bottom:4px}
 .fb .fc{font-size:14px;color:var(--muted);margin-bottom:12px}
 .weak{font-size:13.5px;color:var(--muted);margin-top:10px}
 .linkbtn{background:none;border:none;color:var(--muted);font-size:13px;text-decoration:underline;padding:8px 0;min-height:36px}
+.linkbtn.report{display:block;margin:8px auto 0;font-size:13.5px}
+.linkbtn.report::before{content:"⚑ ";text-decoration:none;display:inline-block;margin-right:4px}
 .disc{font-size:12.5px;color:var(--muted);text-align:center;padding:6px 8px 0}
 
 /* barra de abas */
@@ -141,7 +143,7 @@ nav.tabs button.on svg{stroke-width:2.3}
 .verdict{font-weight:700;font-size:15px}
 .verdict.ok{color:var(--good)}
 .verdict.no{color:var(--bad)}
-.nextbar{position:sticky;bottom:calc(74px + env(safe-area-inset-bottom,0px));z-index:5;padding:4px 0 10px}
+.nextbar{position:static;padding:0;margin:12px 0 0}
 .nextbar .btn{width:100%;min-height:52px;font-size:16px;box-shadow:0 4px 14px rgba(0,0,0,.12)}
 .nextbar .btn.soft{background:var(--surface);color:var(--text);border-color:var(--border)}
 .sumbig{font-family:var(--font-display);font-size:44px;line-height:1;margin:10px 0 4px}
@@ -300,6 +302,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
           <h3 class="dsec" data-t="gal_clin"></h3>
           <p style="font-size:15px" id="gdClin"></p>
           <div class="btnrow"><button class="btn" id="gdAgain" data-t="gal_other"></button></div>
+          <button class="linkbtn report" id="gdReport" data-t="rep_sim"></button>
           <div class="dnav">
             <button class="btn ghost" id="gdPrev" data-t="gal_prev"></button>
             <button class="btn ghost" id="gdNext" data-t="gal_next"></button>
@@ -353,9 +356,10 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
           <button class="explbtn" id="rExplain"><span id="rExplTxt"></span><svg viewBox="0 0 24 24"><path d="M2 12h4l2-6 4 12 3-8 2 2h5"/></svg></button>
           <span class="verdict" id="rVerdict"></span>
         </div>
-        <div class="fb card" id="rFb" hidden style="margin-bottom:0"></div>
+        <div class="nextbar"><button class="btn primary" id="rNextBtn"></button></div>
+        <button class="linkbtn report" id="rReport" data-t="rep_case"></button>
+        <div class="fb card" id="rFb" hidden style="margin:12px 0 0"></div>
       </div>
-      <div class="nextbar"><button class="btn primary" id="rNextBtn"></button></div>
     </div>
     <div class="card" id="rSummary" hidden></div>
 
@@ -446,9 +450,9 @@ norm_h:"O ECG normal",norm_lead:"Escolha uma parte do batimento para ver onde el
 sys_h:"Leitura sistemática",sys_lead:"Siga sempre a mesma ordem para não deixar nada passar.",
 sys_list:"<li><b>Ritmo:</b> há P antes de todo QRS? O R–R é regular?</li><li><b>Frequência:</b> 1500 ÷ mm entre dois R.</li><li><b>Eixo:</b> QRS positivo em D1 e aVF = eixo normal.</li><li><b>Intervalos:</b> PR, QRS e QT.</li><li><b>ST e T:</b> desníveis, inversões, ondas anormais.</li>",
 gal_intro:"Toque em um achado para ver como ele aparece no ECG, os critérios e a importância clínica. Os traçados são simulados e esquemáticos.",
-gal_back:"Todos os achados",gal_crit:"Critérios",gal_clin:"Na prática",gal_other:"Outro exemplo",gal_prev:"‹ Anterior",gal_next:"Próximo ›",gal_lead:"Derivação {l}",
+gal_back:"Todos os achados",gal_crit:"Critérios",gal_clin:"Na prática",gal_other:"Outro exemplo",gal_prev:"‹ Anterior",gal_next:"Próximo ›",rep_sim:"Reportar erro neste traçado",rep_ans:"Resposta do app",rep_mark:"Marcada",rep_leads:"Derivações",laudo_short:"Laudo",rep_case:"Reportar erro neste caso",rep_off:"O formulário de erros ainda não está configurado.",gal_lead:"Derivação {l}",gal_leads:"Derivações: {l}",
 freq1:"Comum",freq2:"Menos comum",freq3:"Raro",
-sim_h:"Qual é o diagnóstico?",sim_lead:"Analise o traçado de 6 segundos e escolha a resposta.",swipe:"Arraste o traçado para ver tudo. Para ampliar, use + e −, faça pinça com dois dedos ou dê dois toques.",
+sim_h:"Qual é o diagnóstico?",sim_lead:"Analise as derivações mostradas (6 segundos) e escolha a resposta. Cada traçado é gerado na hora, então o mesmo achado nunca sai igual.",swipe:"Arraste o traçado para ver tudo. Para ampliar, use + e −, faça pinça com dois dedos ou dê dois toques.",
 guide_show:"Ver roteiro",guide_hide:"Ocultar roteiro",
 guide_list:"<li>O ritmo é regular ou irregular?</li><li>Há onda P antes de cada QRS?</li><li>O QRS é estreito (menos de 3 mm)?</li><li>Qual é a frequência? (1500 ÷ mm)</li><li>Há alterações de ST, T ou QRS?</li>",
 correct:"Correto!",was:"Era",next_ecg:"Próximo ECG",hr_est:"FC ventricular média neste traçado: cerca de {n} bpm.",
@@ -487,9 +491,9 @@ norm_h:"El ECG normal",norm_lead:"Elige una parte del latido para ver dónde est
 sys_h:"Lectura sistemática",sys_lead:"Sigue siempre el mismo orden para no pasar nada por alto.",
 sys_list:"<li><b>Ritmo:</b> ¿hay P antes de cada QRS? ¿El R-R es regular?</li><li><b>Frecuencia:</b> 1500 ÷ mm entre dos R.</li><li><b>Eje:</b> QRS positivo en DI y aVF = eje normal.</li><li><b>Intervalos:</b> PR, QRS y QT.</li><li><b>ST y T:</b> elevaciones, descensos, inversiones, ondas anómalas.</li>",
 gal_intro:"Toca un hallazgo para ver cómo aparece en el ECG, sus criterios y su importancia clínica. Los trazados son simulados y esquemáticos.",
-gal_back:"Todos los hallazgos",gal_crit:"Criterios",gal_clin:"En la práctica",gal_other:"Otro ejemplo",gal_prev:"‹ Anterior",gal_next:"Siguiente ›",gal_lead:"Derivación {l}",
+gal_back:"Todos los hallazgos",gal_crit:"Criterios",gal_clin:"En la práctica",gal_other:"Otro ejemplo",gal_prev:"‹ Anterior",gal_next:"Siguiente ›",rep_sim:"Reportar un error en este trazado",rep_ans:"Respuesta de la app",rep_mark:"Marcada",rep_leads:"Derivaciones",laudo_short:"Informe",rep_case:"Reportar un error en este caso",rep_off:"El formulario de errores aún no está configurado.",gal_lead:"Derivación {l}",gal_leads:"Derivaciones: {l}",
 freq1:"Frecuente",freq2:"Menos frecuente",freq3:"Raro",
-sim_h:"¿Cuál es el diagnóstico?",sim_lead:"Analiza el trazado de 6 segundos y elige la respuesta.",swipe:"Arrastra el trazado para verlo completo. Para ampliar, usa + y −, pellizca con dos dedos o toca dos veces.",
+sim_h:"¿Cuál es el diagnóstico?",sim_lead:"Analiza las derivaciones mostradas (6 segundos) y elige la respuesta. Cada trazado se genera al momento, así que el mismo hallazgo nunca sale igual.",swipe:"Arrastra el trazado para verlo completo. Para ampliar, usa + y −, pellizca con dos dedos o toca dos veces.",
 guide_show:"Ver guía",guide_hide:"Ocultar guía",
 guide_list:"<li>¿El ritmo es regular o irregular?</li><li>¿Hay onda P antes de cada QRS?</li><li>¿El QRS es estrecho (menos de 3 mm)?</li><li>¿Cuál es la frecuencia? (1500 ÷ mm)</li><li>¿Hay alteraciones del ST, de la T o del QRS?</li>",
 correct:"¡Correcto!",was:"Era",next_ecg:"Siguiente ECG",hr_est:"FC ventricular media en este trazado: unos {n} lpm.",
@@ -603,17 +607,12 @@ var GAL=[
  what:{pt:"Uma via acessória leva o impulso aos ventrículos sem o atraso do nó AV.",es:"Una vía accesoria lleva el impulso a los ventrículos sin el retraso del nodo AV."},
  crit:{pt:["PR curto (menos de 0,12 s)","Onda delta: empastamento inicial do QRS","QRS alargado, com alterações secundárias de ST-T"],es:["PR corto (menos de 0,12 s)","Onda delta: empastamiento inicial del QRS","QRS ensanchado, con alteraciones secundarias del ST-T"]},
  clin:{pt:"Risco de taquicardias por reentrada. FA com pré-excitação pode ser grave: evite bloqueadores do nó AV.",es:"Riesgo de taquicardias por reentrada. La FA preexcitada puede ser grave: evita los bloqueadores del nodo AV."}},
-{id:"stemi",cat:"isq",f:1,lead:"II",hmm:38,sim:["peric","hyperk","stdep"],
- name:{pt:"Supradesnivelamento de ST (IAM)",es:"Elevación del ST (IAMCEST)"},
- what:{pt:"Lesão transmural aguda. É a principal urgência do ECG.",es:"Lesión transmural aguda. Es la gran urgencia del ECG."},
- crit:{pt:["Supra de ST de 1 mm ou mais em 2 derivações contíguas (em V2–V3, de 1,5 a 2,5 mm conforme idade e sexo)","ST convexo, que pode se fundir à onda T","Infra de ST recíproco nas derivações opostas"],es:["Elevación del ST de 1 mm o más en 2 derivaciones contiguas (en V2–V3, de 1,5 a 2,5 mm según edad y sexo)","ST convexo, que puede fusionarse con la onda T","Descenso recíproco del ST en las derivaciones opuestas"]},
- clin:{pt:"Localize a parede: D2, D3 e aVF inferior; V1–V4 anterior; D1, aVL, V5 e V6 lateral. Reperfusão imediata.",es:"Localiza la cara: DII, DIII y aVF inferior; V1–V4 anterior; DI, aVL, V5 y V6 lateral. Reperfusión inmediata."}},
-{id:"stdep",cat:"isq",f:1,lead:"V5",sim:["lvh","stemi","hypok"],
+{id:"stdep",cat:"isq",f:1,lead:"V5",sim:["lvh","avr","dig"],
  name:{pt:"Infradesnivelamento de ST",es:"Descenso del ST"},
  what:{pt:"Sinal de isquemia subendocárdica, entre outras causas.",es:"Signo de isquemia subendocárdica, entre otras causas."},
  crit:{pt:["Infra de ST de 0,5 mm ou mais, horizontal ou descendente","Medido 60 a 80 ms após o ponto J","Pode vir acompanhado de T invertida"],es:["Descenso del ST de 0,5 mm o más, horizontal o descendente","Medido 60 a 80 ms después del punto J","Puede acompañarse de T negativa"]},
  clin:{pt:"Pense em síndrome coronariana sem supra, imagem em espelho de um supra em outra parede, sobrecarga ventricular ou efeito digitálico.",es:"Piensa en síndrome coronario sin elevación del ST, imagen especular de una elevación en otra cara, sobrecarga ventricular o efecto digitálico."}},
-{id:"qwave",cat:"isq",f:2,lead:"III",sim:["stemi","lbbb"],
+{id:"qwave",cat:"isq",f:2,lead:"III",sim:["iam_inf","lafb","lbbb"],
  name:{pt:"Ondas Q patológicas",es:"Ondas Q patológicas"},
  what:{pt:"Marca de necrose miocárdica, geralmente de um infarto prévio.",es:"Huella de necrosis miocárdica, habitualmente de un infarto previo."},
  crit:{pt:["Q com duração de 0,04 s (1 mm) ou mais","Profundidade de 25% ou mais do R seguinte","Presente em 2 derivações contíguas"],es:["Q de 0,04 s (1 mm) o más de duración","Profundidad del 25% o más de la R siguiente","Presente en 2 derivaciones contiguas"]},
@@ -623,7 +622,7 @@ var GAL=[
  what:{pt:"Aumento da massa do ventrículo esquerdo, com QRS de grande amplitude.",es:"Aumento de la masa del ventrículo izquierdo, con QRS de gran amplitud."},
  crit:{pt:["Sokolow-Lyon: S em V1 + R em V5 ou V6 de 35 mm ou mais","Cornell: R em aVL + S em V3 acima de 28 mm (homens) ou 20 mm (mulheres)","Padrão de strain: infra de ST e T invertida assimétrica em V5–V6"],es:["Sokolow-Lyon: S en V1 + R en V5 o V6 de 35 mm o más","Cornell: R en aVL + S en V3 por encima de 28 mm (hombres) o 20 mm (mujeres)","Patrón de sobrecarga (strain): descenso del ST y T negativa asimétrica en V5–V6"]},
  clin:{pt:"A causa mais comum é a hipertensão. O ECG tem baixa sensibilidade; confirme com ecocardiograma.",es:"La causa más frecuente es la hipertensión. El ECG tiene baja sensibilidad; confirma con ecocardiograma."}},
-{id:"hyperk",cat:"outros",f:2,lead:"II",hmm:38,sim:["stemi","lqt","hypok"],
+{id:"hyperk",cat:"outros",f:2,lead:"II",hmm:38,sim:["hypt","lqt","hypok"],
  name:{pt:"Hipercalemia",es:"Hiperpotasemia"},
  what:{pt:"O potássio elevado altera a repolarização e, depois, a condução.",es:"El potasio elevado altera la repolarización y, después, la conducción."},
  crit:{pt:["Onda T apiculada, alta e estreita (sinal precoce)","Com a piora: P achatada, PR longo e QRS largo","Casos graves: padrão sinusoidal e parada"],es:["Onda T picuda, alta y estrecha (signo precoz)","Al empeorar: P aplanada, PR largo y QRS ancho","Casos graves: patrón sinusoidal y parada"]},
@@ -638,16 +637,176 @@ var GAL=[
  what:{pt:"Repolarização ventricular prolongada.",es:"Repolarización ventricular prolongada."},
  crit:{pt:["QTc acima de 450 ms em homens ou 460 ms em mulheres (Bazett: QT ÷ √RR)","QTc acima de 500 ms indica risco alto","Regra rápida: com FC normal, QT maior que metade do R–R"],es:["QTc por encima de 450 ms en hombres o 460 ms en mujeres (Bazett: QT ÷ √RR)","QTc por encima de 500 ms indica riesgo alto","Regla rápida: con FC normal, QT mayor que la mitad del R-R"]},
  clin:{pt:"Causas: drogas (antiarrítmicos, macrolídeos, antipsicóticos), hipocalemia, hipomagnesemia, hipocalcemia e formas congênitas. Risco de torsades.",es:"Causas: fármacos (antiarrítmicos, macrólidos, antipsicóticos), hipopotasemia, hipomagnesemia, hipocalcemia y formas congénitas. Riesgo de torsades."}},
-{id:"peric",cat:"outros",f:2,lead:"II",sim:["stemi","brugada"],
+{id:"peric",cat:"outros",f:2,lead:"II",sim:["iam_inf","erepol","brugada"],
  name:{pt:"Pericardite aguda",es:"Pericarditis aguda"},
  what:{pt:"Inflamação do pericárdio, com lesão subepicárdica difusa.",es:"Inflamación del pericardio, con lesión subepicárdica difusa."},
  crit:{pt:["Supra de ST difuso e côncavo, em várias paredes","Infra do segmento PR (e supra de PR em aVR)","Sem imagem recíproca, exceto em aVR e V1"],es:["Elevación del ST difusa y cóncava, en varias caras","Descenso del segmento PR (y elevación del PR en aVR)","Sin imagen especular, salvo en aVR y V1"]},
  clin:{pt:"Dor torácica que piora deitado e melhora sentado; pode haver atrito pericárdico.",es:"Dolor torácico que empeora al acostarse y mejora al sentarse; puede haber roce pericárdico."}},
-{id:"brugada",cat:"outros",f:3,lead:"V1",sim:["rbbb","stemi","peric"],
+{id:"brugada",cat:"outros",f:3,lead:"V1",sim:["rbbb","irbbb","iam_ant"],
  name:{pt:"Padrão de Brugada tipo 1",es:"Patrón de Brugada tipo 1"},
  what:{pt:"Canalopatia hereditária com risco de morte súbita.",es:"Canalopatía hereditaria con riesgo de muerte súbita."},
  crit:{pt:["Supra de ST de 2 mm ou mais em V1–V2, em cúpula (coved)","Seguido de onda T negativa","Pode aparecer só com febre ou drogas bloqueadoras de sódio"],es:["Elevación del ST de 2 mm o más en V1–V2, en cúpula (coved)","Seguida de onda T negativa","Puede aparecer solo con fiebre o fármacos bloqueantes del sodio"]},
- clin:{pt:"Síncope ou história familiar de morte súbita exigem avaliação com cardiologista.",es:"El síncope o los antecedentes familiares de muerte súbita obligan a valoración por cardiología."}}
+ clin:{pt:"Síncope ou história familiar de morte súbita exigem avaliação com cardiologista.",es:"El síncope o los antecedentes familiares de muerte súbita obligan a valoración por cardiología."}},
+{id:"sarrh",cat:"ritmo",f:1,sim:["nsr","pac","afib"],
+ name:{pt:"Arritmia sinusal",es:"Arritmia sinusal"},
+ what:{pt:"Variação do ritmo sinusal com a respiração: acelera na inspiração e desacelera na expiração.",es:"Variación del ritmo sinusal con la respiración: se acelera en la inspiración y se enlentece en la espiración."},
+ crit:{pt:["Onda P sinusal igual antes de cada QRS, com PR constante","R–R varia de forma gradual e cíclica (diferença acima de 0,12 s entre o maior e o menor)","Sem batimentos prematuros nem pausas súbitas"],es:["Onda P sinusal igual antes de cada QRS, con PR constante","El R-R varía de forma gradual y cíclica (diferencia mayor de 0,12 s entre el mayor y el menor)","Sin latidos prematuros ni pausas súbitas"]},
+ clin:{pt:"Fisiológica, comum em jovens e atletas. Não precisa de tratamento.",es:"Fisiológica, frecuente en jóvenes y deportistas. No requiere tratamiento."}},
+{id:"pac",cat:"ritmo",f:1,sim:["pvc","sarrh","afib"],
+ name:{pt:"Extrassístole atrial",es:"Extrasístole auricular"},
+ what:{pt:"Batimento precoce que nasce no átrio, fora do nó sinusal.",es:"Latido precoz que se origina en la aurícula, fuera del nodo sinusal."},
+ crit:{pt:["Onda P precoce com forma diferente da P sinusal","QRS estreito, igual aos demais","Pausa depois da extrassístole geralmente não compensatória"],es:["Onda P precoz con forma distinta de la P sinusal","QRS estrecho, igual a los demás","Pausa posterior generalmente no compensadora"]},
+ clin:{pt:"Muito comum e geralmente benigna. Cafeína, álcool, estresse e doença atrial aumentam a frequência.",es:"Muy frecuente y en general benigna. La cafeína, el alcohol, el estrés y la enfermedad auricular aumentan su frecuencia."}},
+{id:"junc",cat:"ritmo",f:2,sim:["sbrad","bav3","afib"],
+ name:{pt:"Ritmo juncional",es:"Ritmo de la unión"},
+ what:{pt:"Ritmo comandado pela junção atrioventricular quando o nó sinusal falha ou fica mais lento.",es:"Ritmo dirigido por la unión auriculoventricular cuando el nodo sinusal falla o se enlentece."},
+ crit:{pt:["QRS estreito e regular","Onda P ausente ou invertida em D2, logo antes (PR curto) ou logo depois do QRS","FC de 40 a 60 bpm (acima de 60, ritmo juncional acelerado)"],es:["QRS estrecho y regular","Onda P ausente o invertida en DII, justo antes (PR corto) o justo después del QRS","FC de 40 a 60 lpm (por encima de 60, ritmo de la unión acelerado)"]},
+ clin:{pt:"Pense em disfunção do nó sinusal, intoxicação digitálica, betabloqueador ou isquemia inferior.",es:"Piensa en disfunción sinusal, intoxicación digitálica, betabloqueantes o isquemia inferior."}},
+{id:"bigem",cat:"ritmo",f:2,sim:["pvc","pac","vt"],
+ name:{pt:"Bigeminismo ventricular",es:"Bigeminismo ventricular"},
+ what:{pt:"Cada batimento sinusal é seguido por uma extrassístole ventricular.",es:"Cada latido sinusal va seguido de una extrasístole ventricular."},
+ crit:{pt:["Alternância regular: um QRS normal, um QRS largo e precoce","Extrassístole sem onda P antes, com T oposta ao QRS","Pausa compensatória depois de cada extrassístole"],es:["Alternancia regular: un QRS normal, un QRS ancho y precoz","Extrasístole sin onda P previa, con T opuesta al QRS","Pausa compensadora tras cada extrasístole"]},
+ clin:{pt:"O pulso pode parecer lento, porque as extrassístoles geram pouco débito. Investigue distúrbio eletrolítico, isquemia e digital.",es:"El pulso puede parecer lento porque las extrasístoles generan poco gasto. Busca alteraciones electrolíticas, isquemia y digital."}},
+{id:"mat",cat:"ritmo",f:3,sim:["afib","stach","pac"],
+ name:{pt:"Taquicardia atrial multifocal",es:"Taquicardia auricular multifocal"},
+ what:{pt:"Ritmo rápido e irregular com vários focos atriais disparando.",es:"Ritmo rápido e irregular con varios focos auriculares que disparan."},
+ crit:{pt:["FC acima de 100 bpm","Pelo menos 3 formas diferentes de onda P na mesma derivação","PR e R–R variáveis, com linha de base isoelétrica entre as ondas P"],es:["FC mayor de 100 lpm","Al menos 3 morfologías distintas de onda P en la misma derivación","PR y R-R variables, con línea de base isoeléctrica entre las ondas P"]},
+ clin:{pt:"Típica do DPOC descompensado e da hipoxemia. Trate a doença de base; a cardioversão não funciona.",es:"Típica del EPOC descompensado y la hipoxemia. Trata la enfermedad de base; la cardioversión no sirve."}},
+{id:"aivr",cat:"ritmo",f:2,sim:["vt","bav3","junc"],
+ name:{pt:"Ritmo idioventricular acelerado",es:"Ritmo idioventricular acelerado"},
+ what:{pt:"Ritmo ventricular regular, mais rápido que o escape habitual, mas mais lento que uma taquicardia ventricular.",es:"Ritmo ventricular regular, más rápido que el escape habitual pero más lento que una taquicardia ventricular."},
+ crit:{pt:["QRS largo e regular","FC entre 50 e 110 bpm","Sem relação com as ondas P (às vezes dissociação AV ou batimentos de fusão)"],es:["QRS ancho y regular","FC entre 50 y 110 lpm","Sin relación con las ondas P (a veces disociación AV o latidos de fusión)"]},
+ clin:{pt:"Clássico após reperfusão no infarto. Costuma ser benigno e passageiro; não use antiarrítmico.",es:"Clásico tras la reperfusión en el infarto. Suele ser benigno y transitorio; no uses antiarrítmicos."}},
+{id:"pause",cat:"ritmo",f:2,sim:["mob2","bav3","sbrad"],
+ name:{pt:"Pausa sinusal",es:"Pausa sinusal"},
+ what:{pt:"O nó sinusal deixa de disparar por um tempo e nenhuma onda P aparece.",es:"El nodo sinusal deja de disparar durante un tiempo y no aparece ninguna onda P."},
+ crit:{pt:["Ritmo sinusal interrompido por pausa sem onda P","A pausa não é múltipla exata do intervalo P–P (diferente do bloqueio sinoatrial)","Pausas acima de 3 s são clinicamente importantes"],es:["Ritmo sinusal interrumpido por una pausa sin onda P","La pausa no es múltiplo exacto del intervalo P-P (a diferencia del bloqueo sinoauricular)","Las pausas de más de 3 s son clínicamente importantes"]},
+ clin:{pt:"Faz parte da doença do nó sinusal. Pausas sintomáticas (síncope, tontura) indicam marca-passo.",es:"Forma parte de la enfermedad del nodo sinusal. Las pausas sintomáticas (síncope, mareo) indican marcapasos."}},
+{id:"pace",cat:"ritmo",f:2,sim:["lbbb","vt","aivr"],
+ name:{pt:"Ritmo de marca-passo",es:"Ritmo de marcapasos"},
+ what:{pt:"Batimentos disparados por um marca-passo artificial.",es:"Latidos disparados por un marcapasos artificial."},
+ crit:{pt:["Espícula vertical estreita antes do QRS (e antes da P, no marca-passo de dupla câmara)","QRS largo depois da espícula, em geral com padrão de bloqueio de ramo esquerdo","Intervalos regulares, na frequência programada"],es:["Espiga vertical estrecha antes del QRS (y antes de la P en el marcapasos bicameral)","QRS ancho tras la espiga, en general con patrón de bloqueo de rama izquierda","Intervalos regulares a la frecuencia programada"]},
+ clin:{pt:"Verifique se toda espícula gera captura e se o marca-passo sente o ritmo próprio. Falha de captura é urgência.",es:"Comprueba que cada espiga genere captura y que el marcapasos detecte el ritmo propio. La falta de captura es una urgencia."}},
+{id:"bav21",cat:"cond",f:2,sim:["mob1","mob2","bav3"],
+ name:{pt:"BAV de 2º grau 2:1",es:"Bloqueo AV de segundo grado 2:1"},
+ what:{pt:"Uma onda P é conduzida e a seguinte é bloqueada, de forma alternada.",es:"Una onda P se conduce y la siguiente se bloquea, de forma alternante."},
+ crit:{pt:["Duas ondas P para cada QRS, com P–P regular","PR constante nos batimentos conduzidos","Não dá para dizer se é Mobitz I ou II só com o 2:1 (QRS largo sugere bloqueio abaixo do nó)"],es:["Dos ondas P por cada QRS, con P-P regular","PR constante en los latidos conducidos","No se puede distinguir Mobitz I de II solo con el 2:1 (QRS ancho sugiere bloqueo infranodal)"]},
+ clin:{pt:"A frequência ventricular cai para a metade. Com QRS largo ou sintomas, prepare marca-passo.",es:"La frecuencia ventricular cae a la mitad. Con QRS ancho o síntomas, prepara un marcapasos."}},
+{id:"irbbb",cat:"cond",f:1,sim:["rbbb","brugada","nsr"],
+ name:{pt:"Bloqueio incompleto de ramo direito",es:"Bloqueo incompleto de rama derecha"},
+ what:{pt:"Atraso parcial na condução pelo ramo direito.",es:"Retraso parcial de la conducción por la rama derecha."},
+ crit:{pt:["rSr' em V1–V2","QRS entre 0,10 e 0,12 s","S discreta e um pouco alargada em D1 e V6"],es:["rSr' en V1-V2","QRS entre 0,10 y 0,12 s","S discreta y algo ensanchada en DI y V6"]},
+ clin:{pt:"Muitas vezes é variante normal. Considere comunicação interatrial ou sobrecarga do ventrículo direito se houver contexto.",es:"Muchas veces es una variante normal. Considera comunicación interauricular o sobrecarga del ventrículo derecho si el contexto lo sugiere."}},
+{id:"lafb",cat:"cond",f:1,sim:["lpfb","qwave","nsr"],
+ name:{pt:"Bloqueio divisional anterossuperior esquerdo",es:"Hemibloqueo anterior izquierdo"},
+ what:{pt:"Bloqueio do fascículo anterior do ramo esquerdo, que desvia o eixo para cima e para a esquerda.",es:"Bloqueo del fascículo anterior de la rama izquierda, que desvía el eje hacia arriba y a la izquierda."},
+ crit:{pt:["Eixo entre −45° e −90°","qR em D1 e aVL; rS em D2, D3 e aVF","QRS menor que 0,12 s"],es:["Eje entre −45° y −90°","qR en DI y aVL; rS en DII, DIII y aVF","QRS menor de 0,12 s"]},
+ clin:{pt:"É a causa mais comum de desvio do eixo para a esquerda. Junto com bloqueio de ramo direito forma o bloqueio bifascicular.",es:"Es la causa más frecuente de desviación del eje a la izquierda. Junto con el bloqueo de rama derecha forma el bloqueo bifascicular."}},
+{id:"lpfb",cat:"cond",f:3,sim:["lafb","rvh","leadrev"],
+ name:{pt:"Bloqueio divisional posteroinferior esquerdo",es:"Hemibloqueo posterior izquierdo"},
+ what:{pt:"Bloqueio do fascículo posterior do ramo esquerdo, que desvia o eixo para a direita.",es:"Bloqueo del fascículo posterior de la rama izquierda, que desvía el eje a la derecha."},
+ crit:{pt:["Eixo entre +90° e +180°","rS em D1 e aVL; qR em D3 e aVF","Só vale depois de excluir sobrecarga de ventrículo direito, TEP e paciente longilíneo"],es:["Eje entre +90° y +180°","rS en DI y aVL; qR en DIII y aVF","Solo es válido tras descartar sobrecarga del ventrículo derecho, TEP y biotipo longilíneo"]},
+ clin:{pt:"Raro isolado. Costuma indicar doença extensa do sistema de condução.",es:"Raro de forma aislada. Suele indicar enfermedad extensa del sistema de conducción."}},
+{id:"bifasc",cat:"cond",f:2,sim:["rbbb","lafb","lbbb"],
+ name:{pt:"Bloqueio bifascicular (BRD + BDAS)",es:"Bloqueo bifascicular (BRD + HBAI)"},
+ what:{pt:"Bloqueio de ramo direito somado ao bloqueio do fascículo anterior esquerdo.",es:"Bloqueo de rama derecha sumado al bloqueo del fascículo anterior izquierdo."},
+ crit:{pt:["Padrão de bloqueio de ramo direito: rsR' em V1, QRS de 0,12 s ou mais","Eixo desviado para a esquerda (−45° a −90°)","rS em D2, D3 e aVF; qR em D1"],es:["Patrón de bloqueo de rama derecha: rsR' en V1, QRS de 0,12 s o más","Eje desviado a la izquierda (−45° a −90°)","rS en DII, DIII y aVF; qR en DI"]},
+ clin:{pt:"Só resta um fascículo conduzindo. Com síncope, investigue bloqueio AV intermitente.",es:"Solo queda un fascículo conduciendo. Ante un síncope, investiga bloqueo AV intermitente."}},
+{id:"iam_inf",cat:"isq",f:1,sim:["peric","iam_lat","erepol"],
+ name:{pt:"IAM com supra de ST inferior",es:"IAM con elevación del ST inferior"},
+ what:{pt:"Lesão aguda da parede inferior, geralmente por oclusão da coronária direita.",es:"Lesión aguda de la cara inferior, en general por oclusión de la coronaria derecha."},
+ crit:{pt:["Supra de ST em D2, D3 e aVF (em geral maior em D3 que em D2)","Infra de ST recíproco em aVL (e às vezes D1)","Pode haver onda Q e bradicardia associadas"],es:["Elevación del ST en DII, DIII y aVF (en general mayor en DIII que en DII)","Descenso recíproco del ST en aVL (y a veces DI)","Puede haber onda Q y bradicardia asociadas"]},
+ clin:{pt:"Faça V3R e V4R para ver o ventrículo direito; se acometido, evite nitrato. Reperfusão imediata.",es:"Registra V3R y V4R para valorar el ventrículo derecho; si está afectado, evita nitratos. Reperfusión inmediata."}},
+{id:"iam_ant",cat:"isq",f:1,sim:["hypt","brugada","lbbb"],
+ name:{pt:"IAM com supra de ST anterior",es:"IAM con elevación del ST anterior"},
+ what:{pt:"Lesão aguda da parede anterior, geralmente por oclusão da descendente anterior.",es:"Lesión aguda de la cara anterior, en general por oclusión de la descendente anterior."},
+ crit:{pt:["Supra de ST em V1–V4 (1,5 a 2,5 mm ou mais em V2–V3, conforme idade e sexo)","T altas e amplas no início; perda de onda R ou QS em V1–V3 depois","Pode haver infra recíproco em D2, D3 e aVF"],es:["Elevación del ST en V1-V4 (1,5 a 2,5 mm o más en V2-V3 según edad y sexo)","T altas y amplias al inicio; pérdida de R o QS en V1-V3 después","Puede haber descenso recíproco en DII, DIII y aVF"]},
+ clin:{pt:"É o infarto de maior risco de choque e arritmias. Reperfusão imediata.",es:"Es el infarto con mayor riesgo de shock y arritmias. Reperfusión inmediata."}},
+{id:"iam_lat",cat:"isq",f:2,sim:["iam_inf","peric","erepol"],
+ name:{pt:"IAM com supra de ST lateral",es:"IAM con elevación del ST lateral"},
+ what:{pt:"Lesão aguda da parede lateral, pela circunflexa ou por ramo diagonal.",es:"Lesión aguda de la cara lateral, por la circunfleja o una rama diagonal."},
+ crit:{pt:["Supra de ST em D1 e aVL (lateral alta) e/ou V5–V6 (lateral baixa)","Infra de ST recíproco em D3 e aVF","O supra pode ser discreto: compare com as derivações opostas"],es:["Elevación del ST en DI y aVL (lateral alta) y/o V5-V6 (lateral baja)","Descenso recíproco del ST en DIII y aVF","La elevación puede ser discreta: compárala con las derivaciones opuestas"]},
+ clin:{pt:"O infra em D3 às vezes chama mais atenção que o supra lateral. Reperfusão imediata.",es:"El descenso en DIII a veces llama más la atención que la elevación lateral. Reperfusión inmediata."}},
+{id:"iam_post",cat:"isq",f:3,sim:["rvh","stdep","iam_ant"],
+ name:{pt:"IAM posterior",es:"IAM posterior"},
+ what:{pt:"Lesão da parede posterior (inferobasal), que aparece em espelho nas derivações anteriores.",es:"Lesión de la cara posterior (inferobasal), que aparece en espejo en las derivaciones anteriores."},
+ crit:{pt:["Infra de ST horizontal em V1–V3","Onda R alta e larga em V1–V2 (R/S maior que 1)","T positiva em V1–V2; supra de ST em V7–V9 confirma"],es:["Descenso horizontal del ST en V1-V3","Onda R alta y ancha en V1-V2 (R/S mayor que 1)","T positiva en V1-V2; la elevación del ST en V7-V9 lo confirma"]},
+ clin:{pt:"Equivale a infarto com supra: faça V7–V9 e trate como IAMCSST.",es:"Equivale a un infarto con elevación del ST: registra V7-V9 y trátalo como IAMCEST."}},
+{id:"wellens",cat:"isq",f:3,sim:["iam_ant","lvh","hypt"],
+ name:{pt:"Padrão de Wellens",es:"Patrón de Wellens"},
+ what:{pt:"Alteração de onda T que indica estenose crítica da descendente anterior, mesmo sem dor no momento.",es:"Alteración de la onda T que indica estenosis crítica de la descendente anterior, incluso sin dolor en ese momento."},
+ crit:{pt:["T profunda e simétrica (tipo B) ou bifásica, positiva e depois negativa (tipo A), em V2–V3","Supra de ST ausente ou mínimo (menos de 1 mm)","Onda R preservada e sem onda Q nas precordiais"],es:["T profunda y simétrica (tipo B) o bifásica, positiva y luego negativa (tipo A), en V2-V3","Elevación del ST ausente o mínima (menos de 1 mm)","Onda R conservada y sin onda Q en precordiales"]},
+ clin:{pt:"Alto risco de infarto anterior extenso. Evite teste de esforço e indique cateterismo precoce.",es:"Alto riesgo de infarto anterior extenso. Evita la prueba de esfuerzo e indica cateterismo precoz."}},
+{id:"dewinter",cat:"isq",f:3,sim:["hypt","stdep","iam_ant"],
+ name:{pt:"Padrão de de Winter",es:"Patrón de De Winter"},
+ what:{pt:"Equivalente de infarto com supra por oclusão da descendente anterior, sem supra de ST.",es:"Equivalente de infarto con elevación del ST por oclusión de la descendente anterior, sin elevación del ST."},
+ crit:{pt:["Infra do ponto J de 1 a 3 mm, com ST ascendente, em V1–V6","Ondas T altas, simétricas e pontiagudas nas precordiais","Leve supra de ST em aVR pode estar presente"],es:["Descenso del punto J de 1 a 3 mm, con ST ascendente, en V1-V6","Ondas T altas, simétricas y picudas en precordiales","Puede haber leve elevación del ST en aVR"]},
+ clin:{pt:"Trate como IAM com supra: reperfusão imediata.",es:"Trátalo como un IAM con elevación del ST: reperfusión inmediata."}},
+{id:"hypt",cat:"isq",f:2,sim:["hyperk","erepol","iam_ant"],
+ name:{pt:"Ondas T hiperagudas",es:"Ondas T hiperagudas"},
+ what:{pt:"Primeira alteração da oclusão coronária aguda, antes do supra de ST.",es:"Primera alteración de la oclusión coronaria aguda, antes de la elevación del ST."},
+ crit:{pt:["T altas, largas e de base ampla, desproporcionais ao QRS","Em derivações contíguas (por exemplo V2–V4)","Podem ter leve supra de ST; diferem da hipercalemia, em que a T é estreita e pontiaguda"],es:["T altas, anchas y de base amplia, desproporcionadas respecto al QRS","En derivaciones contiguas (por ejemplo V2-V4)","Pueden tener leve elevación del ST; a diferencia de la hiperpotasemia, donde la T es estrecha y picuda"]},
+ clin:{pt:"Repita o ECG a cada 15 a 30 minutos: a evolução para supra de ST é rápida.",es:"Repite el ECG cada 15 a 30 minutos: la evolución a elevación del ST es rápida."}},
+{id:"avr",cat:"isq",f:2,sim:["stdep","peric","iam_inf"],
+ name:{pt:"Supra de ST em aVR com infra difuso",es:"Elevación del ST en aVR con descenso difuso"},
+ what:{pt:"Padrão de isquemia subendocárdica difusa, como na lesão de tronco ou multiarterial.",es:"Patrón de isquemia subendocárdica difusa, como en la lesión de tronco o multivaso."},
+ crit:{pt:["Supra de ST em aVR (às vezes também em V1)","Infra de ST em 6 ou mais derivações, sobretudo D1, D2 e V4–V6","Supra em aVR maior que em V1 reforça lesão de tronco"],es:["Elevación del ST en aVR (a veces también en V1)","Descenso del ST en 6 o más derivaciones, sobre todo DI, DII y V4-V6","Elevación en aVR mayor que en V1 refuerza la lesión de tronco"]},
+ clin:{pt:"Com dor torácica, é sinal de alto risco: discuta cateterismo urgente. Também aparece em taquicardias e anemia grave.",es:"Con dolor torácico es un signo de alto riesgo: plantea cateterismo urgente. También aparece en taquicardias y anemia grave."}},
+{id:"rvh",cat:"outros",f:2,sim:["iam_post","rbbb","lpfb"],
+ name:{pt:"Sobrecarga ventricular direita",es:"Crecimiento ventricular derecho"},
+ what:{pt:"Hipertrofia do ventrículo direito, que desloca as forças elétricas para a direita e para a frente.",es:"Hipertrofia del ventrículo derecho, que desplaza las fuerzas eléctricas hacia la derecha y hacia delante."},
+ crit:{pt:["Desvio do eixo para a direita (acima de +90°)","R dominante em V1 (R/S maior que 1) e S profunda em V5–V6","Strain: infra de ST e T invertida em V1–V3; pode haver P pulmonale"],es:["Desviación del eje a la derecha (más de +90°)","R dominante en V1 (R/S mayor que 1) y S profunda en V5-V6","Strain: descenso del ST y T negativa en V1-V3; puede haber P pulmonale"]},
+ clin:{pt:"Pense em hipertensão pulmonar, DPOC, estenose mitral e cardiopatia congênita.",es:"Piensa en hipertensión pulmonar, EPOC, estenosis mitral y cardiopatías congénitas."}},
+{id:"lae",cat:"outros",f:1,sim:["rae","nsr","bav1"],
+ name:{pt:"Sobrecarga atrial esquerda",es:"Crecimiento auricular izquierdo"},
+ what:{pt:"Aumento do átrio esquerdo, que alarga e entalha a onda P.",es:"Agrandamiento de la aurícula izquierda, que ensancha y mella la onda P."},
+ crit:{pt:["P com 0,12 s ou mais em D2, muitas vezes bífida (P mitrale)","Componente negativo final da P em V1 com 1 mm de profundidade e 0,04 s de duração ou mais","Altura da P normal"],es:["P de 0,12 s o más en DII, a menudo bífida (P mitral)","Componente negativo final de la P en V1 de 1 mm de profundidad y 0,04 s o más","Altura de la P normal"]},
+ clin:{pt:"Associada a hipertensão, valvopatia mitral e disfunção do VE. Aumenta o risco de fibrilação atrial.",es:"Asociado a hipertensión, valvulopatía mitral y disfunción del VI. Aumenta el riesgo de fibrilación auricular."}},
+{id:"rae",cat:"outros",f:2,sim:["lae","hyperk","nsr"],
+ name:{pt:"Sobrecarga atrial direita",es:"Crecimiento auricular derecho"},
+ what:{pt:"Aumento do átrio direito, que deixa a onda P alta e pontiaguda.",es:"Agrandamiento de la aurícula derecha, que vuelve la onda P alta y picuda."},
+ crit:{pt:["P com 2,5 mm ou mais em D2, D3 e aVF (P pulmonale)","Duração da P normal (menos de 0,12 s)","Porção inicial positiva da P em V1 com mais de 1,5 mm"],es:["P de 2,5 mm o más en DII, DIII y aVF (P pulmonale)","Duración de la P normal (menos de 0,12 s)","Porción inicial positiva de la P en V1 de más de 1,5 mm"]},
+ clin:{pt:"Pense em DPOC, hipertensão pulmonar, TEP e cardiopatia congênita.",es:"Piensa en EPOC, hipertensión pulmonar, TEP y cardiopatías congénitas."}},
+{id:"hypercal",cat:"outros",f:3,sim:["hypocal","dig","nsr"],
+ name:{pt:"Hipercalcemia",es:"Hipercalcemia"},
+ what:{pt:"Cálcio alto encurta a repolarização ventricular.",es:"El calcio alto acorta la repolarización ventricular."},
+ crit:{pt:["QT curto, à custa de um segmento ST curto ou ausente","A onda T começa logo depois do QRS","Em casos graves pode haver onda J (Osborn) e bradiarritmias"],es:["QT corto, a expensas de un segmento ST corto o ausente","La onda T comienza justo después del QRS","En casos graves puede haber onda J (Osborn) y bradiarritmias"]},
+ clin:{pt:"Causas comuns: hiperparatireoidismo e neoplasias. Trate com hidratação e corrija a causa.",es:"Causas frecuentes: hiperparatiroidismo y neoplasias. Trata con hidratación y corrige la causa."}},
+{id:"hypocal",cat:"outros",f:3,sim:["lqt","hypercal","hypok"],
+ name:{pt:"Hipocalcemia",es:"Hipocalcemia"},
+ what:{pt:"Cálcio baixo alonga a fase 2 do potencial de ação e o segmento ST.",es:"El calcio bajo alarga la fase 2 del potencial de acción y el segmento ST."},
+ crit:{pt:["QT longo à custa de um segmento ST longo e reto","Onda T de forma e largura normais","Diferente do QT longo por drogas, em que a própria T se alarga"],es:["QT largo a expensas de un segmento ST largo y recto","Onda T de forma y anchura normales","A diferencia del QT largo por fármacos, en el que la propia T se ensancha"]},
+ clin:{pt:"Pense em hipoparatireoidismo, pós-tireoidectomia, insuficiência renal e transfusão maciça. Corrija magnésio também.",es:"Piensa en hipoparatiroidismo, postiroidectomía, insuficiencia renal y transfusión masiva. Corrige también el magnesio."}},
+{id:"dig",cat:"outros",f:3,sim:["stdep","hypercal","lvh"],
+ name:{pt:"Efeito digitálico",es:"Efecto digitálico"},
+ what:{pt:"Alterações esperadas em quem usa digoxina, sem significar intoxicação.",es:"Cambios esperables en quien toma digoxina, que no significan intoxicación."},
+ crit:{pt:["Infra de ST em forma de colher (côncavo), mais visível em V5–V6","T achatada ou invertida e QT curto","PR pode ficar no limite superior"],es:["Descenso del ST en forma de cubeta (cóncavo), más visible en V5-V6","T aplanada o negativa y QT corto","El PR puede estar en el límite superior"]},
+ clin:{pt:"Intoxicação se manifesta por arritmias: extrassístoles, bigeminismo, taquicardia atrial com bloqueio e BAV.",es:"La intoxicación se manifiesta con arritmias: extrasístoles, bigeminismo, taquicardia auricular con bloqueo y bloqueo AV."}},
+{id:"hypoth",cat:"outros",f:3,sim:["erepol","brugada","sbrad"],
+ name:{pt:"Hipotermia (onda J de Osborn)",es:"Hipotermia (onda J de Osborn)"},
+ what:{pt:"Temperatura corporal baixa altera a repolarização e deixa o ritmo lento.",es:"La temperatura corporal baja altera la repolarización y enlentece el ritmo."},
+ crit:{pt:["Onda J (Osborn): entalhe positivo no fim do QRS, maior quanto menor a temperatura","Bradicardia sinusal e QT longo","Tremor muscular produz artefato fino na linha de base"],es:["Onda J (Osborn): muesca positiva al final del QRS, mayor cuanto menor es la temperatura","Bradicardia sinusal y QT largo","El temblor muscular produce un artefacto fino en la línea de base"]},
+ clin:{pt:"Risco de fibrilação ventricular abaixo de 30 °C. Reaqueça e manipule o paciente com cuidado.",es:"Riesgo de fibrilación ventricular por debajo de 30 °C. Recalienta y moviliza al paciente con cuidado."}},
+{id:"tep",cat:"outros",f:2,sim:["stach","irbbb","rvh"],
+ name:{pt:"Tromboembolismo pulmonar (S1Q3T3)",es:"Tromboembolismo pulmonar (S1Q3T3)"},
+ what:{pt:"Sobrecarga aguda do ventrículo direito por embolia pulmonar.",es:"Sobrecarga aguda del ventrículo derecho por embolia pulmonar."},
+ crit:{pt:["Taquicardia sinusal, o achado mais comum","S em D1, Q em D3 e T invertida em D3 (S1Q3T3)","T invertida em V1–V3 e às vezes bloqueio de ramo direito"],es:["Taquicardia sinusal, el hallazgo más frecuente","S en DI, Q en DIII y T negativa en DIII (S1Q3T3)","T negativa en V1-V3 y a veces bloqueo de rama derecha"]},
+ clin:{pt:"O ECG é pouco sensível: um ECG normal não exclui TEP. Use escores clínicos, D-dímero e angiotomografia.",es:"El ECG es poco sensible: un ECG normal no descarta TEP. Usa escalas clínicas, dímero D y angiotomografía."}},
+{id:"lowv",cat:"outros",f:2,sim:["nsr","stach","tep"],
+ name:{pt:"Baixa voltagem",es:"Bajo voltaje"},
+ what:{pt:"Complexos QRS pequenos em todas as derivações.",es:"Complejos QRS pequeños en todas las derivaciones."},
+ crit:{pt:["QRS com menos de 5 mm em todas as derivações periféricas","Ou menos de 10 mm em todas as precordiais","Com taquicardia e alternância elétrica (QRS de altura alternada), sugere tamponamento"],es:["QRS de menos de 5 mm en todas las derivaciones de miembros","O de menos de 10 mm en todas las precordiales","Con taquicardia y alternancia eléctrica (QRS de altura alterna), sugiere taponamiento"]},
+ clin:{pt:"Causas: derrame pericárdico, obesidade, DPOC, hipotireoidismo, amiloidose. Com hipotensão, pense em tamponamento.",es:"Causas: derrame pericárdico, obesidad, EPOC, hipotiroidismo, amiloidosis. Con hipotensión, piensa en taponamiento."}},
+{id:"erepol",cat:"outros",f:1,sim:["peric","iam_ant","hypoth"],
+ name:{pt:"Repolarização precoce",es:"Repolarización precoz"},
+ what:{pt:"Variante comum do normal, sobretudo em jovens e atletas.",es:"Variante frecuente de la normalidad, sobre todo en jóvenes y deportistas."},
+ crit:{pt:["Elevação do ponto J com entalhe ou empastamento no fim do QRS","Supra de ST côncavo, em geral de V4 a V6 e/ou inferior","T altas e concordantes; sem infra recíproco e sem evolução em ECGs seriados"],es:["Elevación del punto J con muesca o empastamiento al final del QRS","Elevación del ST cóncava, en general de V4 a V6 y/o inferior","T altas y concordantes; sin descenso recíproco ni evolución en ECG seriados"]},
+ clin:{pt:"O principal diagnóstico diferencial é o IAM: procure imagem em espelho e compare com ECGs antigos.",es:"El principal diagnóstico diferencial es el IAM: busca imagen en espejo y compara con ECG previos."}},
+{id:"leadrev",cat:"outros",f:2,sim:["lpfb","rvh","nsr"],
+ name:{pt:"Troca de eletrodos dos braços",es:"Inversión de electrodos de los brazos"},
+ what:{pt:"Os eletrodos do braço direito e do esquerdo foram colocados trocados.",es:"Los electrodos del brazo derecho y del izquierdo se colocaron intercambiados."},
+ crit:{pt:["D1 totalmente invertido: P, QRS e T negativos","aVR positivo (parece aVL) e D2 trocado com D3","Precordiais normais, com V6 positivo, o que não combina com D1 negativo"],es:["DI totalmente invertida: P, QRS y T negativos","aVR positivo (parece aVL) y DII intercambiada con DIII","Precordiales normales, con V6 positivo, lo que no encaja con DI negativo"]},
+ clin:{pt:"Não é doença: confira os cabos e repita o ECG antes de concluir dextrocardia ou desvio de eixo.",es:"No es una enfermedad: revisa los cables y repite el ECG antes de concluir dextrocardia o desviación del eje."}}
 ];
 
 /* ---- partes do ECG normal ---- */
@@ -718,9 +877,11 @@ var AXFULL={MID:["Eixo normal","Eje normal"],LAD:["Desvio do eixo para a esquerd
 var LEADNAME={I:["D1","DI"],II:["D2","DII"],III:["D3","DIII"]};
 /* ---------- utilidades e idioma ---------- */
 var FS=250;
-function rnd(a,b){return a+Math.random()*(b-a);}
-function pick(a){return a[Math.floor(Math.random()*a.length)];}
-function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+var RNG=Math.random;
+function seeded(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function rnd(a,b){return a+RNG()*(b-a);}
+function pick(a){return a[Math.floor(RNG()*a.length)];}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(RNG()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function fmt(n,d){return n.toFixed(d).replace('.',',');}
 function $(id){return document.getElementById(id);}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");}
@@ -764,59 +925,257 @@ function sinusX(dur,hr,o){
 function baseline(S){var ph=rnd(0,6.28),y=S.y;for(var i=0;i<y.length;i++){y[i]+=0.012*Math.sin(2*Math.PI*0.28*i/FS+ph)+rnd(-0.004,0.004);}}
 function visible(S){return S.beats.filter(function(b){return b.tR>=0.05&&b.tR<=S.dur-0.05;}).sort(function(a,b){return a.tR-b.tR;});}
 
-var GEN={
-nsr:function(d){return sinus(d,rnd(62,95),rnd(0.13,0.19),0.02,rnd(0.35,0.6));},
-sbrad:function(d){return sinus(d,rnd(41,55),rnd(0.14,0.19),0.02,rnd(0.5,0.8));},
-stach:function(d){return sinus(d,rnd(108,135),rnd(0.12,0.15),0.01,rnd(0.3,0.45),0.12);},
-afib:function(d){
-  var S=mk(d),t=rnd(0.3,0.5);
-  while(t<d+0.6){var rr=rnd(0.38,0.95);beat(S,t,rr,{noP:true,a:rnd(0.85,1.1)});t+=rr;}
-  var ph=[rnd(0,6.28),rnd(0,6.28),rnd(0,6.28)],y=S.y;
-  for(var i=0;i<y.length;i++){var tt=i/FS;y[i]+=0.035*Math.sin(2*Math.PI*5.3*tt+ph[0])+0.03*Math.sin(2*Math.PI*7.1*tt+ph[1])+0.02*Math.sin(2*Math.PI*9.4*tt+ph[2])+rnd(-0.01,0.01);}
-  return S;},
-aflt:function(d){
-  var S=mk(d),T0=rnd(0.195,0.205),blk=pick([2,4]),off=rnd(0,T0),y=S.y;
-  for(var i=0;i<y.length;i++){var ph=((i/FS+off)%T0)/T0;y[i]+=ph<0.85?0.09-0.18*(ph/0.85):-0.09+0.18*((ph-0.85)/0.15);}
-  for(var j=blk;;j+=blk){var tR=j*T0-off+0.13;if(tR>d+0.6)break;if(tR>0.1)beat(S,tR,blk*T0,{noP:true,ta:0.12});}
-  return S;},
-svt:function(d){var S=mk(d),rr=60/rnd(170,200),t=rnd(0.2,0.4);while(t<d+0.6){beat(S,t,rr,{noP:true,ta:0.2});t+=rr;}return S;},
-pvc:function(d){
-  var S=mk(d),rr=60/rnd(65,85),t0=rnd(0.4,0.6),n=Math.ceil((d+0.6)/rr)+1,pv={},k=pick([1,2]),i;
-  while(k<n){pv[k]=true;k+=pick([2,3,4]);}
-  for(i=0;i<n;i++){var tn=t0+i*rr;if(pv[i]){var tp=tn-rnd(0.22,0.3);qrsW(S,tp,1.3,0.032);g(S,tp+0.3,-0.5,0.06);S.beats.push({tR:tp});}else beat(S,tn,rr,{});}
-  return S;},
-vt:function(d){var S=mk(d),rr=rnd(0.30,0.38),t=rnd(0.2,0.4);while(t<d+0.6){qrsW(S,t,1.1,0.035);S.beats.push({tR:t});t+=rr*(1+rnd(-0.01,0.01));}return S;},
-tdp:function(d){var S=mk(d),t=0.25,ph=rnd(0,6.28),per=rnd(2.2,2.8);while(t<d+0.3){var a=1.3*Math.sin(2*Math.PI*t/per+ph);if(Math.abs(a)<0.18)a=a<0?-0.18:0.18;qrsW(S,t,a,0.03);S.beats.push({tR:t});t+=rnd(0.23,0.27);}return S;},
-vf:function(d){var S=mk(d),y=S.y,f=[rnd(3.5,4.5),rnd(4.8,5.8),rnd(6,7)],ph=[rnd(0,6),rnd(0,6),rnd(0,6)];for(var i=0;i<y.length;i++){var tt=i/FS,env=0.25+0.18*Math.sin(2*Math.PI*0.35*tt+ph[0]);y[i]=env*(Math.sin(2*Math.PI*f[0]*tt+ph[0])+0.7*Math.sin(2*Math.PI*f[1]*tt+ph[1])+0.4*Math.sin(2*Math.PI*f[2]*tt+ph[2]))+rnd(-0.02,0.02);}return S;},
-bav1:function(d){return sinus(d,rnd(58,80),rnd(0.27,0.35),0.01,rnd(0.5,0.7));},
-mob1:function(d){
-  var S=mk(d),pp=rnd(0.85,1.0),prs=[0.16,0.27,0.38],k=0,tp=rnd(0.05,0.2);
-  while(tp<d+0.6){var c=k%4;addP(S,tp+0.05,0.15);if(c<3)beat(S,tp+prs[c]+0.04,pp*1.1,{noP:true});k++;tp+=pp;}
-  return S;},
-mob2:function(d){
-  var S=mk(d),pp=rnd(0.78,0.9),k=pick([0,1,2]),tp=rnd(0.05,0.25);
-  while(tp<d+0.6){addP(S,tp+0.05,0.15);if(k%3!==2)beat(S,tp+0.2,pp,{noP:true,qrs:function(S2,tR,a){g(S2,tR,a*0.9,0.016);g(S2,tR+0.045,-0.35*a,0.018);}});k++;tp+=pp;}
-  return S;},
-bav3:function(d){
-  var S=mk(d),pp=rnd(0.7,0.8),tp,tr=rnd(0.4,0.9),rr=rnd(1.6,1.9);
-  for(tp=rnd(0.05,pp);tp<d+0.3;tp+=pp)addP(S,tp,0.15);
-  while(tr<d+0.6){qrsW(S,tr,0.9,0.02);g(S,tr+0.28,-0.3,0.06);S.beats.push({tR:tr});tr+=rr;}
-  return S;},
-rbbb:function(d){return sinusX(d,rnd(65,85),{ta:-0.22,qrs:function(S,tR,a){g(S,tR-0.03,0.25,0.009);g(S,tR-0.005,-0.45,0.011);g(S,tR+0.045,0.85,0.017);}});},
-lbbb:function(d){return sinusX(d,rnd(65,85),{st:-0.08,ta:-0.3,tw:0.05,qrs:function(S,tR,a){g(S,tR-0.012,0.8,0.022);g(S,tR+0.045,0.95,0.024);}});},
-wpw:function(d){return sinusX(d,rnd(65,85),{pr:0.1,ta:0.12,qrs:function(S,tR,a){g(S,tR-0.042,0.3,0.02);qrsN(S,tR,1);}});},
-stemi:function(d){return sinusX(d,rnd(70,90),{ta:0.42,tw:0.05,qrs:function(S,tR,a){g(S,tR-0.025,-0.25,0.01);g(S,tR,0.75,0.011);g(S,tR+0.075,0.26,0.03);g(S,tR+0.15,0.3,0.045);}});},
-stdep:function(d){return sinusX(d,rnd(70,90),{a:1.3,ta:0.14,tOff:0.3,qrs:function(S,tR,a){qrsN(S,tR,a);g(S,tR+0.07,-0.17,0.03);g(S,tR+0.15,-0.2,0.04);}});},
-qwave:function(d){return sinusX(d,rnd(62,80),{ta:-0.18,qrs:function(S,tR,a){g(S,tR-0.02,-0.55,0.016);g(S,tR+0.025,0.35,0.011);}});},
-lvh:function(d){return sinusX(d,rnd(62,80),{a:2.8,st:-0.12,ta:-0.28,tw:0.05});},
-hyperk:function(d){return sinusX(d,rnd(65,85),{pa:0.07,ta:0.85,tw:0.022});},
-hypok:function(d){return sinusX(d,rnd(62,80),{ta:0.07,u:0.14,st:-0.05});},
-lqt:function(d){return sinusX(d,rnd(58,68),{tOff:0.42,tw:0.05});},
-peric:function(d){return sinusX(d,rnd(80,100),{st:0.2,stw:0.06,stc:0.12,prDep:0.07,ta:0.32});},
-brugada:function(d){return sinusX(d,rnd(62,80),{ta:-0.28,tOff:0.26,qrs:function(S,tR,a){g(S,tR-0.02,0.2,0.008);g(S,tR+0.005,-0.5,0.011);g(S,tR+0.06,0.32,0.03);}});}
+/* ---------- gerador vetorial multi-derivação (simulados e galeria) ----------
+   Cada onda é um vetor 3D (x = esquerda, y = inferior, z = anterior) com forma gaussiana no tempo.
+   O traçado de cada derivação é a projeção desses vetores no eixo da derivação. */
+var LF={I:0,II:60,III:120,aVR:-150,aVL:-30,aVF:90},
+    LH={V1:120,V2:95,V3:68,V4:42,V5:18,V6:2},
+    GH={V1:1.35,V2:2.2,V3:2.3,V4:2.2,V5:1.85,V6:1.45};
+function vec(x,y,z){return {x:x,y:y,z:z||0};}
+function vA(ax,m,z){var r=ax*Math.PI/180;return {x:m*Math.cos(r),y:m*Math.sin(r),z:z||0};}
+function vS(v,k){return {x:v.x*k,y:v.y*k,z:v.z*k};}
+function vAdd(a,b){return {x:a.x+b.x,y:a.y+b.y,z:a.z+b.z};}
+function proj(v,l){
+  if(l in LF){var r=LF[l]*Math.PI/180,p=v.x*Math.cos(r)+v.y*Math.sin(r);return l.charAt(0)==="a"?p*0.87:p;}
+  var r2=LH[l]*Math.PI/180;return (v.x*Math.cos(r2)+v.z*Math.sin(r2)+0.1*v.y)*GH[l];
+}
+function E(dur){return {dur:dur,cs:[],ws:[],beats:[],swap:false,gain:1,noise:rnd(0.002,0.006),bw:rnd(0.004,0.02)};}
+function C(S,t,s,v){S.cs.push({t:t,s:s,v:v});}
+function W(S,f){S.ws.push(f);}
+/* platô suave (segmento ST): soma de gaussianas espaçadas */
+function PL(S,t0,t1,v){var s=0.016;for(var t=t0+s;t<=t1-s*0.5;t+=s)C(S,t,s,vS(v,0.4));}
+var SWAP={II:"III",III:"II",aVR:"aVL",aVL:"aVR"};
+function renderE(S,leads){
+  var n=Math.round(S.dur*FS),out=[];
+  leads.forEach(function(l0){
+    var l=S.swap&&SWAP[l0]?SWAP[l0]:l0,sg=(S.swap&&l0==="I")?-1:1,y=new Float32Array(n),i;
+    S.cs.forEach(function(c){
+      var a=sg*proj(c.v,l)*S.gain;if(Math.abs(a)<1e-4)return;
+      var i0=Math.max(0,Math.floor((c.t-4*c.s)*FS)),i1=Math.min(n-1,Math.ceil((c.t+4*c.s)*FS));
+      for(i=i0;i<=i1;i++){var d=(i/FS-c.t)/c.s;y[i]+=a*Math.exp(-0.5*d*d);}
+    });
+    S.ws.forEach(function(f){for(i=0;i<n;i++){var v=f(i/FS);if(v)y[i]+=sg*proj(v,l)*S.gain;}});
+    var ph=rnd(0,6.28),ph2=rnd(0,6.28);
+    for(i=0;i<n;i++)y[i]+=S.bw*Math.sin(2*Math.PI*0.27*i/FS+ph)+0.4*S.bw*Math.sin(2*Math.PI*0.11*i/FS+ph2)+rnd(-S.noise,S.noise);
+    out.push({l:l0,y:y});
+  });
+  return {dur:S.dur,leads:out,y:out[0].y,beats:S.beats.filter(function(b){return b.tR!=null;})};
+}
+
+/* ---- "paciente": eixo, voltagens e intervalos variam a cada traçado ---- */
+function heart(o){
+  o=o||{};var ax=o.ax!=null?o.ax:rnd(5,80);
+  return {ax:ax,m:o.m||rnd(1.0,1.55),z:o.z!=null?o.z:rnd(-0.42,-0.22),
+    tax:o.tax!=null?o.tax:Math.max(-10,Math.min(85,ax+rnd(-25,10))),tm:o.tm||rnd(0.22,0.32),tz:o.tz!=null?o.tz:rnd(0.06,0.18),
+    pa:o.pa||rnd(0.75,1.15),pr:o.pr||rnd(0.13,0.19),sep:o.sep==null?rnd(0.7,1.2):o.sep,qt:o.qt||1};
+}
+/* onda P: átrio direito (início) + esquerdo (final) */
+function pW(S,t,H,kind){
+  var k=H.pa;
+  if(kind==="lae"){C(S,t-0.035,0.02,vS(vec(0.03,0.09,0.06),k));C(S,t+0.035,0.024,vS(vec(0.09,0.1,-0.17),k));return;}
+  if(kind==="rae"){C(S,t-0.006,0.018,vS(vec(0.04,0.3,0.16),k));C(S,t+0.022,0.02,vS(vec(0.04,0.04,-0.02),k));return;}
+  if(kind&&kind.x!=null){C(S,t,0.024,kind);return;}           // P ectópica: vetor próprio
+  C(S,t-0.014,0.02,vS(vec(0.035,0.085,0.05),k));C(S,t+0.016,0.02,vS(vec(0.06,0.06,-0.035),k));
+}
+/* QRS estreito: septal, principal, terminal */
+function qN(S,tR,H){
+  C(S,tR-0.024,0.008,vS(vec(-0.12,0.03,0.3),H.sep));
+  C(S,tR,0.0105,vA(H.ax,H.m,H.z));
+  C(S,tR+0.024,0.0095,vec(-0.16,-0.2,-0.28));
+}
+function tV(H){return vA(H.tax,H.tm,H.tz);}
+/* um batimento completo */
+function bt(S,tR,rr,H,o){
+  o=o||{};var k=kf(rr)*(o.qt||H.qt||1),pr=o.pr!=null?o.pr:H.pr;
+  if(!o.noP)pW(S,tR-pr+0.035,H,o.p);
+  if(o.pq)C(S,tR-0.055,0.025,o.pq);
+  (o.qrs||qN)(S,tR,H,o);
+  if(o.j)C(S,tR+(o.jt||0.038),o.js||0.009,o.j);
+  var tc=tR+(o.tOff!=null?o.tOff:0.21)*k;
+  if(o.st)PL(S,tR+(o.st0||0.035),tc-(o.st1||0.01),o.st);
+  if(o.stg)C(S,tR+(o.stc||0.1),o.stw||0.05,o.stg);
+  if(!o.noT)C(S,tc,(o.tw||0.045)*Math.sqrt(k),o.tv||tV(H));
+  if(o.t2)C(S,tc+(o.t2t||0.07),o.t2s||0.035,o.t2);
+  if(o.u)C(S,tc+0.17,0.035,o.u);
+  S.beats.push({tR:tR});
+}
+function run(S,H,hr,o,jit){
+  var rr0=60/hr,t=rnd(0.3,0.6),j=jit==null?0.015:jit;
+  while(t<S.dur+0.6){var r=rr0*(1+rnd(-j,j));bt(S,t,r,H,typeof o==="function"?o(t):o);t+=r;}
+}
+/* ---- morfologias de QRS ---- */
+function qRBBB(S,tR,H){C(S,tR-0.024,0.008,vS(vec(-0.12,0.03,0.3),H.sep));C(S,tR,0.0105,vA(H.ax,H.m*0.85,-0.12));C(S,tR+0.055,0.023,vec(-0.45,-0.06,0.5));}
+function qIRBBB(S,tR,H){C(S,tR-0.024,0.008,vS(vec(-0.12,0.03,0.3),H.sep));C(S,tR,0.0105,vA(H.ax,H.m*0.9,H.z));C(S,tR+0.038,0.013,vec(-0.25,-0.05,0.3));}
+function qLBBB(S,tR,H){C(S,tR-0.032,0.016,vec(0.25,0.06,-0.18));C(S,tR+0.008,0.02,vA(H.ax,H.m*1.1,-0.75));C(S,tR+0.05,0.019,vec(0.42,0.08,-0.38));}
+function qLAFB(S,tR,H){C(S,tR-0.022,0.009,vA(115,0.33,0.22));C(S,tR+0.004,0.012,vA(H.ax,H.m,H.z));C(S,tR+0.03,0.01,vec(-0.08,-0.1,-0.15));}
+function qLPFB(S,tR,H){C(S,tR-0.022,0.009,vA(-55,0.3,0.2));C(S,tR+0.004,0.012,vA(H.ax,H.m,H.z));C(S,tR+0.03,0.01,vec(-0.1,0.05,-0.15));}
+function qBIF(S,tR,H){qLAFB(S,tR,H);C(S,tR+0.058,0.023,vec(-0.45,-0.06,0.5));}
+function qWide(v,v2){return function(S,tR){C(S,tR-0.02,0.022,v);C(S,tR+0.035,0.024,v2);};}
+function qPaced(S,tR,H){C(S,tR-0.045,0.0016,vA(-70,1.6,0.6));C(S,tR-0.01,0.022,vA(-60,0.9,-0.6));C(S,tR+0.045,0.024,vA(-40,0.55,-0.45));}
+function qDelta(S,tR,H){C(S,tR-0.042,0.03,vA(H.dax,0.5,H.dz));C(S,tR-0.024,0.008,vS(vec(-0.12,0.03,0.3),0.3));C(S,tR+0.004,0.0115,vA(H.ax,H.m*0.85,H.z));C(S,tR+0.028,0.01,vec(-0.14,-0.18,-0.25));}
+function qQinf(S,tR,H){C(S,tR-0.02,0.011,vA(-95,H.qm,0));C(S,tR+0.008,0.011,vA(H.ax,H.m*0.8,H.z));C(S,tR+0.03,0.01,vec(-0.1,-0.1,-0.2));}
+function qQant(S,tR,H){C(S,tR-0.02,0.011,vec(0.05,0.02,-0.42*H.qm));C(S,tR+0.006,0.011,vA(H.ax,H.m*0.75,H.z));C(S,tR+0.028,0.01,vec(-0.1,-0.1,-0.1));}
+function qRVH(S,tR,H){C(S,tR-0.022,0.008,vec(-0.08,0.04,0.12));C(S,tR,0.012,vA(H.ax,H.m,0.55));C(S,tR+0.026,0.011,vec(-0.25,-0.05,0.25));}
+function qPost(S,tR,H){C(S,tR-0.024,0.008,vec(-0.1,0.03,0.3));C(S,tR,0.013,vA(H.ax,H.m*0.9,H.z));C(S,tR+0.026,0.0095,vec(-0.12,-0.15,0.05));}
+function qS1Q3(S,tR,H){C(S,tR-0.022,0.009,vA(-60,0.28,0.15));C(S,tR,0.0105,vA(H.ax,H.m,H.z));C(S,tR+0.03,0.012,vA(185,0.42,0.18));}
+/* atividade atrial contínua */
+function fibW(S,amp){var f=[rnd(5,6),rnd(6.5,7.8),rnd(8.3,9.6)],p=[rnd(0,6),rnd(0,6),rnd(0,6)],a=amp;
+  W(S,function(t){var s=Math.sin(2*Math.PI*f[0]*t+p[0])+0.8*Math.sin(2*Math.PI*f[1]*t+p[1])+0.5*Math.sin(2*Math.PI*f[2]*t+p[2]);return vec(0.1*a*s,0.25*a*s,0.45*a*s);});}
+function flutW(S,T0,off,amp){W(S,function(t){var ph=((t+off)%T0)/T0,s=ph<0.8?1-2*(ph/0.8):-1+2*((ph-0.8)/0.2);return vec(0.01*amp,0.2*amp*s,-0.09*amp*s);});}
+
+/* ---- geradores: cada um sorteia subtipo, frequência, eixo e derivações ---- */
+function chance(p){return RNG()<p;}
+function pvcVec(){var m=rnd(1.2,1.7);return pick([[vA(95,m,-0.7),vA(80,0.55*m,-0.5)],[vA(-75,m,-0.7),vA(-55,0.55*m,-0.5)],[vA(112,m,0.7),vA(135,0.55*m,0.5)],[vA(-115,m,0.6),vA(-140,0.55*m,0.45)]]);}
+function addPVC(S,t,V){C(S,t-0.028,0.03,V[0]);C(S,t+0.045,0.032,V[1]);C(S,t+0.33,0.065,vS(vAdd(V[0],V[1]),-0.25));S.beats.push({tR:t});}
+var GEN2={
+nsr:function(d){var S=E(d),H=heart();run(S,H,rnd(60,98));return renderE(S,["II"]);},
+stach:function(d){var S=E(d),H=heart({pr:rnd(0.12,0.16)});run(S,H,rnd(102,148),{qt:0.92});return renderE(S,["II"]);},
+sbrad:function(d){var S=E(d),H=heart();run(S,H,rnd(36,57));return renderE(S,["II"]);},
+sarrh:function(d){var S=E(d),H=heart(),rr0=60/rnd(58,82),A=rnd(0.13,0.22),P=rnd(3.2,5.2),ph=rnd(0,6.28),t=rnd(0.3,0.6);
+  while(t<d+0.6){var r=rr0*(1+A*Math.sin(2*Math.PI*t/P+ph));bt(S,t,r,H);t+=r;}return renderE(S,["II"]);},
+afib:function(d){var S=E(d),H=heart(),fast=chance(0.5),t=rnd(0.3,0.5);fibW(S,rnd(0.025,0.08));
+  while(t<d+0.6){var rr=fast?rnd(0.36,0.72):rnd(0.55,1.15);bt(S,t,rr,H,{noP:true});t+=rr;}return renderE(S,chance(0.4)?["II","V1"]:["II"]);},
+aflt:function(d){var S=E(d),H=heart(),T0=rnd(0.19,0.225),off=rnd(0,T0),mode=pick([2,2,4,"v"]),j=pick([1,2]);flutW(S,T0,off,rnd(0.9,1.3));
+  while(true){var n=mode==="v"?pick([2,3,4]):mode;var tR=j*T0-off+0.14;if(tR>d+0.6)break;if(tR>0.1)bt(S,tR,n*T0,H,{noP:true,tv:vS(tV(H),0.5)});j+=n;}
+  return renderE(S,chance(0.35)?["II","V1"]:["II"]);},
+svt:function(d){var S=E(d),H=heart(),rp=chance(0.4);run(S,H,rnd(150,215),{noP:true,qt:0.85,u:null,t2:rp?vec(0,-0.06,0.02):null,t2t:-0.12,t2s:0.012},0.004);return renderE(S,["II"]);},
+pac:function(d){var S=E(d),H=heart(),hr=rnd(62,90),rr=60/hr,t=rnd(0.3,0.6),i=0,ect=pick([2,3,4]),pv=pick([vec(0.02,-0.08,0.05),vec(0.09,0.02,0.02),vec(-0.05,0.09,0.06)]);
+  while(t<d+0.6){if(i===ect){var tp=t-rr*rnd(0.28,0.4);bt(S,tp,rr,H,{p:pv,pr:rnd(0.12,0.2)});t=tp+rr*rnd(1.0,1.1);ect+=pick([3,4,5]);}else{bt(S,t,rr,H);t+=rr;}i++;}
+  return renderE(S,["II"]);},
+junc:function(d){var S=E(d),H=heart(),acc=chance(0.35),pos=pick(["none","pre","post"]),pv=vec(0.0,-0.1,0.03);
+  run(S,H,acc?rnd(62,95):rnd(38,58),pos==="pre"?{p:pv,pr:rnd(0.07,0.1)}:{noP:true,t2:pos==="post"?pv:null,t2t:-0.15,t2s:0.02});return renderE(S,["II"]);},
+pvc:function(d){var S=E(d),H=heart(),rr=60/rnd(62,95),t0=rnd(0.4,0.6),n=Math.ceil((d+0.6)/rr)+1,V=pvcVec(),pv={},k=pick([1,2,3]);
+  while(k<n){pv[k]=1;k+=pick([3,4,5]);}
+  for(var i=0;i<n;i++){var tn=t0+i*rr;if(pv[i])addPVC(S,tn-rr*rnd(0.3,0.42),V);else bt(S,tn,rr,H);}
+  return renderE(S,chance(0.3)?["II","V1"]:["II"]);},
+bigem:function(d){var S=E(d),H=heart(),rr=60/rnd(62,88),V=pvcVec(),t=rnd(0.3,0.5),i=0;
+  while(t<d+0.6){if(i%2===1){var tp=t-rr*rnd(0.32,0.4);addPVC(S,tp,V);}else bt(S,t,rr,H);t+=rr;i++;}
+  return renderE(S,["II"]);},
+mat:function(d){var S=E(d),H=heart(),P=shuffle([vec(0.05,0.14,0.05),vec(0.12,0.01,0.03),vec(-0.04,0.15,0.06),vec(0.03,-0.1,0.05),vec(0.1,0.17,-0.02)]).slice(0,pick([3,4])),t=rnd(0.3,0.5);
+  while(t<d+0.6){var rr=rnd(0.38,0.78);bt(S,t,rr,H,{p:pick(P),pr:rnd(0.1,0.22)});t+=rr;}return renderE(S,["II"]);},
+aivr:function(d){var S=E(d),H=heart(),rr=60/rnd(52,98),V=pvcVec(),t=rnd(0.3,0.6),dis=chance(0.5);
+  if(dis){var pp=60/rnd(55,80);for(var tp=rnd(0.1,0.6);tp<d+0.3;tp+=pp)pW(S,tp,H);}
+  while(t<d+0.6){addPVC(S,t,V);t+=rr*(1+rnd(-0.02,0.02));}return renderE(S,["II"]);},
+pause:function(d){var S=E(d),H=heart(),rr=60/rnd(62,88),t=rnd(0.3,0.5),i=0,at=pick([2,3]);
+  while(t<d+0.6){bt(S,t,rr,H);t+=(i===at)?rnd(2.1,3.4):rr*(1+rnd(-0.015,0.015));i++;}return renderE(S,["II"]);},
+pace:function(d){var S=E(d),H=heart(),dual=chance(0.45),rr=60/rnd(60,78),t=rnd(0.35,0.6);
+  while(t<d+0.6){if(dual){C(S,t-0.2,0.0016,vA(-30,1.2,0.5));pW(S,t-0.15,H);}qPaced(S,t,H);C(S,t+0.32,0.06,vA(120,0.3,0.45));S.beats.push({tR:t});t+=rr;}
+  return renderE(S,chance(0.5)?["II","V1"]:["II"]);},
+vt:function(d){var S=E(d),rr=60/rnd(140,210),V=pvcVec(),t=rnd(0.2,0.4),H=heart();
+  if(chance(0.4)){var pp=60/rnd(65,90);for(var tp=rnd(0.1,0.6);tp<d+0.3;tp+=pp)pW(S,tp,H);}
+  while(t<d+0.6){addPVC(S,t,V);t+=rr*(1+rnd(-0.01,0.01));}return renderE(S,chance(0.3)?["II","V1"]:["II"]);},
+tdp:function(d){var S=E(d),t=0.25,ph=rnd(0,6.28),per=rnd(2.0,2.9),base=rnd(0,360);
+  while(t<d+0.3){var a=Math.sin(2*Math.PI*t/per+ph),m=0.35+0.95*Math.abs(a),ax=base+(a>0?0:180);C(S,t-0.015,0.024,vA(ax,m,0.3));C(S,t+0.04,0.026,vA(ax+150,0.55*m,-0.2));S.beats.push({tR:t});t+=rnd(0.22,0.28);}
+  return renderE(S,["II"]);},
+vf:function(d){var S=E(d),f=[rnd(3.5,4.5),rnd(4.8,5.8),rnd(6,7.2)],p=[rnd(0,6),rnd(0,6),rnd(0,6)],k=rnd(0.25,0.5);
+  W(S,function(t){var env=1+0.6*Math.sin(2*Math.PI*0.33*t+p[0]),s=Math.sin(2*Math.PI*f[0]*t+p[0])+0.7*Math.sin(2*Math.PI*f[1]*t+p[1])+0.4*Math.sin(2*Math.PI*f[2]*t+p[2]);return vec(0.3*k*env*s,0.8*k*env*s,0.3*k*env*s);});
+  S.noise=0.02;return renderE(S,["II"]);},
+bav1:function(d){var S=E(d),H=heart({pr:rnd(0.23,0.38)});run(S,H,rnd(55,90));return renderE(S,["II"]);},
+mob1:function(d){var S=E(d),H=heart(),pp=rnd(0.72,0.95),cyc=pick([3,4,5]),pr0=rnd(0.16,0.22),inc=rnd(0.07,0.11),k=pick([0,1]),tp=rnd(0.05,0.25);
+  while(tp<d+0.6){var c=k%cyc;pW(S,tp+0.035,H);if(c<cyc-1){var pr=pr0+inc*(1-Math.pow(0.55,c))/0.45;bt(S,tp+pr,pp,H,{noP:true});}k++;tp+=pp;}return renderE(S,["II"]);},
+mob2:function(d){var S=E(d),H=heart(),pp=rnd(0.72,0.9),cyc=pick([3,4]),wide=chance(0.5),k=pick([0,1,2]),tp=rnd(0.05,0.25),pr=rnd(0.15,0.2);
+  while(tp<d+0.6){pW(S,tp+0.035,H);if(k%cyc!==cyc-1)bt(S,tp+pr,pp,H,{noP:true,qrs:wide?qRBBB:null});k++;tp+=pp;}return renderE(S,["II"]);},
+bav21:function(d){var S=E(d),H=heart(),pp=rnd(0.62,0.85),wide=chance(0.4),k=0,tp=rnd(0.05,0.3),pr=rnd(0.15,0.24);
+  while(tp<d+0.6){pW(S,tp+0.035,H);if(k%2===0)bt(S,tp+pr,2*pp,H,{noP:true,qrs:wide?qRBBB:null});k++;tp+=pp;}return renderE(S,["II"]);},
+bav3:function(d){var S=E(d),H=heart(),pp=60/rnd(62,100),narrow=chance(0.35),rr=60/(narrow?rnd(40,55):rnd(28,42)),V=pvcVec(),tr=rnd(0.3,1.0);
+  for(var tp=rnd(0.05,pp);tp<d+0.3;tp+=pp)pW(S,tp,H);
+  while(tr<d+0.6){if(narrow)bt(S,tr,rr,H,{noP:true});else addPVC(S,tr,V);tr+=rr;}return renderE(S,["II"]);},
+rbbb:function(d){var S=E(d),H=heart();run(S,H,rnd(58,95),{qrs:qRBBB,tv:vec(0.18,0.12,-0.14)});return renderE(S,chance(0.5)?["V1","V6"]:["V1","V6","I"]);},
+irbbb:function(d){var S=E(d),H=heart();run(S,H,rnd(58,95),{qrs:qIRBBB});return renderE(S,["V1","V6"]);},
+lbbb:function(d){var S=E(d),H=heart({ax:rnd(-30,60)});run(S,H,rnd(58,95),{qrs:qLBBB,st:vec(-0.08,-0.02,0.1),tv:vec(-0.22,-0.05,0.3)});return renderE(S,chance(0.5)?["V1","V6"]:["V1","V6","I"]);},
+lafb:function(d){var S=E(d),H=heart({ax:rnd(-80,-48),tax:rnd(20,60)});run(S,H,rnd(58,95),{qrs:qLAFB});return renderE(S,chance(0.5)?["I","II","aVF"]:["I","aVL","II","aVF"]);},
+lpfb:function(d){var S=E(d),H=heart({ax:rnd(105,145),tax:rnd(30,70)});run(S,H,rnd(58,95),{qrs:qLPFB});return renderE(S,chance(0.5)?["I","III","aVF"]:["I","aVL","III","aVF"]);},
+bifasc:function(d){var S=E(d),H=heart({ax:rnd(-80,-50),tax:rnd(20,60)});run(S,H,rnd(58,92),{qrs:qBIF,tv:vec(0.18,0.12,-0.14)});return renderE(S,["V1","I","II","aVF"]);},
+wpw:function(d){var S=E(d),H=heart({pr:rnd(0.07,0.095)});H.dax=H.ax+rnd(-30,30);H.dz=chance(0.5)?rnd(0.15,0.3):rnd(-0.3,-0.1);
+  run(S,H,rnd(60,95),{qrs:qDelta,tv:vS(tV(H),0.6)});return renderE(S,["II","V1"]);},
+iam_inf:function(d){var S=E(d),H=heart({ax:rnd(40,85)}),inj=vA(rnd(95,118),rnd(0.3,0.52),rnd(-0.04,0.05)),q=chance(0.35);H.qm=rnd(0.25,0.4);
+  run(S,H,chance(0.3)?rnd(45,58):rnd(60,98),{qrs:q?qQinf:null,st:inj,stc:0.1,stw:0.05,tv:vAdd(tV(H),vS(inj,0.9))});return renderE(S,["II","III","aVF","aVL"]);},
+iam_ant:function(d){var S=E(d),H=heart(),inj=vec(rnd(0,0.1),rnd(-0.04,0.04),rnd(0.26,0.45)),q=chance(0.4);H.qm=rnd(0.8,1.1);
+  run(S,H,rnd(65,110),{qrs:q?qQant:null,st:inj,stc:0.1,stw:0.05,tv:vAdd(tV(H),vS(inj,0.9))});return renderE(S,["V1","V2","V3","V4"]);},
+iam_lat:function(d){var S=E(d),H=heart({ax:rnd(20,70)}),inj=vec(rnd(0.26,0.38),rnd(-0.16,-0.06),rnd(-0.05,0.04));
+  run(S,H,rnd(62,100),{st:inj,stc:0.1,stw:0.05,tv:vAdd(tV(H),vS(inj,0.9))});return renderE(S,chance(0.5)?["I","aVL","V6","III"]:["I","aVL","V5","V6"]);},
+iam_post:function(d){var S=E(d),H=heart({z:rnd(0.6,0.9)}),dep=vec(rnd(-0.03,0.03),0,-rnd(0.17,0.26));
+  run(S,H,rnd(62,100),{qrs:qPost,st:dep,stc:0.1,stw:0.05,tv:vec(0.15,0.12,rnd(0.15,0.25))});return renderE(S,["V1","V2","V3"]);},
+wellens:function(d){var S=E(d),H=heart(),A=chance(0.35);
+  run(S,H,rnd(58,90),A?{tv:vec(0.1,0.06,0.1),tw:0.035,t2:vec(0.02,0,-rnd(0.18,0.26)),t2t:0.08,t2s:0.04}:{tv:vec(rnd(0.08,0.14),0.06,-rnd(0.28,0.42)),tw:0.05});return renderE(S,["V1","V2","V3","V4"]);},
+dewinter:function(d){var S=E(d),H=heart(),k=rnd(0.8,1.3);
+  run(S,H,rnd(65,100),{stg:vS(vec(-0.08,0,-0.14),k),stc:0.06,stw:0.03,tv:vS(vec(0.14,0.05,0.38),rnd(0.9,1.25)),tw:0.038});return renderE(S,["V2","V3","V4","V5"]);},
+hypt:function(d){var S=E(d),H=heart();run(S,H,rnd(65,100),{st:vec(0,0,rnd(0.03,0.07)),tv:vec(rnd(0.1,0.2),0.08,rnd(0.45,0.65)),tw:rnd(0.055,0.07)});return renderE(S,["V2","V3","V4"]);},
+avr:function(d){var S=E(d),H=heart(),st=vA(rnd(-165,-140),rnd(0.24,0.38),0.03);run(S,H,rnd(80,115),{st:st,stc:0.1,stw:0.05,tv:vS(tV(H),0.6)});return renderE(S,["aVR","V1","II","V5"]);},
+stdep:function(d){var S=E(d),H=heart(),down=chance(0.4),st=vec(-rnd(0.13,0.2),-rnd(0.08,0.14),rnd(0,0.03));
+  run(S,H,rnd(70,110),down?{stg:vS(st,1.3),stc:0.12,stw:0.06,tv:vS(tV(H),-0.4)}:{st:st,tv:vS(tV(H),0.5)});return renderE(S,chance(0.5)?["V4","V5","V6"]:["II","V5","V6"]);},
+qwave:function(d){var S=E(d),H=heart({ax:rnd(-10,40)});H.qm=rnd(0.42,0.6);run(S,H,rnd(58,90),{qrs:qQinf,tv:vA(rnd(-80,-45),rnd(0.12,0.2),0.08)});return renderE(S,["II","III","aVF"]);},
+lvh:function(d){var S=E(d),H=heart({m:rnd(1.9,2.6),z:rnd(-0.75,-0.5),ax:rnd(-15,45)}),strain=chance(0.6);
+  run(S,H,rnd(58,92),strain?{stg:vec(-0.1,-0.03,0.07),stc:0.12,stw:0.06,tv:vec(-0.2,-0.04,0.18),p:chance(0.4)?"lae":null}:{p:chance(0.3)?"lae":null});
+  return renderE(S,chance(0.5)?["V1","V5","V6"]:["V2","V5","aVL"]);},
+rvh:function(d){var S=E(d),H=heart({ax:rnd(100,150),m:rnd(0.9,1.3),tax:rnd(40,80)}),pp=chance(0.4);
+  run(S,H,rnd(65,100),{qrs:qRVH,tv:vec(0.15,0.08,-0.2),p:pp?"rae":null});return renderE(S,["I","aVF","V1","V6"]);},
+lae:function(d){var S=E(d),H=heart({pa:rnd(1.0,1.3)});run(S,H,rnd(60,92),{p:"lae"});return renderE(S,["II","V1"]);},
+rae:function(d){var S=E(d),H=heart({pa:rnd(1.0,1.35)});run(S,H,rnd(65,100),{p:"rae"});return renderE(S,["II","V1"]);},
+hyperk:function(d){var S=E(d),sev=chance(0.3),H=heart({pa:sev?0.25:rnd(0.4,0.8)});
+  run(S,H,rnd(60,95),{tv:vA(H.tax,rnd(0.6,0.95),rnd(0.25,0.45)),tw:rnd(0.022,0.03),qrs:sev?function(S2,tR,H2){C(S2,tR-0.01,0.02,vA(H2.ax,H2.m*0.8,-0.2));C(S2,tR+0.04,0.022,vec(-0.25,-0.15,-0.2));}:null});
+  return renderE(S,chance(0.5)?["II","V3"]:["V2","V3","V4"]);},
+hypok:function(d){var S=E(d),H=heart();run(S,H,rnd(60,95),{tv:vS(tV(H),rnd(0.25,0.4)),st:vS(vA(H.ax,1,H.z),-0.05),stc:0.11,u:vec(0.04,0.07,rnd(0.12,0.2))});return renderE(S,["II","V2","V3"]);},
+hypercal:function(d){var S=E(d),H=heart();run(S,H,rnd(60,92),{tOff:rnd(0.13,0.155),tw:0.04});return renderE(S,chance(0.5)?["II"]:["II","V3"]);},
+hypocal:function(d){var S=E(d),H=heart();run(S,H,rnd(58,85),{tOff:rnd(0.33,0.39),tw:0.038});return renderE(S,chance(0.5)?["II"]:["II","V5"]);},
+lqt:function(d){var S=E(d),H=heart();run(S,H,rnd(55,75),{tOff:rnd(0.32,0.4),tw:rnd(0.055,0.07)});return renderE(S,chance(0.5)?["II"]:["II","V5"]);},
+dig:function(d){var S=E(d),H=heart({pr:rnd(0.18,0.24)}),mv=vA(H.ax,1,H.z);run(S,H,rnd(55,85),{stg:vS(mv,-rnd(0.17,0.25)),stc:0.12,stw:0.055,tOff:0.17,tv:vS(tV(H),0.3)});return renderE(S,["II","V5","V6"]);},
+hypoth:function(d){var S=E(d),H=heart({qt:1.18}),jm=rnd(0.32,0.55);S.noise=rnd(0.012,0.025);run(S,H,rnd(34,55),{j:vS(vA(H.ax,1,-0.25),jm),jt:0.05,js:0.015});return renderE(S,["II","V4","V5"]);},
+tep:function(d){var S=E(d),H=heart({ax:rnd(60,100)}),rb=chance(0.4);
+  run(S,H,rnd(100,125),{qrs:rb?function(S2,tR,H2){qS1Q3(S2,tR,H2);C(S2,tR+0.04,0.013,vec(-0.2,-0.04,0.25));}:qS1Q3,tv:vA(rnd(-50,-30),rnd(0.22,0.3),-0.24),qt:0.92});return renderE(S,chance(0.5)?["I","III","V1"]:["I","III","V1","V2"]);},
+lowv:function(d){var S=E(d),H=heart(),alt=chance(0.4),i=0,rr=60/rnd(95,125),t=rnd(0.3,0.5);S.gain=rnd(0.3,0.42);
+  while(t<d+0.6){var Hb=alt&&i%2?Object.assign({},H,{m:H.m*0.62,ax:H.ax+18}):H;bt(S,t,rr,Hb);t+=rr;i++;}
+  return renderE(S,["I","II","V2","V5"]);},
+erepol:function(d){var S=E(d),H=heart({tm:rnd(0.32,0.42)});run(S,H,rnd(50,75),{j:vec(0.17,0.13,0.11),jt:0.04,js:0.009,st:vec(0.1,0.08,0.11)});return renderE(S,chance(0.5)?["V4","V5","V6"]:["II","V5","V6"]);},
+peric:function(d){var S=E(d),H=heart(),st=vA(rnd(35,60),rnd(0.17,0.26),rnd(0.06,0.14));
+  run(S,H,rnd(85,112),{st:st,stc:0.11,stw:0.06,pq:vec(-0.03,-0.08,-0.03),tv:vAdd(tV(H),vS(st,0.5))});return renderE(S,chance(0.5)?["II","V5","aVR"]:["I","II","V3","aVR"]);},
+brugada:function(d){var S=E(d),H=heart();run(S,H,rnd(58,85),{j:vec(-0.2,0,rnd(0.36,0.46)),jt:0.07,js:0.045,tv:vec(-0.05,0.05,-0.24),tOff:0.25,tw:0.05});return renderE(S,chance(0.5)?["V1","V2"]:["V1","V2","V3"]);},
+leadrev:function(d){var S=E(d),H=heart({ax:rnd(20,70)});S.swap=true;run(S,H,rnd(60,95));return renderE(S,["I","II","aVR","V6"]);}
 };
+
+/* desenho de uma ou mais derivações em faixas empilhadas (simulados e galeria) */
+function stripRows(S){
+  var rows=[],H=0;
+  S.leads.forEach(function(L){
+    var mx=0,mn=0,y=L.y,i;for(i=0;i<y.length;i++){if(y[i]>mx)mx=y[i];if(y[i]<mn)mn=y[i];}
+    var top=Math.max(14,Math.ceil(Math.max(mx,1)*10+5)),bot=Math.max(8,Math.ceil(-mn*10+4));
+    rows.push({L:L,y0:H+top,h:top+bot,top:H});H+=top+bot;
+  });
+  return {rows:rows,hmm:H};
+}
+function drawStrips(cv,S,o){
+  var R=stripRows(S),wmm=10+S.dur*25,hmm=R.hmm,ppm=o.ppm;
+  var W=wmm*ppm,H=hmm*ppm,dpr=capDpr(W,H);
+  cv.style.width=W+"px";cv.style.height=H+"px";cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+  var c=cv.getContext("2d");c.setTransform(dpr,0,0,dpr,0,0);
+  c.fillStyle=PAPER.bg;c.fillRect(0,0,W,H);
+  for(var pass=0;pass<2;pass++){
+    c.strokeStyle=pass?PAPER.major:PAPER.minor;c.lineWidth=pass?1:0.5;c.beginPath();
+    for(var i=0;i<=wmm;i++){if((i%5===0)!==!!pass)continue;var x=Math.round(i*ppm)+0.5;c.moveTo(x,0);c.lineTo(x,H);}
+    for(var j=0;j<=hmm;j++){if((j%5===0)!==!!pass)continue;var yy=Math.round(j*ppm)+0.5;c.moveTo(0,yy);c.lineTo(W,yy);}
+    c.stroke();
+  }
+  var lw=Math.min(2.6,Math.max(1.3,ppm*0.3));
+  R.rows.forEach(function(r,ri){
+    var y0=r.y0*ppm,yv=r.L.y;
+    c.strokeStyle=PAPER.trace;c.lineWidth=lw;c.lineJoin="round";c.lineCap="round";
+    c.beginPath();c.moveTo(1*ppm,y0);c.lineTo(2*ppm,y0);c.lineTo(2*ppm,y0-10*ppm);c.lineTo(7*ppm,y0-10*ppm);c.lineTo(7*ppm,y0);c.lineTo(9*ppm,y0);c.stroke();
+    c.beginPath();
+    for(var k=0;k<yv.length;k++){var px=(10+25*k/FS)*ppm,py=y0-yv[k]*10*ppm;if(k===0)c.moveTo(px,py);else c.lineTo(px,py);}
+    c.stroke();
+    c.fillStyle=PAPER.label;c.font="700 "+Math.max(11,Math.min(15,ppm*2.6))+"px Figtree,system-ui,sans-serif";c.textAlign="left";c.textBaseline="top";
+    c.fillText(leadName(r.L.l),11*ppm,r.top*ppm+4);
+  });
+  c.fillStyle=PAPER.label;c.font="500 10px Figtree,system-ui,sans-serif";c.textAlign="right";c.textBaseline="alphabetic";
+  c.fillText("25 mm/s · 10 mm/mV",W-8,H-5);
+}
+
 var GBY={};GAL.forEach(function(x,i){x.i=i;GBY[x.id]=x;});
-function genItem(id,dur){var S=GEN[id](dur);baseline(S);return S;}
+function genItem(id,dur,seed){
+  if(seed==null)seed=Math.floor(Math.random()*2147483647);
+  RNG=seeded(seed);var S;try{S=GEN2[id](dur);}finally{RNG=Math.random;}
+  S.id=id;S.seed=seed;return S;
+}
 
 /* ---------- desenho em tira única ---------- */
 var PAPER={bg:"#fff7f5",minor:"#f4c9c6",major:"#e39a98",trace:"#1b1414",label:"#a06a68",acc:"#c2153c"};
@@ -934,13 +1293,13 @@ function renderGalList(){
   box.innerHTML=h;
   box.querySelectorAll("[data-g]").forEach(function(b){b.addEventListener("click",function(){openGal(b.getAttribute("data-g"));});});
 }
-function openGal(id){GD.id=id;GD.S=genItem(id,6);$("galList").hidden=true;$("galDetail").hidden=false;window.scrollTo(0,0);ZG.reset();renderGal();}
+function openGal(id,seed){GD.id=id;GD.S=genItem(id,6,seed);$("galList").hidden=true;$("galDetail").hidden=false;window.scrollTo(0,0);ZG.reset();renderGal();}
 function renderGal(){
   if(tab!=="aprender"||sub!=="achados")return;
   if(!GD.id){$("galList").hidden=false;$("galDetail").hidden=true;renderGalList();return;}
   var x=GBY[GD.id];
   $("gdName").textContent=L(x.name);
-  $("gdTags").innerHTML='<span class="tag f'+x.f+'">'+t("freq"+x.f)+'</span><span class="tag">'+L(CATS[x.cat])+'</span><span class="tag">'+t("gal_lead",{l:leadName(x.lead)})+"</span>";
+  $("gdTags").innerHTML='<span class="tag f'+x.f+'">'+t("freq"+x.f)+'</span><span class="tag">'+L(CATS[x.cat])+'</span><span class="tag">'+t(GD.S.leads.length>1?"gal_leads":"gal_lead",{l:GD.S.leads.map(function(z){return leadName(z.l);}).join(", ")})+"</span>";
   $("gdWhat").textContent=L(x.what);
   $("gdCrit").innerHTML=L(x.crit).map(function(c){return "<li>"+esc(c)+"</li>";}).join("");
   $("gdClin").textContent=L(x.clin);
@@ -955,15 +1314,18 @@ $("gdNext").addEventListener("click",function(){var x=GBY[GD.id];if(x.i<GAL.leng
 /* ---------- SIMULADOS ---------- */
 var stats=(function(){try{var s=JSON.parse(localStorage.getItem("ecglab:sim2"));if(s&&typeof s.total==="number"&&s.wrong)return s;}catch(e){}return {total:0,ok:0,wrong:{}};})(),q=null,streak=0;
 function saveStats(){try{localStorage.setItem("ecglab:sim2",JSON.stringify(stats));}catch(e){}}
-function nextKey(prev){
-  var keys=GAL.map(function(x){return x.id;}),w=keys.map(function(k){return k===prev?0:1+2*(stats.wrong[k]||0);});
+var QHIST=[],FW={1:4,2:2,3:1};
+function nextKey(){
+  var keys=GAL.map(function(x){return x.id;}),recent=QHIST.slice(-6);
+  var w=keys.map(function(k){return recent.indexOf(k)>=0?0:FW[GBY[k].f||2]*(1+2*(stats.wrong[k]||0));});
   var sum=w.reduce(function(a,b){return a+b;},0),r=Math.random()*sum;
   for(var i=0;i<keys.length;i++){r-=w[i];if(r<=0)return keys[i];}
   return keys[0];
 }
 function newQ(){
-  var key=nextKey(q&&q.key),x=GBY[key],S=genItem(key,6);
-  var opts=[key],sim=shuffle(x.sim||[]);if(sim.length)opts.push(sim[0]);
+  var key=nextKey(),x=GBY[key],S=genItem(key,6);QHIST.push(key);if(QHIST.length>20)QHIST.shift();
+  var opts=[key],sim=shuffle(x.sim||[]).filter(function(k){return GBY[k];});opts=opts.concat(sim.slice(0,2));
+  var same=shuffle(GAL.filter(function(y){return y.cat===x.cat&&opts.indexOf(y.id)<0;}).map(function(y){return y.id;}));if(opts.length<4&&same.length)opts.push(same[0]);
   var rest=shuffle(GAL.map(function(y){return y.id;}).filter(function(k){return opts.indexOf(k)<0;}));
   while(opts.length<4)opts.push(rest.pop());
   q={key:key,S:S,opts:shuffle(opts),answered:false,chosen:null};
@@ -988,9 +1350,9 @@ function renderQuiz(){
     if(bts.length>=2&&["vf"].indexOf(q.key)<0){var hr=(bts.length-1)*60/(bts[bts.length-1].tR-bts[0].tR);fc='<p class="fc">'+t("hr_est",{n:Math.round(hr)})+"</p>";}
     fb.className="fb card "+(ok?"ok":"no");
     fb.innerHTML="<h3>"+(ok?t("correct")+" ":t("was")+" ")+esc(L(x.name))+'</h3><p style="font-size:15px;margin-bottom:8px">'+esc(L(x.what))+"</p><ul>"+L(x.crit).map(function(c){return "<li>"+esc(c)+"</li>";}).join("")+'</ul><p class="fc">'+esc(L(x.clin))+"</p>"+fc+
-      '<button class="btn primary" id="btnNext" style="width:100%">'+t("next_ecg")+"</button>";
+      '<button class="btn primary" id="btnNext" style="width:100%">'+t("next_ecg")+"</button>"+'<button class="linkbtn report" id="btnReport">'+t("rep_sim")+"</button>";
     fb.hidden=false;$("btnDica").hidden=true;$("dica").hidden=true;
-    $("btnNext").addEventListener("click",newQ);
+    $("btnNext").addEventListener("click",newQ);$("btnReport").addEventListener("click",function(){reportSim(q.S,q.chosen);});
   }else fb.hidden=true;
   renderStats();
 }
@@ -1173,6 +1535,7 @@ function bankQuestion(){
   for(var i=0;i<labels.length;i++){r-=w[i];if(r<=0){Lb=labels[i];break;}}
   var cands=byL[Lb].filter(function(m){return !(RS.sess&&RS.sess.seen[m.id]);});if(!cands.length)cands=byL[Lb];
   var M=pick(cands);
+  if(RS.force){var Mf=RS.bank.filter(function(m){return m.id===RS.force;})[0];RS.force=null;if(Mf){M=Mf;Lb=Mf.label;}}
   return tx("sig","readonly",function(s){return s.get(M.id);}).then(function(S){
     if(!S)throw new Error("sinal ausente");
     var n=S.n,sig=[];for(var k=0;k<12;k++){var f=new Float32Array(n);for(var j=0;j<n;j++)f[j]=S.data[k*n+j]/1000;sig.push(f);}
@@ -1672,10 +2035,10 @@ ZN=ZoomView({wrap:$("normalWrap"),cv:$("cvNormal"),slider:$("zNormal"),zin:$("zN
   draw:function(ppm){var bts=visible(N.S),b=bts[1]||bts[0],p=PARTS[N.sel],r=p.reg(b);draw($("cvNormal"),N.S,{ppm:ppm,hmm:32,band:{a:r[0],b:r[1],label:L(p.chip)}});}});
 ZG=ZoomView({wrap:$("gdScroll"),cv:$("cvGal"),slider:$("zGal"),zin:$("zGalIn"),zout:$("zGalOut"),
   base:function(){return 4.5;},max:function(){return 16;},
-  draw:function(ppm){var x=GBY[GD.id];draw($("cvGal"),GD.S,{ppm:ppm,hmm:x.hmm||34,lead:x.lead});}});
+  draw:function(ppm){drawStrips($("cvGal"),GD.S,{ppm:ppm});}});
 ZQ=ZoomView({wrap:$("quizScroll"),cv:$("cvQuiz"),slider:$("zQuiz"),zin:$("zQuizIn"),zout:$("zQuizOut"),
   base:function(){return 5;},max:function(){return 16;},
-  draw:function(ppm){draw($("cvQuiz"),q.S,{ppm:ppm,hmm:GBY[q.key].hmm||34,lead:GBY[q.key].lead});}});
+  draw:function(ppm){drawStrips($("cvQuiz"),q.S,{ppm:ppm});}});
 ZR=ZoomView({wrap:$("rScroll"),cv:$("cvReal"),slider:$("rZoom"),zin:$("rZoomIn"),zout:$("rZoomOut"),
   base:function(w){return fitPpmOf(RS.cur.C,w-2);},max:function(b){return Math.max(b*2.5,12);},
   draw:function(ppm){RS.ppm=ppm;RS.dur=drawMulti($("cvReal"),RS.cur.C,ppm,markers());},
@@ -1711,6 +2074,43 @@ function autoPack(){
   });
 }
 
+
+/* ---------- reportar erro (Google Forms pré-preenchido) e links que reabrem o caso ---------- */
+var APP_V="2026-10-01";
+var REPORT={url:"https://docs.google.com/forms/d/e/1FAIpQLSfpAkurZKNCXO5wx5_XI8l106OqjC3oRtqgpL9tOg27yvqjqA/viewform",f:{sec:"entry.172935300",item:"entry.1063208790",det:"entry.1116867491",link:"entry.1185269790"}};   // formulário "ECG Lab - Reportar erro"
+function siteURL(){return /^https?:/.test(location.protocol)?location.origin+location.pathname:"https://italoneri.github.io/ecg-lab/";}
+function openReport(sec,item,det,link){
+  if(!REPORT.url){alert(t("rep_off"));return;}
+  var u=REPORT.url+(REPORT.url.indexOf("?")<0?"?":"&")+"usp=pp_url",f=REPORT.f;
+  [[f.sec,sec],[f.item,item],[f.det,det],[f.link,link]].forEach(function(p){if(p[0])u+="&"+p[0]+"="+encodeURIComponent(p[1]||"");});
+  window.open(u,"_blank","noopener");
+}
+function reportSim(S,chosen){
+  if(!S||!S.id)return;var x=GBY[S.id],leads=S.leads.map(function(z){return leadName(z.l);}).join(", ");
+  var det=[t("rep_ans")+": "+L(x.name)];if(chosen)det.push(t("rep_mark")+": "+L(GBY[chosen].name));
+  det.push(t("rep_leads")+": "+leads,"lang: "+LANG,"v: "+APP_V);
+  openReport(tab==="quiz"?"Simulados":"Aprender > Achados",S.id+" — "+L(x.name),det.join(" | "),siteURL()+"#sim="+S.id+"."+S.seed);
+}
+function reportReal(){
+  var qq=RS.cur;if(!qq)return;var tx2=qq.text(),okI=qq.keys.findIndex(function(k,i){return qq.isOk(i);});
+  var det=[tx2.prompt,t("rep_ans")+": "+qq.optText(qq.keys[okI])];
+  if(qq.answered&&qq.chosen!=null)det.push(t("rep_mark")+": "+qq.optText(qq.keys[qq.chosen]));
+  if(tx2.laudo&&tx2.laudo.length)det.push(t("laudo_short")+": "+tx2.laudo.join("; ").replace(/<[^>]+>/g,""));
+  det.push("lang: "+LANG,"v: "+APP_V);
+  var isBank=typeof qq.id==="number";
+  openReport("Casos reais",(isBank?"PTB-XL ":"")+qq.id,det.join(" | "),isBank?siteURL()+"#caso="+qq.id:siteURL());
+}
+$("gdReport").addEventListener("click",function(){reportSim(GD.S,null);});
+$("rReport").addEventListener("click",reportReal);
+function applyHash(){
+  var h=decodeURIComponent(location.hash.slice(1));if(!h)return;
+  var m=/^sim=([a-z0-9_]+)\.(\d+)$/.exec(h);
+  if(m&&GBY[m[1]]){setTab("aprender");setSub("achados");openGal(m[1],+m[2]);return;}
+  m=/^caso=(\d+)$/.exec(h);
+  if(m){var id=+m[1];if(RS.bank.some(function(b){return b.id===id;})){setTab("reais");RS.src="bank";RS.force=id;renderSrcBar();startSession();}}
+}
+window.addEventListener("hashchange",applyHash);
+
 /* ---------- início ---------- */
 newPapel();newNormal();newQ();
 applyLang();setSub("papel");
@@ -1723,7 +2123,7 @@ loadBank().then(function(){
       if(fresh)RS.src="bank";
       renderSrcBar();renderBankInfo();if(fresh)startSession();
     });
-  });
+  }).then(applyHash,applyHash);
 }).catch(function(e){console.warn("ECG Lab:",e&&e.message?e.message:e);renderBankInfo();});
 
 })();
