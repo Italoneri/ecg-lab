@@ -209,6 +209,21 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .dsec{font-size:16px;margin:16px 0 6px}
 .dlist{margin:0;padding-left:20px;font-size:15px}
 .dlist li{margin-bottom:4px}
+.wtext{font-size:15px}
+.wlinks{list-style:none;padding:0;margin:4px 0 0}
+.wlinks li{margin:0 0 8px}
+.wlinks a{color:var(--accent);font-size:14.5px;text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
+.wlinks .ext{display:inline-block;margin-left:4px;font-size:12px;text-decoration:none}
+.whybox{margin:4px 0 12px;border:1px solid var(--border);border-radius:12px;padding:0 12px;background:var(--surface)}
+.whybox summary{cursor:pointer;font-weight:600;font-size:15px;padding:10px 0;min-height:44px;display:flex;align-items:center}
+.whybox p{font-size:14.5px;margin:0 0 10px}
+.whybox .linkbtn{display:block;margin:0 0 6px;padding:6px 0;color:var(--accent);font-size:14px;text-align:left}
+.refs h3{font-size:17px;margin-bottom:6px}
+.refs h4{font-size:14px;margin:12px 0 4px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.refs .booklist{margin:0;padding-left:18px;font-size:14px}
+.refs .booklist li{margin-bottom:4px}
+.info .why{margin-top:8px}
+
 .dnav{display:flex;gap:8px;margin-top:16px}
 .dnav .btn{flex:1}
 </style>
@@ -287,6 +302,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
       <div id="galList">
         <p class="lead" data-t="gal_intro" style="margin-bottom:6px"></p>
         <div id="galGroups"></div>
+        <div class="card refs" id="galRefs" style="margin-top:16px"></div>
       </div>
       <div id="galDetail" hidden>
         <button class="backbtn" id="galBack">‹ <span data-t="gal_back"></span></button>
@@ -299,8 +315,16 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
           <p style="margin-top:12px;font-size:15.5px" id="gdWhat"></p>
           <h3 class="dsec" data-t="gal_crit"></h3>
           <ul class="dlist" id="gdCrit"></ul>
+          <h3 class="dsec" data-t="why_mech"></h3>
+          <p class="wtext" id="gdMech"></p>
+          <h3 class="dsec" data-t="why_leads"></h3>
+          <p class="wtext" id="gdLeads"></p>
+          <h3 class="dsec" data-t="why_causes"></h3>
+          <ul class="dlist" id="gdCauses"></ul>
           <h3 class="dsec" data-t="gal_clin"></h3>
           <p style="font-size:15px" id="gdClin"></p>
+          <h3 class="dsec" data-t="why_more"></h3>
+          <div id="gdLinks"></div>
           <div class="btnrow"><button class="btn" id="gdAgain" data-t="gal_other"></button></div>
           <button class="linkbtn report" id="gdReport" data-t="rep_sim"></button>
           <div class="dnav">
@@ -449,8 +473,8 @@ pr_short:"PR curto (menos de 3 mm)",pr_long:"PR longo (mais de 5 mm): BAV de 1º
 norm_h:"O ECG normal",norm_lead:"Escolha uma parte do batimento para ver onde ela está e quais são os valores normais.",normal_lbl:"Normal:",measured:"Neste traçado: {mm} mm ({s} s)",
 sys_h:"Leitura sistemática",sys_lead:"Siga sempre a mesma ordem para não deixar nada passar.",
 sys_list:"<li><b>Ritmo:</b> há P antes de todo QRS? O R–R é regular?</li><li><b>Frequência:</b> 1500 ÷ mm entre dois R.</li><li><b>Eixo:</b> QRS positivo em D1 e aVF = eixo normal.</li><li><b>Intervalos:</b> PR, QRS e QT.</li><li><b>ST e T:</b> desníveis, inversões, ondas anormais.</li>",
-gal_intro:"Toque em um achado para ver como ele aparece no ECG, os critérios e a importância clínica. Os traçados são simulados e esquemáticos.",
-gal_back:"Todos os achados",gal_crit:"Critérios",gal_clin:"Na prática",gal_other:"Outro exemplo",gal_prev:"‹ Anterior",gal_next:"Próximo ›",rep_sim:"Reportar erro neste traçado",rep_ans:"Resposta do app",rep_mark:"Marcada",rep_leads:"Derivações",laudo_short:"Laudo",rep_case:"Reportar erro neste caso",rep_off:"O formulário de erros ainda não está configurado.",gal_lead:"Derivação {l}",gal_leads:"Derivações: {l}",
+gal_intro:"Toque em um achado para ver como ele aparece no ECG, os critérios, por que acontece, por que aparece naquelas derivações, as causas e links para saber mais. Os traçados são simulados e esquemáticos.",
+gal_back:"Todos os achados",why_mech:"Por que acontece",why_leads:"Por que aparece nessas derivações",why_causes:"Causas e associações",why_more:"Para saber mais",why_sum:"Por que acontece e por que nessas derivações?",why_full:"Ver explicação completa, causas e fontes ›",why_lbl:"Por quê?",refs_h:"Fontes das explicações",refs_lead:"As explicações seguem a diretriz brasileira de laudos de ECG, as diretrizes internacionais mais recentes de cada tema e livros-texto atuais. Os links abrem em uma nova aba.",refs_books:"Livros",refs_guides:"Diretrizes e consensos",refs_note:"Com exceção da diretriz da SBC, os textos dos links estão em inglês. Material de estudo: não substitui a avaliação clínica.",gal_crit:"Critérios",gal_clin:"Na prática",gal_other:"Outro exemplo",gal_prev:"‹ Anterior",gal_next:"Próximo ›",rep_sim:"Reportar erro neste traçado",rep_ans:"Resposta do app",rep_mark:"Marcada",rep_leads:"Derivações",laudo_short:"Laudo",rep_case:"Reportar erro neste caso",rep_off:"O formulário de erros ainda não está configurado.",gal_lead:"Derivação {l}",gal_leads:"Derivações: {l}",
 freq1:"Comum",freq2:"Menos comum",freq3:"Raro",
 sim_h:"Qual é o diagnóstico?",sim_lead:"Analise as derivações mostradas (6 segundos) e escolha a resposta. Cada traçado é gerado na hora, então o mesmo achado nunca sai igual.",swipe:"Arraste o traçado para ver tudo. Para ampliar, use + e −, faça pinça com dois dedos ou dê dois toques.",
 guide_show:"Ver roteiro",guide_hide:"Ocultar roteiro",
@@ -490,8 +514,8 @@ pr_short:"PR corto (menos de 3 mm)",pr_long:"PR largo (más de 5 mm): bloqueo AV
 norm_h:"El ECG normal",norm_lead:"Elige una parte del latido para ver dónde está y cuáles son los valores normales.",normal_lbl:"Normal:",measured:"En este trazado: {mm} mm ({s} s)",
 sys_h:"Lectura sistemática",sys_lead:"Sigue siempre el mismo orden para no pasar nada por alto.",
 sys_list:"<li><b>Ritmo:</b> ¿hay P antes de cada QRS? ¿El R-R es regular?</li><li><b>Frecuencia:</b> 1500 ÷ mm entre dos R.</li><li><b>Eje:</b> QRS positivo en DI y aVF = eje normal.</li><li><b>Intervalos:</b> PR, QRS y QT.</li><li><b>ST y T:</b> elevaciones, descensos, inversiones, ondas anómalas.</li>",
-gal_intro:"Toca un hallazgo para ver cómo aparece en el ECG, sus criterios y su importancia clínica. Los trazados son simulados y esquemáticos.",
-gal_back:"Todos los hallazgos",gal_crit:"Criterios",gal_clin:"En la práctica",gal_other:"Otro ejemplo",gal_prev:"‹ Anterior",gal_next:"Siguiente ›",rep_sim:"Reportar un error en este trazado",rep_ans:"Respuesta de la app",rep_mark:"Marcada",rep_leads:"Derivaciones",laudo_short:"Informe",rep_case:"Reportar un error en este caso",rep_off:"El formulario de errores aún no está configurado.",gal_lead:"Derivación {l}",gal_leads:"Derivaciones: {l}",
+gal_intro:"Toca un hallazgo para ver cómo aparece en el ECG, sus criterios, por qué ocurre, por qué aparece en esas derivaciones, sus causas y enlaces para saber más. Los trazados son simulados y esquemáticos.",
+gal_back:"Todos los hallazgos",why_mech:"Por qué ocurre",why_leads:"Por qué aparece en esas derivaciones",why_causes:"Causas y asociaciones",why_more:"Para saber más",why_sum:"¿Por qué ocurre y por qué en esas derivaciones?",why_full:"Ver la explicación completa, causas y fuentes ›",why_lbl:"¿Por qué?",refs_h:"Fuentes de las explicaciones",refs_lead:"Las explicaciones siguen la guía brasileña de informes de ECG, las guías internacionales más recientes de cada tema y libros de texto actuales. Los enlaces se abren en una pestaña nueva.",refs_books:"Libros",refs_guides:"Guías y consensos",refs_note:"Salvo la guía SBC (en portugués), los textos de los enlaces están en inglés. Material de estudio: no sustituye la evaluación clínica.",gal_crit:"Criterios",gal_clin:"En la práctica",gal_other:"Otro ejemplo",gal_prev:"‹ Anterior",gal_next:"Siguiente ›",rep_sim:"Reportar un error en este trazado",rep_ans:"Respuesta de la app",rep_mark:"Marcada",rep_leads:"Derivaciones",laudo_short:"Informe",rep_case:"Reportar un error en este caso",rep_off:"El formulario de errores aún no está configurado.",gal_lead:"Derivación {l}",gal_leads:"Derivaciones: {l}",
 freq1:"Frecuente",freq2:"Menos frecuente",freq3:"Raro",
 sim_h:"¿Cuál es el diagnóstico?",sim_lead:"Analiza las derivaciones mostradas (6 segundos) y elige la respuesta. Cada trazado se genera al momento, así que el mismo hallazgo nunca sale igual.",swipe:"Arrastra el trazado para verlo completo. Para ampliar, usa + y −, pellizca con dos dedos o toca dos veces.",
 guide_show:"Ver guía",guide_hide:"Ocultar guía",
@@ -1269,6 +1293,523 @@ function renderPapel(){
   $("btnNovo").addEventListener("click",newPapel);
 })();
 
+/* ---------- POR QUÊ: fontes, ECG normal e auxiliares ---------- */
+var REFS={
+ sbc:{u:"https://www.scielo.br/j/abc/a/vzrVzWmgbrBp85sCXd8nFRQ/",pt:"Diretriz SBC de laudos eletrocardiográficos (2022)",es:"Guía SBC de informes electrocardiográficos (2022, en portugués)",cite:"Samesima N, et al. Diretriz da Sociedade Brasileira de Cardiologia sobre a Análise e Emissão de Laudos Eletrocardiográficos – 2022. Arq Bras Cardiol. 2022;119(4):638-680."},
+ acs25:{u:"https://pubmed.ncbi.nlm.nih.gov/40013746/",pt:"Diretriz ACC/AHA de síndrome coronariana aguda (2025)",es:"Guía ACC/AHA de síndrome coronario agudo (2025)",cite:"Rao SV, et al. 2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes. Circulation/J Am Coll Cardiol. 2025."},
+ ecdp22:{u:"https://pubmed.ncbi.nlm.nih.gov/36241466/",pt:"Consenso ACC de dor torácica aguda (2022)",es:"Consenso ACC de dolor torácico agudo (2022)",cite:"Kontos MC, et al. 2022 ACC Expert Consensus Decision Pathway on the Evaluation and Disposition of Acute Chest Pain in the Emergency Department. J Am Coll Cardiol. 2022."},
+ udmi:{u:"https://pubmed.ncbi.nlm.nih.gov/30165617/",pt:"4ª Definição Universal de Infarto (2018)",es:"4.ª Definición Universal del Infarto (2018)",cite:"Thygesen K, et al. Fourth Universal Definition of Myocardial Infarction (2018). Circulation/Eur Heart J. 2018."},
+ esc23:{u:"https://doi.org/10.1093/eurheartj/ehad191",pt:"Diretriz ESC de síndromes coronarianas agudas (2023)",es:"Guía ESC de síndromes coronarios agudos (2023)",cite:"Byrne RA, et al. 2023 ESC Guidelines for the management of acute coronary syndromes. Eur Heart J. 2023."},
+ va22:{u:"https://doi.org/10.1093/eurheartj/ehac262",pt:"Diretriz ESC de arritmias ventriculares e morte súbita (2022)",es:"Guía ESC de arritmias ventriculares y muerte súbita (2022)",cite:"Zeppenfeld K, et al. 2022 ESC Guidelines for the management of patients with ventricular arrhythmias and the prevention of sudden cardiac death. Eur Heart J. 2022."},
+ af24:{u:"https://pubmed.ncbi.nlm.nih.gov/39210723/",pt:"Diretriz ESC de fibrilação atrial (2024)",es:"Guía ESC de fibrilación auricular (2024)",cite:"Van Gelder IC, et al. 2024 ESC Guidelines for the management of atrial fibrillation. Eur Heart J. 2024."},
+ brady18:{u:"https://pubmed.ncbi.nlm.nih.gov/30412709/",pt:"Diretriz ACC/AHA/HRS de bradicardia e distúrbios de condução (2018)",es:"Guía ACC/AHA/HRS de bradicardia y trastornos de conducción (2018)",cite:"Kusumoto FM, et al. 2018 ACC/AHA/HRS Guideline on the Evaluation and Management of Patients With Bradycardia and Cardiac Conduction Delay. Circulation. 2019."},
+ svt19:{u:"https://pubmed.ncbi.nlm.nih.gov/31504425/",pt:"Diretriz ESC de taquicardia supraventricular (2019)",es:"Guía ESC de taquicardia supraventricular (2019)",cite:"Brugada J, et al. 2019 ESC Guidelines for the management of patients with supraventricular tachycardia. Eur Heart J. 2020."},
+ peri25:{u:"https://academic.oup.com/eurheartj/article/46/40/3952/8234483",pt:"Diretriz ESC de miocardite e pericardite (2025)",es:"Guía ESC de miocarditis y pericarditis (2025)",cite:"2025 ESC Guidelines for the management of myocarditis and pericarditis. Eur Heart J. 2025;46(40):3952."},
+ aha09:{u:"https://pubmed.ncbi.nlm.nih.gov/19228820/",pt:"Recomendações AHA/ACCF/HRS: ECG nas sobrecargas",es:"Recomendaciones AHA/ACCF/HRS: ECG en las sobrecargas",cite:"Hancock EW, et al. AHA/ACCF/HRS recommendations for the standardization and interpretation of the electrocardiogram, part V: chamber hypertrophy. Circulation. 2009."},
+ pe19:{u:"https://doi.org/10.1093/eurheartj/ehz405",pt:"Diretriz ESC de embolia pulmonar (2019)",es:"Guía ESC de embolia pulmonar (2019)",cite:"Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020."},
+ aha25:{u:"https://professional.heart.org/en/science-news/2025-aha-guidelines-for-cpr-and-ecc",pt:"Diretrizes AHA de RCP e emergência cardiovascular (2025)",es:"Guías AHA de RCP y atención cardiovascular de emergencia (2025)",cite:"American Heart Association. 2025 Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care."},
+ credible:{u:"https://crediblemeds.org/",pt:"CredibleMeds: fármacos que prolongam o QT",es:"CredibleMeds: fármacos que prolongan el QT"},
+ brugdrugs:{u:"https://www.brugadadrugs.org/",pt:"BrugadaDrugs: fármacos a evitar na síndrome de Brugada",es:"BrugadaDrugs: fármacos a evitar en el síndrome de Brugada"}
+};
+var BOOKS=[
+ "Goldberger AL, et al. Goldberger's Clinical Electrocardiography: A Simplified Approach. 10th ed. Elsevier; 2023.",
+ "Libby P, et al., eds. Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine. 12th ed. Elsevier; 2022.",
+ "Burns E, Buttner R. LITFL ECG Library (litfl.com), revisado continuamente."
+];
+var WHY={};
+function W(id,mech,leads,causes,links){WHY[id]={mech:mech,leads:leads,causes:causes,links:links};}
+var LITFL_UP=["ecg","stemi","omi","pvc","pac","svt","vt","vf","av","mat","aivr","lvh","rvh","lbbb","rbbb","lafb","lpfb","tdp","ajr","qt","mi","2nd","3rd"];
+function linkInfo(k){
+  if(REFS[k])return {u:REFS[k].u,t:L(REFS[k]),src:/litfl|crediblemeds|brugadadrugs/.test(REFS[k].u)?"":"guide"};
+  var slug=k.replace(/^https?:\/\/litfl\.com\//,"").replace(/\/$/,"").replace(/-ecg-library$/,"");
+  var words=slug.split("-").map(function(w){return LITFL_UP.indexOf(w)>=0?w.toUpperCase():w;});
+  var s=words.join(" ");s=s.charAt(0).toUpperCase()+s.slice(1);
+  return {u:k,t:"LITFL · "+s,src:"litfl"};
+}
+function whyLinksHTML(links){
+  return '<ul class="wlinks">'+links.map(function(k){var x=linkInfo(k);
+    return '<li><a href="'+esc(x.u)+'" target="_blank" rel="noopener noreferrer">'+esc(x.t)+'<span class="ext" aria-hidden="true">↗</span></a></li>';}).join("")+"</ul>";
+}
+/* por que no ECG normal (aba Aprender → ECG normal) */
+var PWHY={
+ p:{pt:"O nó sinusal fica no alto do átrio direito, e a ativação dos átrios desce para a esquerda (vetor em torno de +60°). Uma onda que vem em direção ao polo positivo da derivação fica positiva, e por isso a P é maior em D2 (+60°) e negativa em aVR, que olha do ombro direito. Em V1 costuma ser bifásica: o átrio direito, na frente, ativa primeiro; o esquerdo, atrás, depois.",
+    es:"El nodo sinusal está en lo alto de la aurícula derecha, y la activación de las aurículas baja hacia la izquierda (vector cerca de +60°). Una onda que va hacia el polo positivo de la derivación es positiva, y por eso la P es mayor en DII (+60°) y negativa en aVR, que mira desde el hombro derecho. En V1 suele ser bifásica: la aurícula derecha, delante, se activa primero; la izquierda, detrás, después."},
+ pr:{pt:"O PR inclui a ativação atrial e, principalmente, o atraso no nó AV. As células do nó dependem de cálcio e conduzem devagar: isso dá tempo para os átrios encherem os ventrículos e protege os ventrículos de ritmos atriais muito rápidos. O segmento fica plano porque a massa do nó e do His é pequena demais para gerar voltagem visível na pele.",
+     es:"El PR incluye la activación auricular y, sobre todo, el retraso en el nodo AV. Las células del nodo dependen del calcio y conducen despacio: eso da tiempo a las aurículas para llenar los ventrículos y protege a los ventrículos de ritmos auriculares muy rápidos. El segmento es plano porque la masa del nodo y del His es demasiado pequeña para generar un voltaje visible en la piel."},
+ qrs:{pt:"Primeiro o septo ativa da esquerda para a direita: q pequeno em D1, aVL, V5 e V6 e r pequeno em V1. Depois vem a parede livre do VE, que domina por ter mais massa, com vetor para a esquerda, para baixo e para trás: R alto em V5–V6 e S profundo em V1. Por isso o R cresce de V1 a V6, com transição em V3–V4. O QRS é estreito porque o His–Purkinje conduz a 2–4 m/s, várias vezes mais rápido que o músculo comum.",
+      es:"Primero el tabique se activa de izquierda a derecha: q pequeña en DI, aVL, V5 y V6 y r pequeña en V1. Después viene la pared libre del VI, que domina por tener más masa, con vector a la izquierda, hacia abajo y hacia atrás: R alta en V5–V6 y S profunda en V1. Por eso la R crece de V1 a V6, con transición en V3–V4. El QRS es estrecho porque el His–Purkinje conduce a 2–4 m/s, varias veces más rápido que el músculo común."},
+ st:{pt:"O ST corresponde ao platô (fase 2) do potencial de ação: todas as células ventriculares estão despolarizadas, com voltagem parecida. Sem diferença de voltagem entre regiões, não há corrente e o traçado fica na linha de base. Quando uma região está lesada, ela fica com voltagem diferente das outras, surge uma corrente de lesão e o ST se desloca: para cima nas derivações voltadas para a lesão transmural, para baixo na isquemia subendocárdica.",
+     es:"El ST corresponde a la meseta (fase 2) del potencial de acción: todas las células ventriculares están despolarizadas, con voltaje parecido. Sin diferencia de voltaje entre regiones, no hay corriente y el trazado queda en la línea de base. Cuando una región está lesionada, su voltaje es distinto del resto, aparece una corriente de lesión y el ST se desplaza: hacia arriba en las derivaciones orientadas a la lesión transmural, hacia abajo en la isquemia subendocárdica."},
+ t:{pt:"O epicárdio tem potencial de ação mais curto e repolariza antes do endocárdio, então a repolarização caminha ao contrário da despolarização. Como a repolarização tem sinal elétrico oposto, as duas inversões se anulam e a T fica com a mesma polaridade do QRS na maioria das derivações. T negativa em aVR é normal; em V1 e D3 pode ser normal.",
+    es:"El epicardio tiene un potencial de acción más corto y repolariza antes que el endocardio, así que la repolarización avanza al revés de la despolarización. Como la repolarización tiene signo eléctrico opuesto, las dos inversiones se anulan y la T tiene la misma polaridad que el QRS en la mayoría de las derivaciones. La T negativa en aVR es normal; en V1 y DIII puede ser normal."},
+ qt:{pt:"O QT mede a duração do potencial de ação ventricular. Ele encurta quando a frequência sobe, porque o potencial de ação também encurta; por isso precisa ser corrigido (QTc). Um QT longo significa repolarização lenta, o que abre espaço para pós-despolarizações precoces e torsades de pointes.",
+     es:"El QT mide la duración del potencial de acción ventricular. Se acorta cuando sube la frecuencia, porque el potencial de acción también se acorta; por eso hay que corregirlo (QTc). Un QT largo significa repolarización lenta, lo que abre paso a pospotenciales precoces y torsades de pointes."}
+};
+
+/* ---------- POR QUÊ: ritmo ---------- */
+W("nsr",
+ {pt:"O nó sinusal fica no alto do átrio direito, perto da veia cava superior. Suas células têm automatismo: a fase 4 do potencial de ação sobe sozinha (corrente If) até o limiar, de 60 a 100 vezes por minuto em repouso (a diretriz da SBC de 2022 aceita 50 a 100). O impulso se espalha pelos átrios (onda P), sofre um atraso fisiológico no nó AV (segmento PR, que dá tempo para o enchimento ventricular) e desce rápido pelo feixe de His e pelas fibras de Purkinje, o que gera um QRS estreito.",
+  es:"El nodo sinusal está en la parte alta de la aurícula derecha, cerca de la vena cava superior. Sus células tienen automatismo: la fase 4 del potencial de acción sube sola (corriente If) hasta el umbral, de 60 a 100 veces por minuto en reposo (la guía brasileña SBC de 2022 acepta 50 a 100). El impulso recorre las aurículas (onda P), sufre un retraso fisiológico en el nodo AV (segmento PR, que da tiempo al llenado ventricular) y baja rápido por el haz de His y las fibras de Purkinje, lo que genera un QRS estrecho."},
+ {pt:"Como o impulso nasce em cima e à direita, a ativação atrial caminha para baixo e para a esquerda (vetor da P em torno de +60°). Uma onda que se aproxima do polo positivo de uma derivação fica positiva: por isso a P é positiva em D1, D2 e aVF, e é maior em D2 (+60°). Em aVR (−150°), que olha do ombro direito, a P se afasta e fica negativa. Em V1 a P costuma ser bifásica: o átrio direito, anterior, ativa primeiro (componente positivo) e o esquerdo, posterior, depois (componente negativo).",
+  es:"Como el impulso nace arriba y a la derecha, la activación auricular avanza hacia abajo y a la izquierda (vector de la P cerca de +60°). Una onda que se acerca al polo positivo de una derivación es positiva: por eso la P es positiva en DI, DII y aVF, y es mayor en DII (+60°). En aVR (−150°), que mira desde el hombro derecho, la P se aleja y es negativa. En V1 la P suele ser bifásica: la aurícula derecha, anterior, se activa primero (componente positivo) y la izquierda, posterior, después (componente negativo)."},
+ {pt:["Ritmo fisiológico; a frequência depende do equilíbrio entre simpático e vago."],es:["Ritmo fisiológico; la frecuencia depende del equilibrio entre simpático y vago."]},
+ ["https://litfl.com/normal-sinus-rhythm-ecg-library/","sbc"]);
+
+W("stach",
+ {pt:"A estimulação simpática (noradrenalina e adrenalina nos receptores β1) aumenta a corrente If e as correntes de cálcio no nó sinusal. A fase 4 fica mais inclinada, o limiar é atingido mais cedo e a frequência passa de 100 bpm. Quase sempre é uma resposta do corpo a outro problema, não uma doença em si.",
+  es:"La estimulación simpática (noradrenalina y adrenalina sobre los receptores β1) aumenta la corriente If y las corrientes de calcio del nodo sinusal. La fase 4 se vuelve más empinada, el umbral se alcanza antes y la frecuencia supera los 100 lpm. Casi siempre es una respuesta del cuerpo a otro problema, no una enfermedad en sí."},
+ {pt:"A origem continua no nó sinusal, então a P tem o mesmo eixo do ritmo normal: positiva em D1, D2 e aVF e negativa em aVR. Com frequências altas a P pode se fundir com a T anterior; procure-a em D2 e V1. O PR e o QT encurtam porque a condução AV e a repolarização ficam mais rápidas com o simpático.",
+  es:"El origen sigue en el nodo sinusal, así que la P tiene el mismo eje que el ritmo normal: positiva en DI, DII y aVF y negativa en aVR. Con frecuencias altas la P puede fundirse con la T anterior; búscala en DII y V1. El PR y el QT se acortan porque la conducción AV y la repolarización se aceleran con el simpático."},
+ {pt:["Febre, dor, ansiedade, exercício","Hipovolemia, sangramento, choque, sepse","Anemia, hipoxemia","Embolia pulmonar, insuficiência cardíaca","Hipertireoidismo","Fármacos e drogas: β-agonistas, cafeína, cocaína, anfetaminas; abstinência de álcool ou de β-bloqueador"],
+  es:["Fiebre, dolor, ansiedad, ejercicio","Hipovolemia, hemorragia, shock, sepsis","Anemia, hipoxemia","Embolia pulmonar, insuficiencia cardíaca","Hipertiroidismo","Fármacos y drogas: β-agonistas, cafeína, cocaína, anfetaminas; abstinencia de alcohol o de β-bloqueantes"]},
+ ["https://litfl.com/sinus-tachycardia-ecg-library/","sbc"]);
+
+W("sbrad",
+ {pt:"O tônus vagal libera acetilcolina no nó sinusal, que abre canais de potássio (IK-ACh), deixa a célula mais negativa e achata a fase 4. O nó demora mais para atingir o limiar e a frequência cai abaixo de 50–60 bpm. A mesma bradicardia pode vir de fármacos que deprimem o nó ou de doença do próprio nó sinusal.",
+  es:"El tono vagal libera acetilcolina en el nodo sinusal, que abre canales de potasio (IK-ACh), vuelve la célula más negativa y aplana la fase 4. El nodo tarda más en alcanzar el umbral y la frecuencia baja de 50–60 lpm. La misma bradicardia puede deberse a fármacos que deprimen el nodo o a enfermedad del propio nodo sinusal."},
+ {pt:"O marcapasso continua sendo o nó sinusal, então a P mantém o eixo normal (positiva em D1, D2 e aVF), com uma P antes de cada QRS e PR constante. A diferença está só no espaço maior entre os batimentos, que você vê em qualquer derivação de ritmo.",
+  es:"El marcapasos sigue siendo el nodo sinusal, así que la P mantiene el eje normal (positiva en DI, DII y aVF), con una P antes de cada QRS y PR constante. La diferencia está solo en el mayor espacio entre latidos, visible en cualquier derivación de ritmo."},
+ {pt:["Atletas, sono, tônus vagal alto","β-bloqueadores, verapamil/diltiazem, digoxina, amiodarona, ivabradina","Hipotireoidismo, hipotermia","IAM inferior (a coronária direita irriga o nó sinusal em cerca de 60% das pessoas)","Hipertensão intracraniana (reflexo de Cushing)","Hipercalemia","Doença do nó sinusal"],
+  es:["Deportistas, sueño, tono vagal alto","β-bloqueantes, verapamilo/diltiazem, digoxina, amiodarona, ivabradina","Hipotiroidismo, hipotermia","IAM inferior (la coronaria derecha irriga el nodo sinusal en cerca del 60% de las personas)","Hipertensión intracraneal (reflejo de Cushing)","Hiperpotasemia","Enfermedad del nodo sinusal"]},
+ ["https://litfl.com/sinus-bradycardia-ecg-library/","brady18"]);
+
+W("sarrh",
+ {pt:"Na inspiração o tônus vagal diminui (e o retorno venoso aumenta), então o nó sinusal acelera; na expiração o vago volta e a frequência cai. É a arritmia sinusal respiratória, sinal de um sistema nervoso autônomo saudável.",
+  es:"En la inspiración el tono vagal disminuye (y aumenta el retorno venoso), así que el nodo sinusal se acelera; en la espiración vuelve el vago y la frecuencia baja. Es la arritmia sinusal respiratoria, señal de un sistema nervioso autónomo sano."},
+ {pt:"Todas as P têm a mesma forma e o mesmo eixo porque nascem sempre no nó sinusal; só o intervalo PP muda. Por isso uma tira longa de D2, onde a P é maior, é a melhor forma de ver.",
+  es:"Todas las P tienen la misma forma y el mismo eje porque nacen siempre en el nodo sinusal; solo cambia el intervalo PP. Por eso una tira larga de DII, donde la P es mayor, es la mejor forma de verla."},
+ {pt:["Normal em crianças, jovens e atletas","Forma não respiratória: idosos, cardiopatia, intoxicação digitálica"],es:["Normal en niños, jóvenes y deportistas","Forma no respiratoria: ancianos, cardiopatía, intoxicación digitálica"]},
+ ["https://litfl.com/sinus-arrhythmia-ecg-library/"]);
+
+W("afib",
+ {pt:"Focos de disparo rápido, quase sempre nas veias pulmonares, e múltiplas ondas de reentrada percorrem os átrios a 350–600 por minuto. Não há uma despolarização atrial organizada, então não há onda P nem contração atrial efetiva. O nó AV recebe centenas de impulsos e só deixa passar alguns, ao acaso (condução oculta), o que deixa o RR irregularmente irregular. Fibrose e dilatação atrial perpetuam a arritmia.",
+  es:"Focos de disparo rápido, casi siempre en las venas pulmonares, y múltiples ondas de reentrada recorren las aurículas a 350–600 por minuto. No hay una despolarización auricular organizada, así que no hay onda P ni contracción auricular eficaz. El nodo AV recibe cientos de impulsos y solo deja pasar algunos, al azar (conducción oculta), lo que hace el RR irregularmente irregular. La fibrosis y la dilatación auricular perpetúan la arritmia."},
+ {pt:"As ondas f vêm do átrio, então aparecem melhor nas derivações mais próximas dele ou alinhadas com ele: V1, que fica sobre o átrio direito, e D2, D3 e aVF. O QRS é estreito porque, depois do nó AV, a condução pelos ventrículos é normal.",
+  es:"Las ondas f vienen de la aurícula, así que se ven mejor en las derivaciones más cercanas o alineadas con ella: V1, que está sobre la aurícula derecha, y DII, DIII y aVF. El QRS es estrecho porque, después del nodo AV, la conducción por los ventrículos es normal."},
+ {pt:["Idade, hipertensão, obesidade, apneia do sono, diabetes","Valvopatia mitral, insuficiência cardíaca, cardiopatia isquêmica","Álcool (\"holiday heart\"), hipertireoidismo","Pós-operatório, sepse, embolia pulmonar"],
+  es:["Edad, hipertensión, obesidad, apnea del sueño, diabetes","Valvulopatía mitral, insuficiencia cardíaca, cardiopatía isquémica","Alcohol (\"holiday heart\"), hipertiroidismo","Posoperatorio, sepsis, embolia pulmonar"]},
+ ["https://litfl.com/atrial-fibrillation-ecg-library/","af24"]);
+
+W("aflt",
+ {pt:"É uma macrorreentrada no átrio direito: o impulso gira em volta do anel tricúspide e passa pelo istmo cavotricuspídeo, a cerca de 300 voltas por minuto. Como o nó AV não acompanha essa frequência, costuma conduzir 2:1, e a frequência ventricular fica perto de 150 bpm. Por isso, uma taquicardia regular a 150 bpm deve fazer você procurar flutter.",
+  es:"Es una macrorreentrada en la aurícula derecha: el impulso gira alrededor del anillo tricuspídeo y pasa por el istmo cavotricuspídeo, a unas 300 vueltas por minuto. Como el nodo AV no sigue esa frecuencia, suele conducir 2:1 y la frecuencia ventricular queda cerca de 150 lpm. Por eso, ante una taquicardia regular a 150 lpm conviene buscar un flutter."},
+ {pt:"No flutter típico (anti-horário) o impulso sobe pelo septo interatrial, de baixo para cima. Um vetor que se afasta das derivações inferiores gera ondas F negativas em serrote em D2, D3 e aVF. Em V1, que fica de frente para o átrio direito, as ondas F costumam ser positivas e bem separadas.",
+  es:"En el flutter típico (antihorario) el impulso sube por el tabique interauricular, de abajo hacia arriba. Un vector que se aleja de las derivaciones inferiores genera ondas F negativas en dientes de sierra en DII, DIII y aVF. En V1, que mira de frente a la aurícula derecha, las ondas F suelen ser positivas y bien separadas."},
+ {pt:["As mesmas da fibrilação atrial","DPOC e doença pulmonar","Pós-operatório de cirurgia cardíaca, cicatriz atrial"],es:["Las mismas que la fibrilación auricular","EPOC y enfermedad pulmonar","Posoperatorio de cirugía cardíaca, cicatriz auricular"]},
+ ["https://litfl.com/atrial-flutter-ecg-library/","af24"]);
+
+W("svt",
+ {pt:"Na maioria dos casos é uma reentrada que usa o nó AV. Na TRN (reentrada nodal) existem duas vias dentro do nó, uma lenta e uma rápida; uma extrassístole encontra uma delas bloqueada e inicia um circuito. Na TRAV (taquicardia por via acessória) o circuito desce pelo nó e volta por uma via acessória. Como os ventrículos são ativados pelo His–Purkinje, o QRS é estreito.",
+  es:"En la mayoría de los casos es una reentrada que usa el nodo AV. En la TRNAV (reentrada nodal) hay dos vías dentro del nodo, una lenta y una rápida; una extrasístole encuentra una de ellas bloqueada e inicia un circuito. En la TRAV (taquicardia por vía accesoria) el circuito baja por el nodo y vuelve por una vía accesoria. Como los ventrículos se activan por el His–Purkinje, el QRS es estrecho."},
+ {pt:"Os átrios são ativados de trás para frente, de baixo para cima (condução retrógrada). Por isso, quando a P aparece, ela é negativa em D2, D3 e aVF. Na TRN ela fica escondida no QRS ou aparece no fim dele como pseudo-r' em V1 e pseudo-S nas inferiores; na TRAV aparece logo depois do QRS, no segmento ST.",
+  es:"Las aurículas se activan en sentido retrógrado, de abajo hacia arriba. Por eso, cuando la P aparece, es negativa en DII, DIII y aVF. En la TRNAV queda oculta en el QRS o aparece al final como pseudo-r' en V1 y pseudo-S en las inferiores; en la TRAV aparece justo después del QRS, en el segmento ST."},
+ {pt:["Substrato congênito: dupla via nodal ou via acessória","Gatilhos: cafeína, álcool, estresse, estimulantes","Comum em jovens com coração estruturalmente normal"],es:["Sustrato congénito: doble vía nodal o vía accesoria","Desencadenantes: cafeína, alcohol, estrés, estimulantes","Frecuente en jóvenes con corazón estructuralmente normal"]},
+ ["https://litfl.com/supraventricular-tachycardia-svt-ecg-library/","svt19"]);
+
+W("pac",
+ {pt:"Um foco atrial fora do nó sinusal dispara antes da hora (automatismo aumentado ou atividade deflagrada). O impulso costuma entrar no nó sinusal e reiniciá-lo, então a pausa depois é menor que a compensatória. Se chega muito cedo, encontra o nó AV refratário e não conduz (ESA bloqueada) ou conduz com aberração.",
+  es:"Un foco auricular fuera del nodo sinusal se dispara antes de tiempo (automatismo aumentado o actividad desencadenada). El impulso suele entrar en el nodo sinusal y reiniciarlo, así que la pausa siguiente es menor que la compensadora. Si llega muy pronto, encuentra el nodo AV refractario y no conduce (EA bloqueada) o conduce con aberrancia."},
+ {pt:"Como o impulso nasce em outro ponto do átrio, o vetor da P muda: um foco baixo gera P negativa em D2, D3 e aVF; um foco no átrio esquerdo pode deixar a P negativa em D1 e V6. O QRS é igual ao dos batimentos sinusais porque a condução ventricular é a mesma.",
+  es:"Como el impulso nace en otro punto de la aurícula, el vector de la P cambia: un foco bajo genera P negativa en DII, DIII y aVF; un foco en la aurícula izquierda puede volver la P negativa en DI y V6. El QRS es igual al de los latidos sinusales porque la conducción ventricular es la misma."},
+ {pt:["Comum em pessoas saudáveis","Cafeína, álcool, tabaco, estresse, privação de sono","Dilatação atrial: insuficiência cardíaca, valvopatia, hipertensão","DPOC, hipertireoidismo","Muitas ESA aumentam o risco futuro de fibrilação atrial"],es:["Frecuente en personas sanas","Cafeína, alcohol, tabaco, estrés, falta de sueño","Dilatación auricular: insuficiencia cardíaca, valvulopatía, hipertensión","EPOC, hipertiroidismo","Muchas EA aumentan el riesgo futuro de fibrilación auricular"]},
+ ["https://litfl.com/premature-atrial-complex-pac/"]);
+
+W("junc",
+ {pt:"A junção AV tem automatismo próprio (40–60 bpm). Quando o nó sinusal falha ou fica mais lento que ela, a junção assume como marcapasso de escape, um mecanismo de proteção. Se o automatismo juncional aumenta (60–100 bpm, ritmo juncional acelerado), ela compete com o sinusal mesmo sem bradicardia.",
+  es:"La unión AV tiene automatismo propio (40–60 lpm). Cuando el nodo sinusal falla o se vuelve más lento que ella, la unión asume como marcapasos de escape, un mecanismo de protección. Si el automatismo de la unión aumenta (60–100 lpm, ritmo de la unión acelerado), compite con el sinusal incluso sin bradicardia."},
+ {pt:"O impulso sai do meio do coração e sobe para os átrios (de baixo para cima) enquanto desce para os ventrículos. Por isso a P, quando visível, é negativa em D2, D3 e aVF e aparece logo antes do QRS (PR curto), escondida nele ou logo depois. O QRS é estreito porque a ativação ventricular usa o His–Purkinje normal.",
+  es:"El impulso sale del centro del corazón y sube a las aurículas (de abajo hacia arriba) mientras baja a los ventrículos. Por eso la P, cuando se ve, es negativa en DII, DIII y aVF y aparece justo antes del QRS (PR corto), oculta en él o justo después. El QRS es estrecho porque la activación ventricular usa el His–Purkinje normal."},
+ {pt:["Doença do nó sinusal, bradicardia sinusal intensa","β-bloqueadores, bloqueadores de canal de cálcio, intoxicação digitálica","IAM inferior, miocardite, pós-operatório de cirurgia cardíaca","Atletas (tônus vagal alto)"],es:["Enfermedad del nodo sinusal, bradicardia sinusal intensa","β-bloqueantes, bloqueantes de los canales de calcio, intoxicación digitálica","IAM inferior, miocarditis, posoperatorio de cirugía cardíaca","Deportistas (tono vagal alto)"]},
+ ["https://litfl.com/junctional-escape-rhythm-ecg-library/","https://litfl.com/accelerated-junctional-rhythm-ajr/"]);
+
+W("pvc",
+ {pt:"Um foco no músculo ventricular dispara antes do próximo batimento sinusal (automatismo, atividade deflagrada ou microrreentrada). O impulso se espalha de célula em célula, fora do sistema His–Purkinje, que é muito mais rápido. Por isso o QRS fica largo (≥ 120 ms) e bizarro, e a repolarização também muda: o ST e a T apontam para o lado oposto do QRS. Em geral o impulso não reinicia o nó sinusal, e a pausa é compensatória.",
+  es:"Un foco en el músculo ventricular se dispara antes del siguiente latido sinusal (automatismo, actividad desencadenada o microrreentrada). El impulso se propaga de célula a célula, fuera del sistema His–Purkinje, que es mucho más rápido. Por eso el QRS es ancho (≥ 120 ms) y aberrante, y la repolarización también cambia: el ST y la T apuntan al lado opuesto del QRS. En general el impulso no reinicia el nodo sinusal y la pausa es compensadora."},
+ {pt:"A forma do QRS mostra de onde a extrassístole veio. Se nasce no ventrículo direito, o esquerdo ativa por último e o padrão lembra bloqueio de ramo esquerdo (QRS negativo em V1). Se nasce no esquerdo, lembra bloqueio de ramo direito (positivo em V1). As mais comuns em coração normal vêm da via de saída do VD: a ativação desce de cima para baixo e o QRS fica alto e positivo em D2, D3 e aVF.",
+  es:"La forma del QRS muestra de dónde vino la extrasístole. Si nace en el ventrículo derecho, el izquierdo se activa al final y el patrón recuerda un bloqueo de rama izquierda (QRS negativo en V1). Si nace en el izquierdo, recuerda un bloqueo de rama derecha (positivo en V1). Las más frecuentes en corazón normal vienen del tracto de salida del VD: la activación baja de arriba hacia abajo y el QRS es alto y positivo en DII, DIII y aVF."},
+ {pt:["Coração normal (muito comum)","Cafeína, estimulantes, estresse, privação de sono","Hipocalemia, hipomagnesemia, hipóxia","Isquemia, infarto prévio, cardiomiopatias, insuficiência cardíaca","Intoxicação digitálica"],es:["Corazón normal (muy frecuente)","Cafeína, estimulantes, estrés, falta de sueño","Hipopotasemia, hipomagnesemia, hipoxia","Isquemia, infarto previo, miocardiopatías, insuficiencia cardíaca","Intoxicación digitálica"]},
+ ["https://litfl.com/premature-ventricular-complex-pvc-ecg-library/","va22"]);
+
+W("bigem",
+ {pt:"Cada batimento sinusal é seguido por uma extrassístole ventricular, sempre com o mesmo intervalo de acoplamento, o que sugere que o batimento anterior \"dispara\" o seguinte (reentrada ou atividade deflagrada). A pausa longa depois da extrassístole favorece a próxima (\"regra do bigeminismo\"). Às vezes a extrassístole não gera pulso, e o pulso palpado fica com a metade da frequência do ECG.",
+  es:"Cada latido sinusal va seguido de una extrasístole ventricular, siempre con el mismo intervalo de acoplamiento, lo que sugiere que el latido anterior \"dispara\" el siguiente (reentrada o actividad desencadenada). La pausa larga después de la extrasístole favorece la siguiente (\"regla del bigeminismo\"). A veces la extrasístole no genera pulso y el pulso palpado tiene la mitad de la frecuencia del ECG."},
+ {pt:"Valem as mesmas regras da extrassístole isolada: a forma do QRS em V1 e nas inferiores mostra a origem. Em uma tira de ritmo (D2) fica fácil ver a alternância normal–largo–normal–largo.",
+  es:"Valen las mismas reglas de la extrasístole aislada: la forma del QRS en V1 y en las inferiores muestra el origen. En una tira de ritmo (DII) se ve fácil la alternancia normal–ancho–normal–ancho."},
+ {pt:["As mesmas da extrassístole ventricular","Clássico da intoxicação digitálica","Isquemia e cardiomiopatias"],es:["Las mismas que la extrasístole ventricular","Clásico de la intoxicación digitálica","Isquemia y miocardiopatías"]},
+ ["https://litfl.com/premature-ventricular-complex-pvc-ecg-library/","va22"]);
+
+W("mat",
+ {pt:"Vários focos atriais diferentes disparam ao mesmo tempo, por automatismo aumentado ou atividade deflagrada. Isso é favorecido por átrio distendido, hipóxia, catecolaminas e cálcio intracelular alto. Cada batimento vem de um foco, então o ritmo é irregular e a frequência passa de 100 bpm.",
+  es:"Varios focos auriculares distintos se disparan a la vez, por automatismo aumentado o actividad desencadenada. Lo favorecen la aurícula distendida, la hipoxia, las catecolaminas y el calcio intracelular alto. Cada latido viene de un foco, así que el ritmo es irregular y la frecuencia supera los 100 lpm."},
+ {pt:"Cada foco gera um vetor de P diferente, então você vê pelo menos 3 formas de P (e PR variáveis) na mesma derivação. Isso aparece melhor em D2, D3 e V1, onde a P é maior. Ao contrário da fibrilação atrial, existe uma P nítida antes de cada QRS.",
+  es:"Cada foco genera un vector de P distinto, así que ves al menos 3 formas de P (y PR variables) en la misma derivación. Se nota mejor en DII, DIII y V1, donde la P es mayor. A diferencia de la fibrilación auricular, hay una P nítida antes de cada QRS."},
+ {pt:["DPOC descompensada, hipoxemia (causa clássica)","Hipertensão pulmonar, insuficiência cardíaca, sepse","Hipocalemia, hipomagnesemia","Teofilina, β-agonistas"],es:["EPOC descompensada, hipoxemia (causa clásica)","Hipertensión pulmonar, insuficiencia cardíaca, sepsis","Hipopotasemia, hipomagnesemia","Teofilina, β-agonistas"]},
+ ["https://litfl.com/multifocal-atrial-tachycardia-mat-ecg-library/"]);
+
+W("aivr",
+ {pt:"Um foco ventricular com automatismo aumentado dispara a 40–120 bpm, mais rápido que o escape ventricular normal (20–40 bpm), mas sem chegar a uma taquicardia ventricular. Ele assume quando o sinusal fica mais lento. É típico da reperfusão de uma artéria ocluída e costuma ser benigno e transitório.",
+  es:"Un foco ventricular con automatismo aumentado dispara a 40–120 lpm, más rápido que el escape ventricular normal (20–40 lpm), pero sin llegar a una taquicardia ventricular. Toma el mando cuando el sinusal se enlentece. Es típico de la reperfusión de una arteria ocluida y suele ser benigno y transitorio."},
+ {pt:"Como a ativação nasce no ventrículo e anda fora do His–Purkinje, o QRS é largo, com a mesma forma de uma extrassístole daquele foco. O sinusal e o foco ventricular competem, então aparecem batimentos de fusão e de captura e dissociação AV, visíveis em uma tira longa.",
+  es:"Como la activación nace en el ventrículo y avanza fuera del His–Purkinje, el QRS es ancho, con la misma forma que una extrasístole de ese foco. El sinusal y el foco ventricular compiten, así que aparecen latidos de fusión y de captura y disociación AV, visibles en una tira larga."},
+ {pt:["Reperfusão no IAM (trombólise ou angioplastia)","Intoxicação digitálica","Cardiomiopatias, cocaína, distúrbios eletrolíticos"],es:["Reperfusión en el IAM (trombólisis o angioplastia)","Intoxicación digitálica","Miocardiopatías, cocaína, trastornos electrolíticos"]},
+ ["https://litfl.com/accelerated-idioventricular-rhythm-aivr/"]);
+
+W("pause",
+ {pt:"Na parada sinusal o nó sinusal deixa de gerar impulsos; no bloqueio sinoatrial de saída o impulso é gerado, mas não sai do nó para o átrio. No bloqueio de saída a pausa é múltipla exata do PP; na parada não. Se a pausa for longa, um marcapasso mais baixo (junção ou ventrículo) pode \"escapar\".",
+  es:"En el paro sinusal el nodo sinusal deja de generar impulsos; en el bloqueo sinoauricular de salida el impulso se genera, pero no sale del nodo a la aurícula. En el bloqueo de salida la pausa es un múltiplo exacto del PP; en el paro no. Si la pausa es larga, un marcapasos más bajo (unión o ventrículo) puede \"escapar\"."},
+ {pt:"O nó sinusal sozinho não aparece no ECG; só vemos a P quando o átrio ativa. Por isso a pausa é a falta de P e de QRS em todas as derivações ao mesmo tempo. Uma tira longa de D2 permite medir a pausa e comparar com o PP.",
+  es:"El nodo sinusal por sí solo no aparece en el ECG; solo vemos la P cuando la aurícula se activa. Por eso la pausa es la ausencia de P y de QRS en todas las derivaciones a la vez. Una tira larga de DII permite medir la pausa y compararla con el PP."},
+ {pt:["Doença do nó sinusal (fibrose do idoso), síndrome bradi-taqui","β-bloqueadores, bloqueadores de canal de cálcio, digoxina, antiarrítmicos","Tônus vagal (vômito, apneia do sono), hipercalemia","Isquemia (coronária direita)"],es:["Enfermedad del nodo sinusal (fibrosis del anciano), síndrome bradi-taqui","β-bloqueantes, bloqueantes de los canales de calcio, digoxina, antiarrítmicos","Tono vagal (vómito, apnea del sueño), hiperpotasemia","Isquemia (coronaria derecha)"]},
+ ["https://litfl.com/sinus-node-dysfunction-sick-sinus-syndrome/","https://litfl.com/sinoatrial-exit-block-ecg-library/","brady18"]);
+
+W("pace",
+ {pt:"O marcapasso emite um estímulo (espícula) quando a frequência própria cai abaixo da programada. No eletrodo clássico, na ponta do ventrículo direito, a ativação começa ali e anda de célula em célula, sem usar o His–Purkinje, então o QRS é largo. A estimulação do sistema de condução (feixe de His ou área do ramo esquerdo), cada vez mais usada, produz QRS mais estreito.",
+  es:"El marcapasos emite un estímulo (espiga) cuando la frecuencia propia baja de la programada. Con el electrodo clásico, en la punta del ventrículo derecho, la activación empieza allí y avanza de célula a célula, sin usar el His–Purkinje, así que el QRS es ancho. La estimulación del sistema de conducción (haz de His o área de la rama izquierda), cada vez más usada, produce un QRS más estrecho."},
+ {pt:"Na estimulação apical do VD a ativação vai da ponta para a base e da direita para a esquerda. Ela se afasta das derivações inferiores (QRS negativo em D2, D3 e aVF, eixo superior) e de V1 (padrão de bloqueio de ramo esquerdo). O ST e a T discordantes do QRS são esperados. A espícula aparece em todas as derivações, às vezes bem pequena nos marcapassos bipolares.",
+  es:"En la estimulación apical del VD la activación va de la punta a la base y de derecha a izquierda. Se aleja de las derivaciones inferiores (QRS negativo en DII, DIII y aVF, eje superior) y de V1 (patrón de bloqueo de rama izquierda). Se esperan ST y T discordantes con el QRS. La espiga aparece en todas las derivaciones, a veces muy pequeña en los marcapasos bipolares."},
+ {pt:["Indicações principais: doença do nó sinusal sintomática, BAV de 2º grau Mobitz II, BAV avançado e BAV total"],es:["Indicaciones principales: enfermedad del nodo sinusal sintomática, BAV de 2.º grado Mobitz II, BAV avanzado y BAV completo"]},
+ ["https://litfl.com/pacemaker-rhythms-normal-patterns/","brady18"]);
+
+W("vt",
+ {pt:"Na forma mais comum, um circuito de reentrada contorna uma cicatriz (por exemplo, de infarto antigo), com 3 ou mais batimentos ventriculares acima de 100 bpm. A ativação anda fora do His–Purkinje, então o QRS é largo (≥ 120 ms). Os átrios seguem o próprio ritmo: há dissociação AV, com batimentos de captura e de fusão. Toda taquicardia de QRS largo deve ser tratada como TV até prova em contrário.",
+  es:"En la forma más frecuente, un circuito de reentrada rodea una cicatriz (por ejemplo, de un infarto antiguo), con 3 o más latidos ventriculares a más de 100 lpm. La activación va fuera del His–Purkinje, así que el QRS es ancho (≥ 120 ms). Las aurículas siguen su propio ritmo: hay disociación AV, con latidos de captura y de fusión. Toda taquicardia de QRS ancho debe tratarse como TV hasta que se demuestre lo contrario."},
+ {pt:"Quando a ativação começa na ponta do coração e sobe para a base e para a direita, ela se afasta de D1 e aVF e se aproxima de aVR: QRS negativo em D1 e aVF e positivo em aVR (eixo \"terra de ninguém\", −90° a ±180°). Se todo o ventrículo é ativado na mesma direção, as precordiais ficam todas positivas ou todas negativas (concordância).",
+  es:"Cuando la activación empieza en la punta del corazón y sube hacia la base y a la derecha, se aleja de DI y aVF y se acerca a aVR: QRS negativo en DI y aVF y positivo en aVR (eje \"tierra de nadie\", −90° a ±180°). Si todo el ventrículo se activa en la misma dirección, las precordiales son todas positivas o todas negativas (concordancia)."},
+ {pt:["Cardiopatia isquêmica com cicatriz (causa mais comum)","Cardiomiopatias: dilatada, hipertrófica, arritmogênica do VD, chagásica","Miocardite, sarcoidose","Distúrbios eletrolíticos, fármacos","Idiopática (via de saída, fascicular) em coração normal"],es:["Cardiopatía isquémica con cicatriz (causa más frecuente)","Miocardiopatías: dilatada, hipertrófica, arritmogénica del VD, chagásica","Miocarditis, sarcoidosis","Trastornos electrolíticos, fármacos","Idiopática (tracto de salida, fascicular) en corazón normal"]},
+ ["https://litfl.com/ventricular-tachycardia-monomorphic-ecg-library/","va22"]);
+
+W("tdp",
+ {pt:"Quando a repolarização está prolongada (QT longo), canais de cálcio e sódio podem reabrir no fim do potencial de ação e gerar pós-despolarizações precoces, que disparam batimentos. Como a repolarização é desigual entre as camadas do ventrículo, forma-se uma reentrada que muda de direção o tempo todo. Costuma começar após a sequência curto–longo–curto.",
+  es:"Cuando la repolarización está prolongada (QT largo), canales de calcio y sodio pueden reabrirse al final del potencial de acción y generar pospotenciales precoces, que disparan latidos. Como la repolarización es desigual entre las capas del ventrículo, se forma una reentrada que cambia de dirección todo el tiempo. Suele empezar tras la secuencia corto–largo–corto."},
+ {pt:"O eixo do QRS gira em volta da linha de base. Em cada momento o vetor está mais paralelo a umas derivações e mais perpendicular a outras, então a amplitude cresce e diminui como um fuso (\"torção das pontas\"). Isso aparece em qualquer derivação, mas o aspecto muda de uma para outra.",
+  es:"El eje del QRS gira alrededor de la línea de base. En cada momento el vector es más paralelo a unas derivaciones y más perpendicular a otras, así que la amplitud crece y disminuye como un huso (\"torsión de las puntas\"). Se ve en cualquier derivación, pero el aspecto cambia de una a otra."},
+ {pt:["Fármacos que prolongam o QT: antiarrítmicos (sotalol, quinidina), macrolídeos, fluoroquinolonas, antipsicóticos (haloperidol), metadona, ondansetrona","Hipocalemia, hipomagnesemia, hipocalcemia","Bradicardia, BAV","QT longo congênito","Sexo feminino, idade, insuficiência cardíaca"],es:["Fármacos que prolongan el QT: antiarrítmicos (sotalol, quinidina), macrólidos, fluoroquinolonas, antipsicóticos (haloperidol), metadona, ondansetrón","Hipopotasemia, hipomagnesemia, hipocalcemia","Bradicardia, BAV","QT largo congénito","Sexo femenino, edad, insuficiencia cardíaca"]},
+ ["https://litfl.com/polymorphic-vt-and-torsades-de-pointes-tdp/","credible","va22"]);
+
+W("vf",
+ {pt:"Múltiplas ondas de reentrada (rotores) percorrem o ventrículo sem nenhuma organização. Não há contração eficaz nem débito cardíaco: é parada cardíaca. Sem desfibrilação, as chances de sobrevivência caem a cada minuto.",
+  es:"Múltiples ondas de reentrada (rotores) recorren el ventrículo sin ninguna organización. No hay contracción eficaz ni gasto cardíaco: es paro cardíaco. Sin desfibrilación, las probabilidades de supervivencia caen cada minuto."},
+ {pt:"Como não existe uma frente de ativação única, nenhuma derivação mostra QRS: só ondulações caóticas de forma e amplitude variáveis. A FV fina pode parecer assistolia; confira outra derivação e o ganho antes de concluir.",
+  es:"Como no existe un frente de activación único, ninguna derivación muestra QRS: solo ondulaciones caóticas de forma y amplitud variables. La FV fina puede parecer asistolia; revisa otra derivación y la ganancia antes de concluir."},
+ {pt:["Isquemia aguda e infarto (causa mais comum)","Cicatriz e cardiomiopatias","Canalopatias: Brugada, QT longo, QT curto","Distúrbios eletrolíticos, fármacos, choque elétrico, commotio cordis","Degeneração de uma TV ou torsades"],es:["Isquemia aguda e infarto (causa más frecuente)","Cicatriz y miocardiopatías","Canalopatías: Brugada, QT largo, QT corto","Trastornos electrolíticos, fármacos, descarga eléctrica, commotio cordis","Degeneración de una TV o torsades"]},
+ ["https://litfl.com/ventricular-fibrillation-vf-ecg-library/","aha25","va22"]);
+
+/* ---------- POR QUÊ: condução e eixo ---------- */
+W("bav1",
+ {pt:"Não é um bloqueio de verdade, é um atraso. Todo impulso atrial chega aos ventrículos, mas demora mais, quase sempre dentro do nó AV (às vezes no átrio ou no His–Purkinje). O PR passa de 200 ms e fica constante.",
+  es:"No es un bloqueo verdadero, es un retraso. Todo impulso auricular llega a los ventrículos, pero tarda más, casi siempre dentro del nodo AV (a veces en la aurícula o en el His–Purkinje). El PR supera los 200 ms y se mantiene constante."},
+ {pt:"O atraso é igual para todos os batimentos e aparece em todas as derivações. Meça o PR onde a P e o início do QRS estão mais nítidos, em geral D2. Se o QRS é estreito, o atraso quase certamente está no nó AV, o que é tranquilizador.",
+  es:"El retraso es igual en todos los latidos y aparece en todas las derivaciones. Mide el PR donde la P y el inicio del QRS sean más nítidos, en general DII. Si el QRS es estrecho, el retraso casi seguro está en el nodo AV, lo que es tranquilizador."},
+ {pt:["Tônus vagal, atletas","β-bloqueadores, bloqueadores de canal de cálcio, digoxina, amiodarona","Fibrose degenerativa (idade)","IAM inferior, miocardite, febre reumática, doença de Lyme","Hipercalemia"],es:["Tono vagal, deportistas","β-bloqueantes, bloqueantes de los canales de calcio, digoxina, amiodarona","Fibrosis degenerativa (edad)","IAM inferior, miocarditis, fiebre reumática, enfermedad de Lyme","Hiperpotasemia"]},
+ ["https://litfl.com/first-degree-heart-block-ecg-library/","brady18"]);
+
+W("mob1",
+ {pt:"O nó AV tem condução decremental: cada impulso chega um pouco mais cedo no período refratário do anterior e atravessa o nó mais devagar. O PR aumenta batimento a batimento até que um impulso não passa. Na pausa o nó se recupera e o ciclo recomeça com PR curto. O bloqueio quase sempre é nodal, e o prognóstico é bom.",
+  es:"El nodo AV tiene conducción decremental: cada impulso llega un poco antes en el período refractario del anterior y atraviesa el nodo más despacio. El PR aumenta latido a latido hasta que un impulso no pasa. En la pausa el nodo se recupera y el ciclo vuelve a empezar con PR corto. El bloqueo casi siempre es nodal y el pronóstico es bueno."},
+ {pt:"O fenômeno é de tempo, não de forma, então aparece igual em todas as derivações. Use uma tira longa (D2 ou V1, onde a P aparece bem) e compare o PR logo antes e logo depois da P bloqueada: o primeiro é o mais longo, o segundo o mais curto. O incremento diminui a cada batimento, por isso o RR encurta antes da pausa.",
+  es:"Es un fenómeno de tiempo, no de forma, así que aparece igual en todas las derivaciones. Usa una tira larga (DII o V1, donde la P se ve bien) y compara el PR justo antes y justo después de la P bloqueada: el primero es el más largo y el segundo el más corto. El incremento disminuye en cada latido, por eso el RR se acorta antes de la pausa."},
+ {pt:["Tônus vagal (sono, atletas)","β-bloqueadores, bloqueadores de canal de cálcio, digoxina","IAM inferior (a coronária direita irriga o nó AV e há reflexo vagal)","Miocardite"],es:["Tono vagal (sueño, deportistas)","β-bloqueantes, bloqueantes de los canales de calcio, digoxina","IAM inferior (la coronaria derecha irriga el nodo AV y hay reflejo vagal)","Miocarditis"]},
+ ["https://litfl.com/av-block-2nd-degree-mobitz-i-wenckebach-phenomenon/","brady18"]);
+
+W("mob2",
+ {pt:"A lesão está abaixo do nó, no His ou nos ramos, que conduzem pelo princípio do tudo ou nada: o impulso passa no tempo normal ou não passa. Por isso o PR é constante antes e depois da P bloqueada. Como a doença costuma atingir os ramos de forma difusa, muitas vezes há bloqueio de ramo associado (QRS largo). O risco de evoluir para BAV total é alto, e em geral há indicação de marcapasso.",
+  es:"La lesión está por debajo del nodo, en el His o en las ramas, que conducen según el principio de todo o nada: el impulso pasa en el tiempo normal o no pasa. Por eso el PR es constante antes y después de la P bloqueada. Como la enfermedad suele afectar las ramas de forma difusa, a menudo hay bloqueo de rama asociado (QRS ancho). El riesgo de evolucionar a BAV completo es alto y en general hay indicación de marcapasos."},
+ {pt:"Também é um fenômeno de tempo: veja em uma tira longa (D2 ou V1) que o PR não muda e que, de repente, uma P fica sem QRS. Procure no mesmo traçado sinais de bloqueio de ramo em V1 e V6, que reforçam a origem infranodal.",
+  es:"También es un fenómeno de tiempo: mira en una tira larga (DII o V1) que el PR no cambia y que, de repente, una P queda sin QRS. Busca en el mismo trazado signos de bloqueo de rama en V1 y V6, que refuerzan el origen infranodal."},
+ {pt:["Fibrose degenerativa do sistema de condução (Lenègre, Lev)","IAM anterior (necrose do septo e dos ramos)","Doença de Chagas, sarcoidose, miocardite","Pós-operatório cardíaco, implante percutâneo de valva aórtica (TAVI)"],es:["Fibrosis degenerativa del sistema de conducción (Lenègre, Lev)","IAM anterior (necrosis del tabique y de las ramas)","Enfermedad de Chagas, sarcoidosis, miocarditis","Posoperatorio cardíaco, implante percutáneo de válvula aórtica (TAVI)"]},
+ ["https://litfl.com/av-block-2nd-degree-mobitz-ii-hay-block/","brady18"]);
+
+W("bav21",
+ {pt:"Uma P conduz e a seguinte é bloqueada, sempre alternando. Como nunca há duas P conduzidas seguidas, não dá para ver se o PR alonga, e o tipo (Mobitz I ou II) fica indefinido. Pistas: QRS estreito e PR longo sugerem bloqueio no nó; QRS largo e PR normal sugerem bloqueio abaixo dele, que é mais grave.",
+  es:"Una P conduce y la siguiente se bloquea, siempre alternando. Como nunca hay dos P conducidas seguidas, no se puede ver si el PR se alarga, y el tipo (Mobitz I o II) queda indefinido. Pistas: QRS estrecho y PR largo sugieren bloqueo en el nodo; QRS ancho y PR normal sugieren bloqueo por debajo, que es más grave."},
+ {pt:"As P são regulares e o dobro dos QRS. A P bloqueada costuma cair em cima da onda T e deformá-la; procure em D2 e V1, onde a P é maior.",
+  es:"Las P son regulares y el doble que los QRS. La P bloqueada suele caer sobre la onda T y deformarla; búscala en DII y V1, donde la P es mayor."},
+ {pt:["As mesmas do Mobitz I (nodal) ou do Mobitz II (infranodal)"],es:["Las mismas que el Mobitz I (nodal) o el Mobitz II (infranodal)"]},
+ ["https://litfl.com/av-block-2nd-degree-fixed-ratio-blocks/","brady18"]);
+
+W("bav3",
+ {pt:"Nenhum impulso atrial chega aos ventrículos. Um marcapasso de escape abaixo do bloqueio mantém o coração batendo: na junção (QRS estreito, 40–60 bpm) se o bloqueio é nodal, ou no ventrículo (QRS largo, 20–40 bpm) se é infranodal. Átrios e ventrículos batem cada um no próprio ritmo (dissociação AV), então o PR muda o tempo todo.",
+  es:"Ningún impulso auricular llega a los ventrículos. Un marcapasos de escape por debajo del bloqueo mantiene el corazón latiendo: en la unión (QRS estrecho, 40–60 lpm) si el bloqueo es nodal, o en el ventrículo (QRS ancho, 20–40 lpm) si es infranodal. Aurículas y ventrículos laten cada uno a su ritmo (disociación AV), así que el PR cambia todo el tiempo."},
+ {pt:"Em D2 e V1, onde a P é mais visível, marque as P com um compasso: elas \"marcham\" regulares e passam por cima dos QRS e das T sem relação com eles. A largura do QRS indica onde está o escape.",
+  es:"En DII y V1, donde la P es más visible, marca las P con un compás: \"marchan\" regulares y pasan por encima de los QRS y de las T sin relación con ellos. La anchura del QRS indica dónde está el escape."},
+ {pt:["Fibrose degenerativa","IAM inferior (geralmente nodal e transitório) ou anterior (infranodal, pior prognóstico)","Fármacos, hipercalemia","Doença de Chagas, doença de Lyme, sarcoidose","Pós-cirurgia cardíaca ou TAVI","Congênito (anticorpo anti-Ro materno)"],es:["Fibrosis degenerativa","IAM inferior (generalmente nodal y transitorio) o anterior (infranodal, peor pronóstico)","Fármacos, hiperpotasemia","Enfermedad de Chagas, enfermedad de Lyme, sarcoidosis","Poscirugía cardíaca o TAVI","Congénito (anticuerpo anti-Ro materno)"]},
+ ["https://litfl.com/av-block-3rd-degree-complete-heart-block/","brady18"]);
+
+W("rbbb",
+ {pt:"Com o ramo direito bloqueado, o septo e o ventrículo esquerdo ativam normalmente pelo ramo esquerdo. O ventrículo direito é ativado por último, devagar, de célula em célula a partir do lado esquerdo. Isso acrescenta uma onda tardia, lenta e dirigida para a direita e para a frente, e o QRS chega a 120 ms ou mais. A T se inverte em V1–V3 porque a repolarização segue a despolarização anormal (alteração secundária).",
+  es:"Con la rama derecha bloqueada, el tabique y el ventrículo izquierdo se activan normalmente por la rama izquierda. El ventrículo derecho se activa al final, despacio, de célula a célula desde el lado izquierdo. Eso agrega una onda tardía, lenta y dirigida a la derecha y hacia delante, y el QRS llega a 120 ms o más. La T se invierte en V1–V3 porque la repolarización sigue a la despolarización anormal (alteración secundaria)."},
+ {pt:"V1 fica em cima do ventrículo direito. A ativação tardia do VD vem em direção a V1 e forma o R' (rsR', \"orelha de coelho\"). A mesma onda tardia se afasta das derivações esquerdas (D1, aVL, V5 e V6), onde aparece como um S largo e empastado.",
+  es:"V1 está sobre el ventrículo derecho. La activación tardía del VD va hacia V1 y forma la R' (rsR', \"orejas de conejo\"). La misma onda tardía se aleja de las derivaciones izquierdas (DI, aVL, V5 y V6), donde aparece como una S ancha y empastada."},
+ {pt:["Pode ser achado isolado em pessoas saudáveis","Sobrecarga do VD: embolia pulmonar, hipertensão pulmonar, DPOC","Comunicação interatrial","Doença de Chagas (com hemibloqueio anterior esquerdo, combinação clássica)","Cardiopatia isquêmica, fibrose degenerativa, pós-cirurgia cardíaca"],es:["Puede ser un hallazgo aislado en personas sanas","Sobrecarga del VD: embolia pulmonar, hipertensión pulmonar, EPOC","Comunicación interauricular","Enfermedad de Chagas (con hemibloqueo anterior izquierdo, combinación clásica)","Cardiopatía isquémica, fibrosis degenerativa, poscirugía cardíaca"]},
+ ["https://litfl.com/right-bundle-branch-block-rbbb-ecg-library/","sbc"]);
+
+W("irbbb",
+ {pt:"A condução pelo ramo direito ou pelo ventrículo direito é só um pouco mais lenta. A onda tardia para a direita existe, mas é pequena, e o QRS fica abaixo de 120 ms. Muitas vezes reflete apenas um VD maior ou mais espesso, sem doença.",
+  es:"La conducción por la rama derecha o por el ventrículo derecho es apenas más lenta. La onda tardía hacia la derecha existe, pero es pequeña, y el QRS queda por debajo de 120 ms. A menudo solo refleja un VD más grande o más grueso, sin enfermedad."},
+ {pt:"Pelo mesmo motivo do bloqueio completo, a ativação tardia do VD aparece como um r' pequeno em V1 (rSr'), com um S discreto em D1 e V6.",
+  es:"Por el mismo motivo que en el bloqueo completo, la activación tardía del VD aparece como una r' pequeña en V1 (rSr'), con una S discreta en DI y V6."},
+ {pt:["Variante normal em jovens e atletas","Comunicação interatrial (tipo ostium secundum)","Sobrecarga do VD","Pectus excavatum"],es:["Variante normal en jóvenes y deportistas","Comunicación interauricular (tipo ostium secundum)","Sobrecarga del VD","Pectus excavatum"]},
+ ["https://litfl.com/right-bundle-branch-block-rbbb-ecg-library/"]);
+
+W("lbbb",
+ {pt:"Com o ramo esquerdo bloqueado, o septo passa a ser ativado da direita para a esquerda (ao contrário do normal), e o ventrículo esquerdo é ativado devagar, de célula em célula, a partir do direito. Toda a despolarização aponta para a esquerda e para trás, e o QRS chega a 120 ms ou mais. O ST e a T ficam para o lado oposto do QRS (discordância secundária), o que dificulta o diagnóstico de isquemia; nesses casos use os critérios de Sgarbossa modificados por Smith.",
+  es:"Con la rama izquierda bloqueada, el tabique pasa a activarse de derecha a izquierda (al revés de lo normal), y el ventrículo izquierdo se activa despacio, de célula a célula, desde el derecho. Toda la despolarización apunta a la izquierda y hacia atrás, y el QRS llega a 120 ms o más. El ST y la T quedan del lado opuesto al QRS (discordancia secundaria), lo que dificulta el diagnóstico de isquemia; en esos casos usa los criterios de Sgarbossa modificados por Smith."},
+ {pt:"A ativação vai para a esquerda e para trás, então se afasta de V1–V3 (QS ou rS largos) e vem em direção a D1, aVL, V5 e V6 (R largo, monofásico, com entalhe). Não há q septal nessas derivações esquerdas porque o septo agora é ativado da direita para a esquerda.",
+  es:"La activación va a la izquierda y hacia atrás, así que se aleja de V1–V3 (QS o rS anchos) y se acerca a DI, aVL, V5 y V6 (R ancha, monofásica, con muesca). No hay q septal en esas derivaciones izquierdas porque el tabique ahora se activa de derecha a izquierda."},
+ {pt:["Hipertensão com hipertrofia do VE","Cardiopatia isquêmica, cardiomiopatia dilatada","Estenose aórtica, pós-TAVI","Fibrose degenerativa","Quase sempre indica doença estrutural: peça ecocardiograma","Pelo consenso do ACC de 2022, BRE novo sozinho não equivale a IAM com supra"],es:["Hipertensión con hipertrofia del VI","Cardiopatía isquémica, miocardiopatía dilatada","Estenosis aórtica, pos-TAVI","Fibrosis degenerativa","Casi siempre indica enfermedad estructural: pide ecocardiograma","Según el consenso del ACC de 2022, un BRI nuevo por sí solo no equivale a IAM con elevación del ST"]},
+ ["https://litfl.com/left-bundle-branch-block-lbbb-ecg-library/","ecdp22","sbc"]);
+
+W("lafb",
+ {pt:"O fascículo anterossuperior do ramo esquerdo é longo e fino, com irrigação única, e por isso bloqueia com frequência. Com ele bloqueado, o ventrículo esquerdo começa a ser ativado pelo fascículo posteroinferior (parede inferior) e depois a ativação sobe para a parede anterolateral. O vetor principal fica para cima e para a esquerda, e o eixo vai além de −45°. O QRS quase não alarga.",
+  es:"El fascículo anterosuperior de la rama izquierda es largo y delgado, con irrigación única, y por eso se bloquea con frecuencia. Con él bloqueado, el ventrículo izquierdo empieza a activarse por el fascículo posteroinferior (pared inferior) y después la activación sube a la pared anterolateral. El vector principal queda hacia arriba y a la izquierda y el eje pasa de −45°. El QRS casi no se ensancha."},
+ {pt:"No começo, o vetor pequeno vai para baixo: r pequeno em D2, D3 e aVF e q pequeno em D1 e aVL. Depois, o vetor grande sobe para a esquerda: ele se afasta das inferiores (S profundo em D2, D3 e aVF, com S em D3 maior que em D2) e vem em direção a D1 e aVL (padrão qR).",
+  es:"Al principio, el vector pequeño va hacia abajo: r pequeña en DII, DIII y aVF y q pequeña en DI y aVL. Después, el vector grande sube a la izquierda: se aleja de las inferiores (S profunda en DII, DIII y aVF, con S en DIII mayor que en DII) y va hacia DI y aVL (patrón qR)."},
+ {pt:["Hipertensão, cardiopatia isquêmica (artéria descendente anterior)","Doença de Chagas (muitas vezes com BRD)","Valvopatia aórtica, cardiomiopatias, fibrose degenerativa"],es:["Hipertensión, cardiopatía isquémica (arteria descendente anterior)","Enfermedad de Chagas (a menudo con BRD)","Valvulopatía aórtica, miocardiopatías, fibrosis degenerativa"]},
+ ["https://litfl.com/left-anterior-fascicular-block-lafb-ecg-library/","sbc"]);
+
+W("lpfb",
+ {pt:"O fascículo posteroinferior é curto, largo e tem dupla irrigação, então raramente bloqueia; quando bloqueia, costuma haver doença extensa. O VE começa a ser ativado pelo fascículo anterior (parte alta e lateral) e a ativação desce para a parede inferior e para a direita. O eixo desvia para a direita (em geral além de +90°).",
+  es:"El fascículo posteroinferior es corto, ancho y tiene doble irrigación, así que rara vez se bloquea; cuando lo hace, suele haber enfermedad extensa. El VI empieza a activarse por el fascículo anterior (parte alta y lateral) y la activación baja hacia la pared inferior y a la derecha. El eje se desvía a la derecha (en general más allá de +90°)."},
+ {pt:"O vetor inicial vai para cima e para a esquerda (r pequeno em D1 e aVL, q pequeno nas inferiores). O vetor principal desce e vai para a direita: ele se afasta de D1 e aVL (rS) e vem em direção a D2, D3 e aVF (qR, com R alto em D3). É um diagnóstico de exclusão: primeiro descarte sobrecarga do VD, infarto lateral, embolia pulmonar e biotipo longilíneo.",
+  es:"El vector inicial va hacia arriba y a la izquierda (r pequeña en DI y aVL, q pequeña en las inferiores). El vector principal baja y va a la derecha: se aleja de DI y aVL (rS) y va hacia DII, DIII y aVF (qR, con R alta en DIII). Es un diagnóstico de exclusión: primero descarta sobrecarga del VD, infarto lateral, embolia pulmonar y biotipo longilíneo."},
+ {pt:["Cardiopatia isquêmica extensa, cardiomiopatias","Doença de Chagas","Quase sempre junto com BRD (bloqueio bifascicular)"],es:["Cardiopatía isquémica extensa, miocardiopatías","Enfermedad de Chagas","Casi siempre junto con BRD (bloqueo bifascicular)"]},
+ ["https://litfl.com/left-posterior-fascicular-block-lpfb-ecg-library/","sbc"]);
+
+W("bifasc",
+ {pt:"Dois dos três fascículos estão bloqueados, quase sempre o ramo direito e o fascículo anterossuperior esquerdo. Os ventrículos dependem de um único fascículo; se ele também falhar, ocorre BAV total. Em quem tem síncope, procure BAV intermitente: pode haver indicação de marcapasso.",
+  es:"Dos de los tres fascículos están bloqueados, casi siempre la rama derecha y el fascículo anterosuperior izquierdo. Los ventrículos dependen de un único fascículo; si también falla, aparece un BAV completo. En quien tiene síncope, busca un BAV intermitente: puede haber indicación de marcapasos."},
+ {pt:"Cada bloqueio deixa sua marca onde é mais visível: o do ramo direito em V1 (rsR') e em D1/V6 (S largo); o do fascículo anterior no plano frontal (S profundo em D2, D3 e aVF e eixo além de −45°).",
+  es:"Cada bloqueo deja su marca donde más se ve: el de rama derecha en V1 (rsR') y en DI/V6 (S ancha); el del fascículo anterior en el plano frontal (S profunda en DII, DIII y aVF y eje más allá de −45°)."},
+ {pt:["Cardiopatia chagásica (causa clássica no Brasil e na América Latina)","Fibrose degenerativa, cardiopatia isquêmica, hipertensão","Pós-TAVI"],es:["Miocardiopatía chagásica (causa clásica en Brasil y América Latina)","Fibrosis degenerativa, cardiopatía isquémica, hipertensión","Pos-TAVI"]},
+ ["https://litfl.com/bifascicular-block-ecg-library/","brady18","sbc"]);
+
+W("wpw",
+ {pt:"Uma via acessória (feixe de Kent) liga átrio e ventrículo sem passar pelo atraso do nó AV. Parte do ventrículo é ativada mais cedo: o PR encurta (< 120 ms) e o início do QRS fica lento e empastado (onda delta), porque essa ativação anda de célula em célula. O resto do ventrículo é ativado pelo sistema normal, e o QRS resulta da fusão das duas frentes. A via permite taquicardias por reentrada, e uma fibrilação atrial pré-excitada pode virar FV: evite adenosina, verapamil, digoxina e β-bloqueadores nesse caso.",
+  es:"Una vía accesoria (haz de Kent) une aurícula y ventrículo sin pasar por el retraso del nodo AV. Parte del ventrículo se activa antes: el PR se acorta (< 120 ms) y el inicio del QRS es lento y empastado (onda delta), porque esa activación avanza de célula a célula. El resto del ventrículo se activa por el sistema normal, y el QRS es la fusión de los dos frentes. La vía permite taquicardias por reentrada, y una fibrilación auricular preexcitada puede degenerar en FV: evita adenosina, verapamilo, digoxina y β-bloqueantes en ese caso."},
+ {pt:"A polaridade da onda delta aponta onde está a via, porque a ativação começa ali. Via lateral esquerda: a ativação vai da esquerda para a direita, delta negativa em D1 e aVL e R dominante em V1. Via posterosseptal: delta negativa nas inferiores, que pode imitar Q de infarto inferior. Via direita: V1 negativo, parecido com bloqueio de ramo esquerdo.",
+  es:"La polaridad de la onda delta señala dónde está la vía, porque la activación empieza allí. Vía lateral izquierda: la activación va de izquierda a derecha, delta negativa en DI y aVL y R dominante en V1. Vía posteroseptal: delta negativa en las inferiores, que puede imitar una Q de infarto inferior. Vía derecha: V1 negativo, parecido a un bloqueo de rama izquierda."},
+ {pt:["Congênito","Associado à anomalia de Ebstein","Formas familiares (gene PRKAG2)"],es:["Congénito","Asociado a la anomalía de Ebstein","Formas familiares (gen PRKAG2)"]},
+ ["https://litfl.com/pre-excitation-syndromes-ecg-library/","https://litfl.com/delta-wave-ecg-library/","svt19"]);
+
+/* ---------- POR QUÊ: isquemia ---------- */
+W("stdep",
+ {pt:"O subendocárdio (camada interna) é a região mais vulnerável: sofre a maior tensão da parede e só recebe sangue na diástole. Quando a oferta não atende a demanda, ele fica isquêmico e gera uma corrente de lesão durante o ST que aponta do epicárdio para dentro da cavidade. As derivações de superfície \"veem\" esse vetor se afastando e registram ST abaixo da linha de base. Infra horizontal ou descendente ≥ 0,5 mm em duas derivações contíguas é o mais específico.",
+  es:"El subendocardio (capa interna) es la zona más vulnerable: soporta la mayor tensión de la pared y solo recibe sangre en diástole. Cuando el aporte no cubre la demanda, se vuelve isquémico y genera una corriente de lesión durante el ST que apunta del epicardio hacia la cavidad. Las derivaciones de superficie \"ven\" ese vector alejarse y registran el ST por debajo de la línea de base. El descenso horizontal o descendente ≥ 0,5 mm en dos derivaciones contiguas es el más específico."},
+ {pt:"Ao contrário do supra, o infra não localiza a artéria: costuma aparecer em V4–V6, D1 e D2, seja qual for o território isquêmico. Duas exceções importantes: infra máximo em V1–V4 sugere infarto posterior (supra visto em espelho), e infra difuso com supra em aVR sugere isquemia subendocárdica difusa (tronco ou multiarterial). Infra em derivações opostas a um supra é imagem recíproca de IAM.",
+  es:"A diferencia de la elevación, el descenso no localiza la arteria: suele aparecer en V4–V6, DI y DII, sea cual sea el territorio isquémico. Dos excepciones importantes: descenso máximo en V1–V4 sugiere infarto posterior (elevación vista en espejo), y descenso difuso con elevación en aVR sugiere isquemia subendocárdica difusa (tronco o multivaso). El descenso en derivaciones opuestas a una elevación es imagen recíproca de IAM."},
+ {pt:["Síndrome coronariana aguda sem supra","Isquemia por demanda: taquiarritmia, anemia, hipotensão, sepse","Recíproca de IAM com supra","Alterações secundárias: hipertrofia do VE com strain, bloqueio de ramo, marcapasso","Digoxina, hipocalemia"],es:["Síndrome coronario agudo sin elevación del ST","Isquemia por demanda: taquiarritmia, anemia, hipotensión, sepsis","Recíproca de IAM con elevación del ST","Alteraciones secundarias: hipertrofia del VI con sobrecarga, bloqueo de rama, marcapasos","Digoxina, hipopotasemia"]},
+ ["https://litfl.com/myocardial-ischaemia-ecg-library/","udmi","esc23"]);
+
+W("qwave",
+ {pt:"Músculo necrosado não despolariza e funciona como uma \"janela elétrica\". O eletrodo sobre a cicatriz enxerga, através dela, a ativação da parede oposta, que se afasta dele, e registra uma deflexão inicial negativa: a onda Q. É patológica quando é larga (≥ 40 ms, ou ≥ 20 ms em V2–V3 pela definição universal) ou profunda (≥ 25% do R), em duas derivações contíguas.",
+  es:"El músculo necrosado no se despolariza y funciona como una \"ventana eléctrica\". El electrodo sobre la cicatriz ve, a través de ella, la activación de la pared opuesta, que se aleja, y registra una deflexión inicial negativa: la onda Q. Es patológica cuando es ancha (≥ 40 ms, o ≥ 20 ms en V2–V3 según la definición universal) o profunda (≥ 25% de la R), en dos derivaciones contiguas."},
+ {pt:"O grupo de derivações com Q aponta a parede: V1–V4 anterior (descendente anterior), D2, D3 e aVF inferior (coronária direita ou circunflexa), D1, aVL, V5 e V6 lateral (circunflexa ou diagonal). Um q pequeno e estreito em D1, aVL, V5 e V6 é normal (ativação do septo da esquerda para a direita), assim como Q isolada em D3, aVR ou V1.",
+  es:"El grupo de derivaciones con Q señala la pared: V1–V4 anterior (descendente anterior), DII, DIII y aVF inferior (coronaria derecha o circunfleja), DI, aVL, V5 y V6 lateral (circunfleja o diagonal). Una q pequeña y estrecha en DI, aVL, V5 y V6 es normal (activación del tabique de izquierda a derecha), igual que una Q aislada en DIII, aVR o V1."},
+ {pt:["Infarto prévio (principal)","Cardiomiopatia hipertrófica (Q septal profunda e estreita)","Pré-excitação (onda delta negativa), BRE","Doenças infiltrativas, miocardite","Eletrodos mal posicionados"],es:["Infarto previo (principal)","Miocardiopatía hipertrófica (Q septal profunda y estrecha)","Preexcitación (onda delta negativa), BRI","Enfermedades infiltrativas, miocarditis","Electrodos mal colocados"]},
+ ["https://litfl.com/q-wave-ecg-library/","udmi"]);
+
+W("iam_inf",
+ {pt:"A oclusão da coronária direita (cerca de 80%) ou da circunflexa deixa a parede inferior com isquemia transmural. As células lesadas ficam parcialmente despolarizadas, e durante o ST surge uma corrente entre o músculo sadio e o lesado. O vetor dessa corrente aponta para a área lesada, e as derivações voltadas para ela registram supra de ST.",
+  es:"La oclusión de la coronaria derecha (cerca del 80%) o de la circunfleja deja la pared inferior con isquemia transmural. Las células lesionadas quedan parcialmente despolarizadas, y durante el ST aparece una corriente entre el músculo sano y el lesionado. El vector de esa corriente apunta a la zona lesionada, y las derivaciones orientadas hacia ella registran elevación del ST."},
+ {pt:"D2 (+60°), D3 (+120°) e aVF (+90°) olham o coração por baixo, então o vetor de lesão inferior vem em direção a elas: supra. aVL (−30°) fica quase oposta a D3 e mostra infra recíproco, muitas vezes o primeiro sinal. Supra em D3 maior que em D2 sugere coronária direita (o vetor puxa para a direita). Supra ≥ 1 mm em V4R indica infarto do VD: evite nitratos e cuidado com a hipovolemia. Infra em V1–V3 sugere extensão posterior.",
+  es:"DII (+60°), DIII (+120°) y aVF (+90°) miran el corazón desde abajo, así que el vector de lesión inferior va hacia ellas: elevación. aVL (−30°) es casi opuesta a DIII y muestra descenso recíproco, a menudo el primer signo. Elevación en DIII mayor que en DII sugiere coronaria derecha (el vector tira a la derecha). Elevación ≥ 1 mm en V4R indica infarto del VD: evita nitratos y vigila la hipovolemia. Descenso en V1–V3 sugiere extensión posterior."},
+ {pt:["Aterotrombose coronariana (IAM tipo 1)","Espasmo, dissecção espontânea, embolia coronariana","Pode vir com bradicardia e BAV: a coronária direita irriga o nó AV, e há reflexo vagal (Bezold–Jarisch)"],es:["Aterotrombosis coronaria (IAM tipo 1)","Espasmo, disección espontánea, embolia coronaria","Puede acompañarse de bradicardia y BAV: la coronaria derecha irriga el nodo AV y hay reflejo vagal (Bezold–Jarisch)"]},
+ ["https://litfl.com/inferior-stemi-ecg-library/","https://litfl.com/mi-localization-ecg-library/","acs25","udmi"]);
+
+W("iam_ant",
+ {pt:"A oclusão da artéria descendente anterior causa lesão transmural do septo e da parede anterior. O vetor de lesão aponta para a frente, para as precordiais. As T hiperagudas costumam vir antes do supra. Limites da definição universal em V2–V3: ≥ 2 mm em homens a partir de 40 anos, ≥ 2,5 mm em homens com menos de 40 e ≥ 1,5 mm em mulheres; nas outras derivações, ≥ 1 mm.",
+  es:"La oclusión de la arteria descendente anterior produce lesión transmural del tabique y de la pared anterior. El vector de lesión apunta hacia delante, a las precordiales. Las T hiperagudas suelen preceder a la elevación. Umbrales de la definición universal en V2–V3: ≥ 2 mm en hombres desde 40 años, ≥ 2,5 mm en hombres menores de 40 y ≥ 1,5 mm en mujeres; en las demás derivaciones, ≥ 1 mm."},
+ {pt:"V1–V4 ficam sobre o septo e a parede anterior, então mostram o supra. Uma oclusão proximal (antes do primeiro ramo diagonal) estende a lesão para a parede lateral alta (supra em D1 e aVL) e costuma dar infra recíproco nas inferiores. Perda de R e Q em V1–V4 indicam necrose já estabelecida.",
+  es:"V1–V4 están sobre el tabique y la pared anterior, así que muestran la elevación. Una oclusión proximal (antes de la primera rama diagonal) extiende la lesión a la pared lateral alta (elevación en DI y aVL) y suele dar descenso recíproco en las inferiores. La pérdida de R y las Q en V1–V4 indican necrosis ya establecida."},
+ {pt:["Oclusão da descendente anterior (aterotrombose)","Diagnósticos que imitam: aneurisma de VE (supra persistente com Q), Takotsubo, pericardite, repolarização precoce, BRE, HVE"],es:["Oclusión de la descendente anterior (aterotrombosis)","Diagnósticos que imitan: aneurisma del VI (elevación persistente con Q), Takotsubo, pericarditis, repolarización precoz, BRI, HVI"]},
+ ["https://litfl.com/anterior-myocardial-infarction-ecg-library/","acs25","udmi"]);
+
+W("iam_lat",
+ {pt:"A oclusão da circunflexa (ou de um ramo marginal) ou do primeiro ramo diagonal causa lesão na parede lateral do VE. O vetor de lesão aponta para a esquerda. A parede lateral é \"eletricamente silenciosa\" e muitas vezes não preenche os critérios clássicos de supra; por isso esse infarto é dos mais perdidos.",
+  es:"La oclusión de la circunfleja (o de una rama marginal) o de la primera diagonal produce lesión en la pared lateral del VI. El vector de lesión apunta a la izquierda. La pared lateral es \"eléctricamente silenciosa\" y a menudo no cumple los criterios clásicos de elevación; por eso este infarto es de los más pasados por alto."},
+ {pt:"D1, aVL, V5 e V6 olham o coração pela esquerda e mostram o supra. D3 e aVF ficam do lado oposto de aVL e mostram infra recíproco, que muitas vezes chama mais atenção que o próprio supra. Supra em D1, aVL e V2 com infra em D3 (sinal da \"bandeira da África do Sul\") sugere oclusão do primeiro diagonal.",
+  es:"DI, aVL, V5 y V6 miran el corazón desde la izquierda y muestran la elevación. DIII y aVF están del lado opuesto a aVL y muestran descenso recíproco, que a menudo llama más la atención que la propia elevación. Elevación en DI, aVL y V2 con descenso en DIII (signo de la \"bandera de Sudáfrica\") sugiere oclusión de la primera diagonal."},
+ {pt:["Oclusão da circunflexa, de um ramo marginal ou do primeiro diagonal"],es:["Oclusión de la circunfleja, de una rama marginal o de la primera diagonal"]},
+ ["https://litfl.com/lateral-stemi-ecg-library/","https://litfl.com/omi-replacing-the-stemi-misnomer/","acs25"]);
+
+W("iam_post",
+ {pt:"A oclusão da circunflexa ou de um ramo da coronária direita causa lesão da parede posterior (inferobasal). Nenhuma das 12 derivações fica sobre essa parede. V1–V3 ficam do lado oposto (na frente) e veem a lesão em espelho. O consenso do ACC de 2022 trata esse padrão como equivalente de IAM com supra.",
+  es:"La oclusión de la circunfleja o de una rama de la coronaria derecha produce lesión de la pared posterior (inferobasal). Ninguna de las 12 derivaciones está sobre esa pared. V1–V3 están del lado opuesto (delante) y ven la lesión en espejo. El consenso del ACC de 2022 trata este patrón como equivalente de IAM con elevación del ST."},
+ {pt:"Visto de frente, tudo se inverte: o supra vira infra horizontal em V1–V3 (máximo em V2–V3), a onda Q vira um R alto e largo (R/S > 1 em V2) e a T invertida vira uma T positiva. Para confirmar, registre V7–V9 nas costas, que ficam de frente para a parede: supra ≥ 0,5 mm (≥ 1 mm em homens com menos de 40 anos).",
+  es:"Visto de frente, todo se invierte: la elevación se vuelve descenso horizontal en V1–V3 (máximo en V2–V3), la onda Q se vuelve una R alta y ancha (R/S > 1 en V2) y la T negativa se vuelve una T positiva. Para confirmar, registra V7–V9 en la espalda, que miran de frente a la pared: elevación ≥ 0,5 mm (≥ 1 mm en hombres menores de 40 años)."},
+ {pt:["Oclusão da circunflexa ou da coronária direita (ramo posterolateral)","Muitas vezes junto com o IAM inferior ou lateral"],es:["Oclusión de la circunfleja o de la coronaria derecha (rama posterolateral)","A menudo junto con el IAM inferior o lateral"]},
+ ["https://litfl.com/posterior-myocardial-infarction-ecg-library/","ecdp22","acs25"]);
+
+W("wellens",
+ {pt:"Há uma estenose crítica da descendente anterior proximal que ocluiu e reabriu sozinha. O músculo reperfundido (atordoado, com edema) mostra alterações da T no período sem dor, as mesmas que aparecem depois da reperfusão de um IAM. Tipo A: T bifásica (positiva e depois negativa) em V2–V3. Tipo B: T negativa, profunda e simétrica em V2–V3, às vezes até V6. A artéria pode fechar de novo nos dias seguintes e causar um infarto anterior extenso.",
+  es:"Hay una estenosis crítica de la descendente anterior proximal que se ocluyó y se reabrió sola. El músculo reperfundido (aturdido, con edema) muestra cambios de la T en el período sin dolor, los mismos que aparecen tras la reperfusión de un IAM. Tipo A: T bifásica (positiva y luego negativa) en V2–V3. Tipo B: T negativa, profunda y simétrica en V2–V3, a veces hasta V6. La arteria puede volver a cerrarse en los días siguientes y causar un infarto anterior extenso."},
+ {pt:"V2 e V3 ficam sobre o território da descendente anterior proximal (septo e parede anterior), por isso as T mudam ali. Como a artéria está aberta no momento do ECG, há pouco ou nenhum supra, não há Q e a progressão do R está preservada.",
+  es:"V2 y V3 están sobre el territorio de la descendente anterior proximal (tabique y pared anterior), por eso las T cambian allí. Como la arteria está abierta en el momento del ECG, hay poca o ninguna elevación, no hay Q y la progresión de la R está conservada."},
+ {pt:["Estenose crítica da descendente anterior proximal","Teste de esforço contraindicado: indicação de cateterismo precoce","Pseudo-Wellens: cocaína, miocardite, embolia pulmonar, hipertrofia do VE"],es:["Estenosis crítica de la descendente anterior proximal","Prueba de esfuerzo contraindicada: indicación de coronariografía precoz","Pseudo-Wellens: cocaína, miocarditis, embolia pulmonar, hipertrofia del VI"]},
+ ["https://litfl.com/wellens-syndrome-ecg-library/","ecdp22"]);
+
+W("dewinter",
+ {pt:"É uma oclusão aguda da descendente anterior proximal em que o ST não sobe. A explicação mais aceita é uma diferença anatômica na rede de Purkinje (com atraso da condução no endocárdio) ou a falha na ativação dos canais de potássio sensíveis ao ATP. Com isso, a corrente de lesão fica restrita ao subendocárdio. Deve ser tratado como equivalente de IAM com supra.",
+  es:"Es una oclusión aguda de la descendente anterior proximal en la que el ST no sube. La explicación más aceptada es una diferencia anatómica en la red de Purkinje (con retraso de la conducción en el endocardio) o la falla en la activación de los canales de potasio sensibles al ATP. Así, la corriente de lesión queda restringida al subendocardio. Debe tratarse como equivalente de IAM con elevación del ST."},
+ {pt:"Aparece em V1–V6, que cobrem o território da descendente anterior: infra ascendente de 1–3 mm no ponto J que continua em uma T alta, simétrica e larga. Muitas vezes há supra discreto (0,5–1 mm) em aVR.",
+  es:"Aparece en V1–V6, que cubren el territorio de la descendente anterior: descenso ascendente de 1–3 mm en el punto J que continúa en una T alta, simétrica y ancha. A menudo hay elevación discreta (0,5–1 mm) en aVR."},
+ {pt:["Oclusão aguda da descendente anterior proximal (cerca de 2% dos IAM anteriores)"],es:["Oclusión aguda de la descendente anterior proximal (cerca del 2% de los IAM anteriores)"]},
+ ["https://litfl.com/de-winter-t-wave/","ecdp22","acs25"]);
+
+W("hypt",
+ {pt:"Nos primeiros minutos de uma oclusão, as células isquêmicas perdem potássio para o meio extracelular e a repolarização local muda. Isso produz uma T de base larga, alta, simétrica e volumosa em relação ao QRS, antes de o ST subir. A fase é curta, então ECGs seriados (a cada 15–30 min) e a comparação com um ECG antigo ajudam muito.",
+  es:"En los primeros minutos de una oclusión, las células isquémicas pierden potasio al medio extracelular y la repolarización local cambia. Eso produce una T de base ancha, alta, simétrica y voluminosa en relación con el QRS, antes de que el ST suba. La fase es corta, así que los ECG seriados (cada 15–30 min) y la comparación con un ECG previo ayudan mucho."},
+ {pt:"Aparece nas derivações voltadas para a parede ocluída, por exemplo V2–V4 na descendente anterior ou D2, D3 e aVF na coronária direita. Às vezes já existe infra recíproco do outro lado. Na hipercalemia a T também é alta, mas é estreita, pontiaguda e difusa, sem respeitar território.",
+  es:"Aparece en las derivaciones orientadas a la pared ocluida, por ejemplo V2–V4 en la descendente anterior o DII, DIII y aVF en la coronaria derecha. A veces ya hay descenso recíproco del otro lado. En la hiperpotasemia la T también es alta, pero es estrecha, picuda y difusa, sin respetar territorio."},
+ {pt:["Fase inicial de uma oclusão coronariana","Diferenciais: hipercalemia, repolarização precoce, hipertrofia do VE, padrão de de Winter"],es:["Fase inicial de una oclusión coronaria","Diferenciales: hiperpotasemia, repolarización precoz, hipertrofia del VI, patrón de de Winter"]},
+ ["https://litfl.com/t-wave-ecg-library/","https://litfl.com/killer-ecg-patterns-part-2/","ecdp22"]);
+
+W("avr",
+ {pt:"Isquemia subendocárdica difusa (lesão do tronco da coronária esquerda, doença de três vasos ou isquemia por demanda grave) gera vetores de lesão que apontam de todas as paredes do VE para dentro da cavidade. Somados, eles apontam para cima e para a direita, em direção à base do coração. Na maioria dos casos não é uma oclusão de uma única artéria.",
+  es:"La isquemia subendocárdica difusa (lesión del tronco de la coronaria izquierda, enfermedad de tres vasos o isquemia por demanda grave) genera vectores de lesión que apuntan desde todas las paredes del VI hacia la cavidad. Sumados, apuntan hacia arriba y a la derecha, hacia la base del corazón. En la mayoría de los casos no es la oclusión de una sola arteria."},
+ {pt:"aVR olha o coração pelo ombro direito, \"de dentro da cavidade\", e é praticamente o espelho das derivações laterais. Por isso o vetor de isquemia difusa vem em direção a ela (supra em aVR, às vezes também em V1), enquanto D1, D2 e V4–V6 mostram infra.",
+  es:"aVR mira el corazón desde el hombro derecho, \"desde dentro de la cavidad\", y es prácticamente el espejo de las derivaciones laterales. Por eso el vector de isquemia difusa va hacia ella (elevación en aVR, a veces también en V1), mientras DI, DII y V4–V6 muestran descenso."},
+ {pt:["Lesão de tronco da coronária esquerda ou doença de três vasos","Descendente anterior proximal","Causas não coronarianas: taquicardia supraventricular, choque, anemia grave, hipertrofia do VE com strain, digoxina, hipocalemia"],es:["Lesión del tronco de la coronaria izquierda o enfermedad de tres vasos","Descendente anterior proximal","Causas no coronarias: taquicardia supraventricular, shock, anemia grave, hipertrofia del VI con sobrecarga, digoxina, hipopotasemia"]},
+ ["https://litfl.com/st-elevation-in-avr/","ecdp22","esc23"]);
+
+/* ---------- POR QUÊ: sobrecargas e outros ---------- */
+W("lvh",
+ {pt:"Mais massa no VE gera um vetor de despolarização maior, voltado para a esquerda e para trás, e por isso a voltagem do QRS aumenta. A parede espessa também fica relativamente isquêmica no subendocárdio e repolariza de outro jeito, o que gera o padrão de strain: infra de ST e T negativa e assimétrica nas derivações esquerdas. O ECG é específico, mas pouco sensível; o ecocardiograma confirma.",
+  es:"Más masa en el VI genera un vector de despolarización mayor, dirigido a la izquierda y hacia atrás, y por eso aumenta el voltaje del QRS. La pared gruesa también queda relativamente isquémica en el subendocardio y repolariza de otra forma, lo que genera el patrón de sobrecarga: descenso del ST y T negativa y asimétrica en las derivaciones izquierdas. El ECG es específico, pero poco sensible; el ecocardiograma lo confirma."},
+ {pt:"V5, V6, D1 e aVL ficam de frente para o VE e recebem o vetor aumentado (R alto). V1 e V2 ficam do lado oposto e veem o mesmo vetor se afastando (S profundo). Por isso os critérios somam as duas pontas: Sokolow-Lyon (S em V1 + R em V5 ou V6 ≥ 35 mm), Cornell (R em aVL + S em V3 > 28 mm em homens e > 20 mm em mulheres) e Peguero-Lo Presti (S mais profundo de qualquer derivação + S em V4 ≥ 28 mm em homens e ≥ 23 mm em mulheres).",
+  es:"V5, V6, DI y aVL miran de frente al VI y reciben el vector aumentado (R alta). V1 y V2 están del lado opuesto y ven el mismo vector alejarse (S profunda). Por eso los criterios suman los dos extremos: Sokolow-Lyon (S en V1 + R en V5 o V6 ≥ 35 mm), Cornell (R en aVL + S en V3 > 28 mm en hombres y > 20 mm en mujeres) y Peguero-Lo Presti (S más profunda de cualquier derivación + S en V4 ≥ 28 mm en hombres y ≥ 23 mm en mujeres)."},
+ {pt:["Hipertensão arterial (causa mais comum)","Estenose aórtica, coarctação da aorta","Cardiomiopatia hipertrófica","Insuficiência aórtica ou mitral (sobrecarga de volume)","Atletas: voltagem alta isolada pode ser normal"],es:["Hipertensión arterial (causa más frecuente)","Estenosis aórtica, coartación de aorta","Miocardiopatía hipertrófica","Insuficiencia aórtica o mitral (sobrecarga de volumen)","Deportistas: el voltaje alto aislado puede ser normal"]},
+ ["https://litfl.com/left-ventricular-hypertrophy-lvh-ecg-library/","https://litfl.com/ecg-criteria-for-left-ventricular-hypertrophy/","aha09","sbc"]);
+
+W("rvh",
+ {pt:"Normalmente o VE domina o QRS. Quando o VD fica muito espesso, o vetor dele cresce a ponto de puxar o QRS para a direita e para a frente. A repolarização do VD também muda (strain), com infra de ST e T negativa nas derivações sobre ele.",
+  es:"Normalmente el VI domina el QRS. Cuando el VD se engrosa mucho, su vector crece hasta tirar del QRS a la derecha y hacia delante. La repolarización del VD también cambia (sobrecarga), con descenso del ST y T negativa en las derivaciones sobre él."},
+ {pt:"V1, que fica sobre o VD, passa a ter R dominante (R/S > 1, R ≥ 7 mm). V5 e V6, do lado oposto, ganham S profundo. No plano frontal o eixo desvia para a direita (além de +110°), e o strain aparece em V1–V3 e nas inferiores. Diferenciais de R alto em V1: BRD, infarto posterior, WPW, cardiomiopatia hipertrófica, dextrocardia, eletrodos trocados e crianças.",
+  es:"V1, que está sobre el VD, pasa a tener R dominante (R/S > 1, R ≥ 7 mm). V5 y V6, del lado opuesto, muestran S profunda. En el plano frontal el eje se desvía a la derecha (más allá de +110°), y la sobrecarga aparece en V1–V3 y en las inferiores. Diferenciales de R alta en V1: BRD, infarto posterior, WPW, miocardiopatía hipertrófica, dextrocardia, electrodos invertidos y niños."},
+ {pt:["Hipertensão pulmonar de qualquer causa","DPOC e cor pulmonale, embolia pulmonar crônica","Estenose mitral, estenose pulmonar","Cardiopatias congênitas (ex.: tetralogia de Fallot)"],es:["Hipertensión pulmonar de cualquier causa","EPOC y cor pulmonale, embolia pulmonar crónica","Estenosis mitral, estenosis pulmonar","Cardiopatías congénitas (p. ej., tetralogía de Fallot)"]},
+ ["https://litfl.com/right-ventricular-hypertrophy-rvh-ecg-library/","aha09"]);
+
+W("lae",
+ {pt:"O átrio esquerdo é ativado por último e forma a segunda metade da P. Quando ele aumenta, ou quando a condução entre os átrios (feixe de Bachmann) fica lenta, essa segunda metade fica mais longa e mais ampla, e a P alarga (≥ 120 ms) e ganha um entalhe.",
+  es:"La aurícula izquierda se activa al final y forma la segunda mitad de la P. Cuando aumenta de tamaño, o cuando la conducción entre aurículas (haz de Bachmann) se enlentece, esa segunda mitad se alarga y crece, y la P se ensancha (≥ 120 ms) y presenta una muesca."},
+ {pt:"Em D2 a P fica larga e bífida (\"P mitrale\"), com os picos separados por 40 ms ou mais. O átrio esquerdo fica atrás, então a ativação dele se afasta de V1: a parte final da P em V1 fica negativa, larga e profunda (índice de Morris, ≥ 1 mm de profundidade × 1 mm de largura).",
+  es:"En DII la P es ancha y bífida (\"P mitrale\"), con picos separados por 40 ms o más. La aurícula izquierda está detrás, así que su activación se aleja de V1: la parte final de la P en V1 es negativa, ancha y profunda (índice de Morris, ≥ 1 mm de profundidad × 1 mm de anchura)."},
+ {pt:["Estenose ou insuficiência mitral","Hipertensão com hipertrofia do VE, estenose aórtica","Insuficiência cardíaca","Predispõe a fibrilação atrial"],es:["Estenosis o insuficiencia mitral","Hipertensión con hipertrofia del VI, estenosis aórtica","Insuficiencia cardíaca","Predispone a fibrilación auricular"]},
+ ["https://litfl.com/left-atrial-enlargement-ecg-library/","aha09"]);
+
+W("rae",
+ {pt:"O átrio direito é ativado primeiro e forma a parte inicial da P. Quando ele aumenta, essa parte fica mais alta, mas a duração total não muda, porque o fim da P depende do átrio esquerdo.",
+  es:"La aurícula derecha se activa primero y forma la parte inicial de la P. Cuando aumenta de tamaño, esa parte se vuelve más alta, pero la duración total no cambia, porque el final de la P depende de la aurícula izquierda."},
+ {pt:"O vetor do átrio direito aponta para baixo e para a frente. Por isso a P fica alta e pontiaguda (≥ 2,5 mm) em D2, D3 e aVF (\"P pulmonale\"), as derivações alinhadas com ela, e a parte inicial positiva da P em V1, que fica na frente, passa de 1,5 mm.",
+  es:"El vector de la aurícula derecha apunta hacia abajo y hacia delante. Por eso la P es alta y picuda (≥ 2,5 mm) en DII, DIII y aVF (\"P pulmonale\"), las derivaciones alineadas con ella, y la parte inicial positiva de la P en V1, que está delante, supera 1,5 mm."},
+ {pt:["Hipertensão pulmonar, DPOC, embolia pulmonar","Estenose ou insuficiência tricúspide, estenose pulmonar","Cardiopatias congênitas"],es:["Hipertensión pulmonar, EPOC, embolia pulmonar","Estenosis o insuficiencia tricuspídea, estenosis pulmonar","Cardiopatías congénitas"]},
+ ["https://litfl.com/right-atrial-enlargement-ecg-library/","aha09"]);
+
+W("hyperk",
+ {pt:"O potássio extracelular alto aumenta a condutância dos canais de potássio da repolarização: a fase 3 fica mais rápida e a T fica alta, estreita e pontiaguda. Com níveis maiores, o potencial de repouso fica menos negativo, inativa parte dos canais de sódio e a despolarização fica lenta. Primeiro a P achata e o PR alonga, depois o QRS alarga e, por fim, surge a onda sinusoidal, que precede FV ou assistolia. O ECG não acompanha bem o nível sérico: um ECG normal não exclui hipercalemia.",
+  es:"El potasio extracelular alto aumenta la conductancia de los canales de potasio de la repolarización: la fase 3 se acelera y la T se vuelve alta, estrecha y picuda. Con niveles mayores, el potencial de reposo se vuelve menos negativo, inactiva parte de los canales de sodio y la despolarización se enlentece. Primero la P se aplana y el PR se alarga, después el QRS se ensancha y, al final, aparece la onda sinusoidal, que precede a la FV o la asistolia. El ECG no sigue bien el nivel sérico: un ECG normal no descarta hiperpotasemia."},
+ {pt:"É um distúrbio sistêmico, então afeta todas as derivações. A T apiculada chama mais atenção onde a T já é maior: V2–V4, D2 e D3.",
+  es:"Es un trastorno sistémico, así que afecta a todas las derivaciones. La T picuda llama más la atención donde la T ya es mayor: V2–V4, DII y DIII."},
+ {pt:["Insuficiência renal aguda ou crônica","Fármacos: IECA, BRA, espironolactona, diuréticos poupadores de potássio, AINEs, trimetoprima, heparina","Cetoacidose, acidose, rabdomiólise, hemólise, lise tumoral","Insuficiência adrenal","Pseudo-hipercalemia (amostra hemolisada)"],es:["Insuficiencia renal aguda o crónica","Fármacos: IECA, ARA II, espironolactona, diuréticos ahorradores de potasio, AINE, trimetoprima, heparina","Cetoacidosis, acidosis, rabdomiólisis, hemólisis, lisis tumoral","Insuficiencia suprarrenal","Seudohiperpotasemia (muestra hemolizada)"]},
+ ["https://litfl.com/hyperkalaemia-ecg-library/"]);
+
+W("hypok",
+ {pt:"Com pouco potássio extracelular, a corrente de potássio da repolarização diminui e a fase 3 se arrasta. A T achata, o ST desce e aparece a onda U. O resultado é um QU longo, mais automatismo e pós-despolarizações, o que predispõe a extrassístoles, torsades de pointes e FV, principalmente em quem usa digoxina.",
+  es:"Con poco potasio extracelular, la corriente de potasio de la repolarización disminuye y la fase 3 se alarga. La T se aplana, el ST desciende y aparece la onda U. El resultado es un QU largo, más automatismo y pospotenciales, lo que predispone a extrasístoles, torsades de pointes y FV, sobre todo en quien toma digoxina."},
+ {pt:"Também é sistêmica, mas a onda U aparece melhor em V2–V3, onde T e U costumam ser maiores. Com hipocalemia mais grave, a U pode ficar maior que a T e se fundir com ela.",
+  es:"También es sistémica, pero la onda U se ve mejor en V2–V3, donde T y U suelen ser mayores. Con hipopotasemia más grave, la U puede ser mayor que la T y fundirse con ella."},
+ {pt:["Diuréticos tiazídicos e de alça","Vômitos, diarreia, sonda nasogástrica","Hiperaldosteronismo","Insulina, β2-agonistas, síndrome de realimentação","Hipomagnesemia, alcalose"],es:["Diuréticos tiazídicos y de asa","Vómitos, diarrea, sonda nasogástrica","Hiperaldosteronismo","Insulina, β2-agonistas, síndrome de realimentación","Hipomagnesemia, alcalosis"]},
+ ["https://litfl.com/hypokalaemia-ecg-library/"]);
+
+W("hypercal",
+ {pt:"O cálcio extracelular alto encurta a fase 2 (platô) do potencial de ação. Como o ST corresponde ao platô, ele encurta ou some: a T começa logo depois do QRS e o QT fica curto. Em casos graves pode haver onda J (tipo Osborn), bradicardia e BAV.",
+  es:"El calcio extracelular alto acorta la fase 2 (meseta) del potencial de acción. Como el ST corresponde a la meseta, se acorta o desaparece: la T empieza justo después del QRS y el QT es corto. En casos graves puede haber onda J (tipo Osborn), bradicardia y BAV."},
+ {pt:"É sistêmica e aparece em todas as derivações. Meça o QT em D2 ou V5, onde o fim da T é mais claro.",
+  es:"Es sistémica y aparece en todas las derivaciones. Mide el QT en DII o V5, donde el final de la T es más claro."},
+ {pt:["Hiperparatireoidismo primário e câncer (juntos, cerca de 90%)","Excesso de vitamina D, tiazídicos, lítio","Sarcoidose e outras doenças granulomatosas","Imobilização, síndrome leite-álcali"],es:["Hiperparatiroidismo primario y cáncer (juntos, cerca del 90%)","Exceso de vitamina D, tiazidas, litio","Sarcoidosis y otras enfermedades granulomatosas","Inmovilización, síndrome de leche y alcalinos"]},
+ ["https://litfl.com/hypercalcaemia-ecg-library/"]);
+
+W("hypocal",
+ {pt:"O cálcio baixo prolonga a fase 2 (platô) do potencial de ação. O segmento ST fica longo e reto, mas a T tem forma normal; é o ST que estica o QT. Raramente causa torsades de pointes.",
+  es:"El calcio bajo prolonga la fase 2 (meseta) del potencial de acción. El segmento ST se vuelve largo y recto, pero la T tiene forma normal; es el ST el que alarga el QT. Rara vez causa torsades de pointes."},
+ {pt:"É sistêmica e aparece em todas as derivações. Compare: na hipocalemia o QT (QU) longo vem de uma T achatada com U; na hipocalcemia vem de um ST longo com T normal.",
+  es:"Es sistémica y aparece en todas las derivaciones. Compara: en la hipopotasemia el QT (QU) largo viene de una T aplanada con U; en la hipocalcemia viene de un ST largo con T normal."},
+ {pt:["Hipoparatireoidismo (por exemplo, após tireoidectomia)","Deficiência de vitamina D, doença renal crônica","Hipomagnesemia, pancreatite, sepse","Transfusão maciça (citrato)","Fármacos: bisfosfonatos, denosumabe"],es:["Hipoparatiroidismo (por ejemplo, tras tiroidectomía)","Déficit de vitamina D, enfermedad renal crónica","Hipomagnesemia, pancreatitis, sepsis","Transfusión masiva (citrato)","Fármacos: bisfosfonatos, denosumab"]},
+ ["https://litfl.com/hypocalcaemia-ecg-library/"]);
+
+W("lqt",
+ {pt:"A repolarização ventricular demora mais, por menos corrente de potássio de saída (IKr, IKs) ou por mais corrente tardia de sódio ou cálcio. Nesse platô alongado aparecem pós-despolarizações precoces, que podem disparar torsades de pointes. Corrija o QT pela frequência: QTc acima de 450 ms em homens e 460 ms em mulheres é longo, e acima de 500 ms o risco é alto.",
+  es:"La repolarización ventricular tarda más, por menos corriente de potasio de salida (IKr, IKs) o por más corriente tardía de sodio o calcio. En esa meseta alargada aparecen pospotenciales precoces, que pueden disparar torsades de pointes. Corrige el QT por la frecuencia: un QTc mayor de 450 ms en hombres y 460 ms en mujeres es largo, y por encima de 500 ms el riesgo es alto."},
+ {pt:"O QT é igual em todo o coração, mas o fim da T fica mais nítido em umas derivações do que em outras. Meça em D2 ou V5 (método da tangente) e use a derivação com o QT mais longo. Bazett corrige demais em frequências altas; Fridericia ou Framingham são melhores nesses casos.",
+  es:"El QT es el mismo en todo el corazón, pero el final de la T es más nítido en unas derivaciones que en otras. Mídelo en DII o V5 (método de la tangente) y usa la derivación con el QT más largo. Bazett corrige de más en frecuencias altas; Fridericia o Framingham son mejores en esos casos."},
+ {pt:["Fármacos (consulte a lista do CredibleMeds)","Hipocalemia, hipomagnesemia, hipocalcemia","QT longo congênito (KCNQ1, KCNH2, SCN5A)","Bradicardia, BAV, isquemia","Hipotermia, hipotireoidismo, hemorragia intracraniana, anorexia"],es:["Fármacos (consulta la lista de CredibleMeds)","Hipopotasemia, hipomagnesemia, hipocalcemia","QT largo congénito (KCNQ1, KCNH2, SCN5A)","Bradicardia, BAV, isquemia","Hipotermia, hipotiroidismo, hemorragia intracraneal, anorexia"]},
+ ["https://litfl.com/qt-interval-ecg-library/","credible","va22"]);
+
+W("peric",
+ {pt:"A inflamação do pericárdio atinge o miocárdio logo abaixo dele (epicárdio) em toda a volta do coração. Isso gera uma corrente de lesão subepicárdica difusa, que não respeita território de artéria. A inflamação do átrio desloca a repolarização atrial e causa infra do PR. A evolução clássica tem 4 fases: supra com infra de PR, normalização, T invertida e nova normalização. Segundo as diretrizes da ESC, as alterações típicas aparecem em até cerca de 60% dos casos, então um ECG normal não exclui pericardite.",
+  es:"La inflamación del pericardio alcanza el miocardio justo debajo (epicardio) en todo el contorno del corazón. Eso genera una corriente de lesión subepicárdica difusa, que no respeta el territorio de una arteria. La inflamación de la aurícula desplaza la repolarización auricular y produce descenso del PR. La evolución clásica tiene 4 fases: elevación con descenso del PR, normalización, T negativa y nueva normalización. Según las guías de la ESC, los cambios típicos aparecen hasta en cerca del 60% de los casos, así que un ECG normal no descarta pericarditis."},
+ {pt:"Somadas, as correntes de lesão apontam para a ponta do coração (para baixo e para a esquerda). Por isso há supra côncavo na maioria das derivações (D1, D2, aVF, V2–V6) e só aVR, que olha do lado oposto, mostra infra de ST e supra de PR. No IAM é diferente: o supra fica em um território e há imagem recíproca em derivações opostas (por exemplo, em aVL no IAM inferior).",
+  es:"Sumadas, las corrientes de lesión apuntan a la punta del corazón (hacia abajo y a la izquierda). Por eso hay elevación cóncava en la mayoría de las derivaciones (DI, DII, aVF, V2–V6) y solo aVR, que mira desde el lado opuesto, muestra descenso del ST y elevación del PR. En el IAM es distinto: la elevación queda en un territorio y hay imagen recíproca en derivaciones opuestas (por ejemplo, en aVL en el IAM inferior)."},
+ {pt:["Viral ou idiopática (maioria)","Tuberculose (importante no Brasil e na América Latina)","Pós-infarto, pós-cirurgia cardíaca","Uremia, doenças autoimunes, câncer, radioterapia, fármacos"],es:["Viral o idiopática (mayoría)","Tuberculosis (importante en Brasil y América Latina)","Posinfarto, poscirugía cardíaca","Uremia, enfermedades autoinmunes, cáncer, radioterapia, fármacos"]},
+ ["https://litfl.com/pericarditis-ecg-library/","peri25"]);
+
+W("brugada",
+ {pt:"É uma canalopatia hereditária; em cerca de 20% dos casos há mutação com perda de função do gene SCN5A, que reduz a corrente de sódio. No epicárdio da via de saída do VD a corrente transitória de saída (Ito) passa a predominar, e o potencial de ação perde o \"domo\" no epicárdio, mas não no endocárdio. Esse gradiente entre as camadas forma o supra em cúpula e pode gerar reentrada de fase 2, com TV polimórfica ou FV, muitas vezes em repouso, no sono ou com febre.",
+  es:"Es una canalopatía hereditaria; en cerca del 20% de los casos hay una mutación con pérdida de función del gen SCN5A, que reduce la corriente de sodio. En el epicardio del tracto de salida del VD la corriente transitoria de salida (Ito) pasa a predominar, y el potencial de acción pierde la \"cúpula\" en el epicardio, pero no en el endocardio. Ese gradiente entre las capas forma la elevación en cúpula y puede generar reentrada en fase 2, con TV polimórfica o FV, a menudo en reposo, durante el sueño o con fiebre."},
+ {pt:"A via de saída do VD fica logo abaixo de V1 e V2, por isso o padrão aparece ali. Ele fica mais evidente com os eletrodos no 2º ou 3º espaço intercostal. Tipo 1 (diagnóstico): supra em cúpula ≥ 2 mm seguido de T negativa em pelo menos uma derivação entre V1 e V2. O tipo 2 (\"sela\") sozinho não fecha diagnóstico.",
+  es:"El tracto de salida del VD está justo debajo de V1 y V2, por eso el patrón aparece allí. Se hace más evidente con los electrodos en el 2.º o 3.er espacio intercostal. Tipo 1 (diagnóstico): elevación en cúpula ≥ 2 mm seguida de T negativa en al menos una derivación entre V1 y V2. El tipo 2 (\"en silla de montar\") por sí solo no confirma el diagnóstico."},
+ {pt:["Genético (herança autossômica dominante)","Desmascarado por febre, bloqueadores de sódio (flecainida, ajmalina), antidepressivos tricíclicos, lítio, cocaína, álcool, hipercalemia","Fenocópias: o mesmo desenho por outras causas, que some quando a causa é corrigida"],es:["Genético (herencia autosómica dominante)","Desenmascarado por fiebre, bloqueantes de sodio (flecainida, ajmalina), antidepresivos tricíclicos, litio, cocaína, alcohol, hiperpotasemia","Fenocopias: el mismo dibujo por otras causas, que desaparece al corregirlas"]},
+ ["https://litfl.com/what-is-brugada-syndrome/","brugdrugs","va22"]);
+
+W("hypoth",
+ {pt:"O frio deixa todos os canais iônicos mais lentos: aparecem bradicardia sinusal e PR, QRS e QT longos. A onda de Osborn (onda J) nasce de um entalhe maior no potencial de ação do epicárdio (corrente Ito) do que no do endocárdio, o que cria uma diferença de voltagem no ponto J. A amplitude dela aumenta quanto mais baixa a temperatura. Abaixo de cerca de 28 °C, o risco de FA e de FV é alto.",
+  es:"El frío enlentece todos los canales iónicos: aparecen bradicardia sinusal y PR, QRS y QT largos. La onda de Osborn (onda J) nace de una muesca mayor en el potencial de acción del epicardio (corriente Ito) que en el del endocardio, lo que crea una diferencia de voltaje en el punto J. Su amplitud aumenta cuanto más baja la temperatura. Por debajo de unos 28 °C, el riesgo de FA y de FV es alto."},
+ {pt:"A onda J aparece melhor nas inferiores (D2, D3, aVF) e nas precordiais médias e laterais (V2–V6). O tremor de frio causa artefato na linha de base, que pode atrapalhar a leitura.",
+  es:"La onda J se ve mejor en las inferiores (DII, DIII, aVF) y en las precordiales medias y laterales (V2–V6). El temblor por frío causa artefacto en la línea de base, que puede dificultar la lectura."},
+ {pt:["Exposição ao frio, afogamento","Idosos, intoxicação alcoólica, hipotireoidismo, sepse","Controle de temperatura terapêutico","Onda J sem hipotermia: hipercalcemia, hemorragia subaracnóidea"],es:["Exposición al frío, ahogamiento","Ancianos, intoxicación alcohólica, hipotiroidismo, sepsis","Control térmico terapéutico","Onda J sin hipotermia: hipercalcemia, hemorragia subaracnoidea"]},
+ ["https://litfl.com/hypothermia-ecg-library/","https://litfl.com/osborn-wave-j-wave-ecg-library/"]);
+
+W("dig",
+ {pt:"A digoxina inibe a bomba Na⁺/K⁺-ATPase. Isso aumenta o cálcio dentro da célula (mais força de contração) e encurta o potencial de ação: o ST fica \"em colher\" e o QT encurta. O efeito vagal no nó AV alonga o PR. O efeito digitálico é esperado com a dose terapêutica e não significa intoxicação. Na intoxicação, o automatismo e as pós-despolarizações tardias aumentam junto com o bloqueio AV: extrassístoles, bigeminismo, taquicardia atrial com bloqueio, ritmo juncional e TV bidirecional.",
+  es:"La digoxina inhibe la bomba Na⁺/K⁺-ATPasa. Eso aumenta el calcio dentro de la célula (más fuerza de contracción) y acorta el potencial de acción: el ST adopta forma \"de cubeta\" y el QT se acorta. El efecto vagal sobre el nodo AV alarga el PR. El efecto digitálico es esperable con la dosis terapéutica y no significa intoxicación. En la intoxicación aumentan el automatismo y los pospotenciales tardíos junto con el bloqueo AV: extrasístoles, bigeminismo, taquicardia auricular con bloqueo, ritmo de la unión y TV bidireccional."},
+ {pt:"O ST \"em colher\" (ou \"bigode de Salvador Dalí\") aparece mais nas derivações com R alto, como V4–V6, D1 e D2, porque o ST cai junto com o ponto J e é puxado para baixo.",
+  es:"El ST \"de cubeta\" (o \"bigote de Salvador Dalí\") aparece más en las derivaciones con R alta, como V4–V6, DI y DII, porque el ST baja junto con el punto J y queda arrastrado hacia abajo."},
+ {pt:["Uso de digoxina","Intoxicação favorecida por insuficiência renal, hipocalemia, hipomagnesemia, hipercalcemia, idade e interações (amiodarona, verapamil)"],es:["Uso de digoxina","Intoxicación favorecida por insuficiencia renal, hipopotasemia, hipomagnesemia, hipercalcemia, edad e interacciones (amiodarona, verapamilo)"]},
+ ["https://litfl.com/digoxin-effect-ecg-library/"]);
+
+W("tep",
+ {pt:"O êmbolo aumenta de repente a pressão na artéria pulmonar. O VD, de parede fina, dilata, sofre isquemia e conduz mais devagar. O ECG reflete esse estresse do VD: taquicardia sinusal (o achado mais comum), desvio do eixo para a direita, BRD e T negativa em V1–V4. O S1Q3T3 é específico, mas aparece em poucos casos, e um ECG normal não exclui embolia.",
+  es:"El émbolo aumenta de golpe la presión en la arteria pulmonar. El VD, de pared delgada, se dilata, sufre isquemia y conduce más despacio. El ECG refleja ese estrés del VD: taquicardia sinusal (el hallazgo más frecuente), desviación del eje a la derecha, BRD y T negativa en V1–V4. El S1Q3T3 es específico, pero aparece en pocos casos, y un ECG normal no descarta embolia."},
+ {pt:"O VD fica na frente e à direita. As alterações de repolarização dele aparecem nas precordiais sobre ele (V1–V4) e em D3 e aVF, que olham para baixo e para a direita. O S profundo em D1 representa a ativação tardia do VD indo para a direita, longe de D1; o Q e a T negativa em D3 refletem o eixo desviado para a direita.",
+  es:"El VD está delante y a la derecha. Sus cambios de repolarización aparecen en las precordiales sobre él (V1–V4) y en DIII y aVF, que miran hacia abajo y a la derecha. La S profunda en DI representa la activación tardía del VD hacia la derecha, lejos de DI; la Q y la T negativa en DIII reflejan el eje desviado a la derecha."},
+ {pt:["Trombose venosa profunda","Fatores de risco: imobilização, cirurgia, câncer, gestação e puerpério, estrogênios, trombofilias"],es:["Trombosis venosa profunda","Factores de riesgo: inmovilización, cirugía, cáncer, embarazo y puerperio, estrógenos, trombofilias"]},
+ ["https://litfl.com/ecg-changes-in-pulmonary-embolism/","pe19"]);
+
+W("lowv",
+ {pt:"Ou o coração gera menos força elétrica (perda ou infiltração de músculo), ou algo entre o coração e os eletrodos isola o sinal (líquido, ar, gordura). Critério: QRS menor que 5 mm em todas as derivações dos membros e/ou menor que 10 mm em todas as precordiais. Baixa voltagem com taquicardia e alternância elétrica (o coração balança dentro do derrame) sugere tamponamento.",
+  es:"O el corazón genera menos fuerza eléctrica (pérdida o infiltración de músculo), o algo entre el corazón y los electrodos aísla la señal (líquido, aire, grasa). Criterio: QRS menor de 5 mm en todas las derivaciones de los miembros y/o menor de 10 mm en todas las precordiales. Bajo voltaje con taquicardia y alternancia eléctrica (el corazón se balancea dentro del derrame) sugiere taponamiento."},
+ {pt:"Afeta todas as derivações, mas as dos membros, mais distantes do coração, costumam cair primeiro abaixo do limite.",
+  es:"Afecta a todas las derivaciones, pero las de los miembros, más lejos del corazón, suelen ser las primeras en bajar del límite."},
+ {pt:["Derrame pericárdico e tamponamento","Obesidade, DPOC e enfisema, pneumotórax, derrame pleural, anasarca","Hipotireoidismo (mixedema)","Amiloidose (baixa voltagem com parede espessa no eco: sinal de alerta)","Infarto extenso, cardiomiopatia dilatada"],es:["Derrame pericárdico y taponamiento","Obesidad, EPOC y enfisema, neumotórax, derrame pleural, anasarca","Hipotiroidismo (mixedema)","Amiloidosis (bajo voltaje con pared gruesa en el eco: signo de alarma)","Infarto extenso, miocardiopatía dilatada"]},
+ ["https://litfl.com/low-qrs-voltage-ecg-library/","https://litfl.com/ecg-findings-in-massive-pericardial-effusion/"]);
+
+W("erepol",
+ {pt:"Há elevação do ponto J e/ou um entalhe ou empastamento no fim do QRS, causados por diferenças na repolarização do epicárdio (corrente Ito mais forte). É uma variante comum e quase sempre benigna, mais frequente em homens jovens, atletas e pessoas com tônus vagal alto. É estável no tempo.",
+  es:"Hay elevación del punto J y/o una muesca o empastamiento al final del QRS, causados por diferencias en la repolarización del epicardio (corriente Ito más intensa). Es una variante común y casi siempre benigna, más frecuente en hombres jóvenes, deportistas y personas con tono vagal alto. Es estable en el tiempo."},
+ {pt:"Costuma aparecer em V2–V5, com supra côncavo e T alta proporcional ao QRS, e às vezes com entalhe nas inferiores e laterais. Não há imagem recíproca (exceto em aVR) nem infra de PR. Diferenciais: pericardite (difusa, com infra de PR) e IAM anterior sutil (compare com ECG antigo e repita o ECG).",
+  es:"Suele aparecer en V2–V5, con elevación cóncava y T alta proporcional al QRS, y a veces con muesca en las inferiores y laterales. No hay imagen recíproca (salvo en aVR) ni descenso del PR. Diferenciales: pericarditis (difusa, con descenso del PR) e IAM anterior sutil (compara con un ECG previo y repite el ECG)."},
+ {pt:["Variante do normal: jovens, sexo masculino, atletas, afrodescendentes, tônus vagal alto","\"Síndrome\" de repolarização precoce só em quem sobreviveu a uma parada sem outra causa"],es:["Variante de la normalidad: jóvenes, sexo masculino, deportistas, afrodescendientes, tono vagal alto","\"Síndrome\" de repolarización precoz solo en quien sobrevivió a un paro sin otra causa"]},
+ ["https://litfl.com/benign-early-repolarisation-ecg-library/","va22"]);
+
+W("leadrev",
+ {pt:"Não é doença: é erro de posição dos eletrodos. A troca mais comum é entre braço esquerdo e braço direito. Como D1 = braço esquerdo − braço direito, trocar os dois inverte D1; aVR e aVL trocam de lugar, e D2 e D3 também.",
+  es:"No es una enfermedad: es un error en la posición de los electrodos. El intercambio más frecuente es entre brazo izquierdo y brazo derecho. Como DI = brazo izquierdo − brazo derecho, intercambiarlos invierte DI; aVR y aVL cambian de lugar, y DII y DIII también."},
+ {pt:"D1 fica com P, QRS e T todos negativos, e aVR fica positiva (P e QRS para cima), o que nunca acontece no ritmo sinusal normal. As precordiais continuam normais, com progressão do R preservada. É isso que diferencia da dextrocardia verdadeira, em que o R diminui de V1 a V6.",
+  es:"DI queda con P, QRS y T todos negativos, y aVR queda positiva (P y QRS hacia arriba), lo que nunca ocurre en ritmo sinusal normal. Las precordiales siguen normales, con progresión de la R conservada. Eso lo diferencia de la dextrocardia verdadera, en la que la R disminuye de V1 a V6."},
+ {pt:["Erro técnico na colocação dos eletrodos: refaça o ECG"],es:["Error técnico al colocar los electrodos: repite el ECG"]},
+ ["https://litfl.com/ecg-limb-lead-reversal-ecg-library/"]);
+
+
 /* ---------- NORMAL ---------- */
 var N={S:null,sel:"p"},PORDER=["p","pr","qrs","st","t","qt"];
 function newNormal(){N.S=sinus(2.6,70,0.16,0,0.45);baseline(N.S);}
@@ -1278,11 +1819,16 @@ function renderNormal(){
   PORDER.forEach(function(k){var b=document.createElement("button");b.className="chip"+(k===N.sel?" sel":"");b.textContent=L(PARTS[k].chip);b.addEventListener("click",function(){N.sel=k;renderNormal();});ch.appendChild(b);});
   var bts=visible(N.S),b=bts[1]||bts[0],p=PARTS[N.sel],r=p.reg(b),dt=r[1]-r[0];
   if(!ZN.render())return;
-  $("infoNormal").innerHTML="<h3>"+L(p.title)+'</h3><span class="norm">'+t("normal_lbl")+" "+L(p.norm)+"</span><p>"+L(p.what)+"</p><p>"+L(p.tip)+'</p><p class="measured">'+t("measured",{mm:fmt(dt*25,1),s:fmt(dt,2)})+"</p>";
+  $("infoNormal").innerHTML="<h3>"+L(p.title)+'</h3><span class="norm">'+t("normal_lbl")+" "+L(p.norm)+"</span><p>"+L(p.what)+"</p><p>"+L(p.tip)+'</p><p class="why"><b>'+t("why_lbl")+"</b> "+esc(L(PWHY[N.sel]))+'</p><p class="measured">'+t("measured",{mm:fmt(dt*25,1),s:fmt(dt,2)})+"</p>";
 }
 
 /* ---------- GALERIA ---------- */
 var GD={id:null,S:null};
+function renderRefs(){
+  var g=Object.keys(REFS).filter(function(k){return REFS[k].cite;});
+  $("galRefs").innerHTML="<h3>"+t("refs_h")+'</h3><p class="lead" style="font-size:14.5px">'+t("refs_lead")+"</p><h4>"+t("refs_books")+'</h4><ul class="booklist">'+
+    BOOKS.map(function(b){return "<li>"+esc(b)+"</li>";}).join("")+"</ul><h4>"+t("refs_guides")+"</h4>"+whyLinksHTML(g)+'<p class="hint" style="margin-top:8px">'+t("refs_note")+"</p>";
+}
 function renderGalList(){
   var box=$("galGroups"),h="";
   Object.keys(CATS).forEach(function(c){
@@ -1291,6 +1837,7 @@ function renderGalList(){
     h+="</div>";
   });
   box.innerHTML=h;
+  renderRefs();
   box.querySelectorAll("[data-g]").forEach(function(b){b.addEventListener("click",function(){openGal(b.getAttribute("data-g"));});});
 }
 function openGal(id,seed){GD.id=id;GD.S=genItem(id,6,seed);$("galList").hidden=true;$("galDetail").hidden=false;window.scrollTo(0,0);ZG.reset();renderGal();}
@@ -1303,6 +1850,10 @@ function renderGal(){
   $("gdWhat").textContent=L(x.what);
   $("gdCrit").innerHTML=L(x.crit).map(function(c){return "<li>"+esc(c)+"</li>";}).join("");
   $("gdClin").textContent=L(x.clin);
+  var w=WHY[x.id];
+  $("gdMech").textContent=w?L(w.mech):"";$("gdLeads").textContent=w?L(w.leads):"";
+  $("gdCauses").innerHTML=w?L(w.causes).map(function(c){return "<li>"+esc(c)+"</li>";}).join(""):"";
+  $("gdLinks").innerHTML=w?whyLinksHTML(w.links):"";
   ZG.render();
   $("gdPrev").disabled=x.i===0;$("gdNext").disabled=x.i===GAL.length-1;
 }
@@ -1349,12 +1900,17 @@ function renderQuiz(){
     var x=GBY[q.key],ok=q.chosen===q.key,bts=visible(q.S),fc="";
     if(bts.length>=2&&["vf"].indexOf(q.key)<0){var hr=(bts.length-1)*60/(bts[bts.length-1].tR-bts[0].tR);fc='<p class="fc">'+t("hr_est",{n:Math.round(hr)})+"</p>";}
     fb.className="fb card "+(ok?"ok":"no");
-    fb.innerHTML="<h3>"+(ok?t("correct")+" ":t("was")+" ")+esc(L(x.name))+'</h3><p style="font-size:15px;margin-bottom:8px">'+esc(L(x.what))+"</p><ul>"+L(x.crit).map(function(c){return "<li>"+esc(c)+"</li>";}).join("")+'</ul><p class="fc">'+esc(L(x.clin))+"</p>"+fc+
+    fb.innerHTML="<h3>"+(ok?t("correct")+" ":t("was")+" ")+esc(L(x.name))+'</h3><p style="font-size:15px;margin-bottom:8px">'+esc(L(x.what))+"</p><ul>"+L(x.crit).map(function(c){return "<li>"+esc(c)+"</li>";}).join("")+'</ul><p class="fc">'+esc(L(x.clin))+"</p>"+fc+whyQuizHTML(q.key)+
       '<button class="btn primary" id="btnNext" style="width:100%">'+t("next_ecg")+"</button>"+'<button class="linkbtn report" id="btnReport">'+t("rep_sim")+"</button>";
     fb.hidden=false;$("btnDica").hidden=true;$("dica").hidden=true;
+    var bw=$("btnWhy");if(bw)bw.addEventListener("click",function(){var k=q.key,sd=q.S.seed;setTab("aprender");setSub("achados");openGal(k,sd);});
     $("btnNext").addEventListener("click",newQ);$("btnReport").addEventListener("click",function(){reportSim(q.S,q.chosen);});
   }else fb.hidden=true;
   renderStats();
+}
+function whyQuizHTML(k){
+  var w=WHY[k];if(!w)return "";
+  return '<details class="whybox"><summary>'+t("why_sum")+"</summary><p><b>"+t("why_mech")+".</b> "+esc(L(w.mech))+"</p><p><b>"+t("why_leads")+".</b> "+esc(L(w.leads))+'</p><button class="linkbtn" id="btnWhy">'+t("why_full")+"</button></details>";
 }
 function answerQ(k){
   q.answered=true;q.chosen=k;var ok=(k===q.key);
