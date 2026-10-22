@@ -58,6 +58,7 @@ section.tab{padding-top:14px}
 .zview.pannable,.zview.pannable canvas{cursor:grab}
 .zview.pannable.grabbing,.zview.pannable.grabbing canvas{cursor:grabbing}
 .zview.measure,.zview.measure canvas{cursor:crosshair}
+.zview.measure canvas{touch-action:none}
 #papelWrap.zview:not(.zoomed) canvas{cursor:ew-resize}
 .hint{font-size:13px;color:var(--muted);margin-top:8px}
 
@@ -209,6 +210,66 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .dsec{font-size:16px;margin:16px 0 6px}
 .dlist{margin:0;padding-left:20px;font-size:15px}
 .dlist li{margin-bottom:4px}
+.modeseg{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:4px;gap:4px;margin-bottom:12px}
+.modeseg button{flex:1;border:none;background:none;min-height:40px;border-radius:10px;font-weight:600;font-size:14.5px;color:var(--muted)}
+.modeseg button.on{background:var(--accent-soft);color:var(--accent)}
+.gsteps{display:flex;gap:6px;margin:14px 0 6px;flex-wrap:wrap}
+.gsteps span{flex:1 1 70px;text-align:center;font-size:12.5px;font-weight:700;padding:6px 4px;border-radius:999px;background:var(--border);color:var(--muted)}
+.gsteps span.cur{background:var(--accent-soft);color:var(--accent)}
+.gsteps span.ok{background:var(--good-soft);color:var(--good)}
+.gsteps span.fail{background:var(--bad-soft);color:var(--bad)}
+.gstage{border:1px solid var(--border);border-radius:14px;padding:14px;margin-top:8px}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ghead b{font-family:var(--font-display);font-size:17px}
+.gtries{font-size:13px;color:var(--muted);font-weight:600;white-space:nowrap}
+.gq{font-size:15px;margin:6px 0 10px}
+.grow2{display:flex;gap:8px;align-items:center}
+.grow2 .unit{color:var(--muted);font-weight:600}
+.ginput{width:100%;min-height:48px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font:inherit;font-size:16px;padding:0 12px}
+.ginput:focus{outline:none;border-color:var(--accent)}
+.sgnbtn{min-width:48px;font-size:20px;padding:0}
+.aclist{list-style:none;margin:6px 0 0;padding:4px;border:1px solid var(--border);border-radius:12px;background:var(--surface);box-shadow:0 8px 24px rgba(0,0,0,.10)}
+.aclist li{padding:8px 10px;border-radius:8px;cursor:pointer;font-size:15px;min-height:44px;display:flex;align-items:center}
+.aclist li.on,.aclist li:hover{background:var(--accent-soft)}
+.aclist li.none{color:var(--muted);cursor:default;background:none}
+.gchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.gc{display:inline-flex;align-items:center;gap:4px;min-height:32px;padding:3px 10px;border-radius:999px;border:1.5px solid var(--border);font-size:14px;font-weight:600;background:var(--surface);line-height:1.25}
+.gc small{font-weight:500;font-size:12px}
+.gc.g{background:#15803d;border-color:#15803d;color:#fff}
+.gc.y{background:#eab308;border-color:#eab308;color:#1a1a1a}
+.gc.x{background:var(--border);border-color:var(--border);color:var(--muted)}
+.gc.o,.gc.p,.gc.d{border-style:dashed;color:var(--muted)}
+.gc.n{border-color:var(--accent);color:var(--accent)}
+.gc button{border:none;background:none;font-size:18px;line-height:1;padding:0 2px;color:inherit;min-width:28px;min-height:28px}
+.gbtns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.gbtns .btn{flex:1 1 140px}
+.gbtns .btn:disabled{opacity:.5}
+.gleft{font-weight:700;font-size:14.5px;margin-top:10px}
+.grows{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.rowl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.rowl>small{color:var(--muted);font-size:12.5px}
+.rowl .fbm{color:var(--text);font-size:13px}
+.ghints{margin:12px 0 0;padding:0;list-style:none}
+.ghints li{background:var(--accent-soft);border-radius:10px;padding:8px 12px;margin-bottom:6px;font-size:14.5px}
+.ghints li b{color:var(--accent)}
+.gdone{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px;padding:8px 2px;border-bottom:1px solid var(--border)}
+.gdone .e{white-space:nowrap;font-size:13px}
+.gfinal{text-align:center;margin-top:12px}
+.gfinal h3{font-size:18px}
+.gscore{font-family:var(--font-display);font-size:44px;line-height:1;margin:8px 0 4px}
+.gscore small{font-size:18px;color:var(--muted)}
+.ggrid{font-size:15px;line-height:1.7;white-space:pre-wrap;font-family:inherit;margin:8px 0;text-align:left;display:inline-block}
+.gkey{margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+.gkey h3{font-size:17px;margin-bottom:6px}
+.gkey h4{font-size:14.5px;margin:12px 0 4px}
+.gkey ul{margin:0;padding-left:18px;font-size:14.5px}
+.gkey li{margin-bottom:4px}
+.gkey p{font-size:14.5px}
+.gkey .mk{font-weight:700}.gkey .mk.ok{color:var(--good)}.gkey .mk.no{color:var(--bad)}
+.lnk{background:none;border:none;color:var(--accent);text-decoration:underline;padding:4px 0 4px 8px;font-size:13.5px}
+.gnote{font-size:13px;color:var(--muted);margin-top:8px}
+.toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:var(--text);color:var(--surface);padding:10px 16px;border-radius:12px;font-size:14px;z-index:80;max-width:90vw;text-align:center}
+
 .wtext{font-size:15px}
 .wlinks{list-style:none;padding:0;margin:4px 0 0}
 .wlinks li{margin:0 0 8px}
@@ -287,7 +348,9 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
         <p class="lead" data-t="norm_lead"></p>
         <div style="height:12px"></div>
         <div class="paper fit" id="normalWrap"><canvas id="cvNormal"></canvas></div>
-        <div class="zoomrow"><button class="iconbtn" id="zNormalOut" data-ta="zoom_out">−</button><input type="range" id="zNormal" min="0" max="100" value="0" data-ta="zoom"><button class="iconbtn" id="zNormalIn" data-ta="zoom_in">+</button></div>
+        <div class="zoomrow"><button class="iconbtn" id="zNormalOut" data-ta="zoom_out">−</button><input type="range" id="zNormal" min="0" max="100" value="0" data-ta="zoom"><button class="iconbtn" id="zNormalIn" data-ta="zoom_in">+</button><button class="iconbtn" id="nMeasure" data-ta="caliper" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 6l-6 15M12 6l6 15M8.5 15h7"/></svg></button></div>
+        <p class="hint" id="nHint"></p>
+        <div class="readout" id="nRead" hidden></div>
         <div class="chips" id="chipsNormal"></div>
       </div>
       <div class="card info" id="infoNormal"></div>
@@ -310,8 +373,9 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
           <h2 id="gdName"></h2>
           <div class="dtags" id="gdTags"></div>
           <div class="scroller" id="gdScroll"><canvas id="cvGal"></canvas></div>
-          <div class="zoomrow"><button class="iconbtn" id="zGalOut" data-ta="zoom_out">−</button><input type="range" id="zGal" min="0" max="100" value="0" data-ta="zoom"><button class="iconbtn" id="zGalIn" data-ta="zoom_in">+</button></div>
-          <p class="hint" data-t="swipe"></p>
+          <div class="zoomrow"><button class="iconbtn" id="zGalOut" data-ta="zoom_out">−</button><input type="range" id="zGal" min="0" max="100" value="0" data-ta="zoom"><button class="iconbtn" id="zGalIn" data-ta="zoom_in">+</button><button class="iconbtn" id="gMeasure" data-ta="caliper" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 6l-6 15M12 6l6 15M8.5 15h7"/></svg></button></div>
+          <p class="hint" id="gHint"></p>
+          <div class="readout" id="gRead" hidden></div>
           <p style="margin-top:12px;font-size:15.5px" id="gdWhat"></p>
           <h3 class="dsec" data-t="gal_crit"></h3>
           <ul class="dlist" id="gdCrit"></ul>
@@ -344,8 +408,9 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
       <p class="lead" data-t="sim_lead"></p>
       <div style="height:12px"></div>
       <div class="scroller" id="quizScroll"><canvas id="cvQuiz"></canvas></div>
-      <div class="zoomrow"><button class="iconbtn" id="zQuizOut" data-ta="zoom_out">−</button><input type="range" id="zQuiz" min="0" max="100" value="0" data-ta="zoom"><button class="iconbtn" id="zQuizIn" data-ta="zoom_in">+</button></div>
-      <p class="hint" data-t="swipe"></p>
+      <div class="zoomrow"><button class="iconbtn" id="zQuizOut" data-ta="zoom_out">−</button><input type="range" id="zQuiz" min="0" max="100" value="0" data-ta="zoom"><button class="iconbtn" id="zQuizIn" data-ta="zoom_in">+</button><button class="iconbtn" id="qMeasure" data-ta="caliper" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 6l-6 15M12 6l6 15M8.5 15h7"/></svg></button></div>
+      <p class="hint" id="qHint"></p>
+      <div class="readout" id="qRead" hidden></div>
       <div class="btnrow"><button class="btn ghost" id="btnDica"></button></div>
       <ul id="dica" hidden style="margin:10px 0 0;padding-left:20px;font-size:14.5px;color:var(--muted)" data-th="guide_list"></ul>
       <div class="opts" id="opts"></div>
@@ -357,6 +422,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 
   <!-- ABA CASOS REAIS -->
   <section class="tab" id="tab-reais" hidden>
+    <div class="modeseg" id="rMode" role="group"><button data-m="quiz" data-t="m_quiz"></button><button data-m="pro" data-t="m_pro"></button><button data-m="daily" data-t="m_daily"></button></div>
     <div class="srcbar" id="srcBar"></div>
     <div class="statbar"><span id="rStat"></span><span id="rStreak"></span></div>
     <div id="rQuiz">
@@ -375,6 +441,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
         </div>
         <p class="hint" id="rHint"></p>
         <div class="readout" id="rRead" hidden></div>
+        <div id="rGame" hidden></div>
         <div class="opts" id="rOpts"></div>
         <div class="explrow" id="rExplRow" hidden>
           <button class="explbtn" id="rExplain"><span id="rExplTxt"></span><svg viewBox="0 0 24 24"><path d="M2 12h4l2-6 4 12 3-8 2 2h5"/></svg></button>
@@ -482,7 +549,7 @@ guide_list:"<li>O ritmo é regular ou irregular?</li><li>Há onda P antes de cad
 correct:"Correto!",was:"Era",next_ecg:"Próximo ECG",hr_est:"FC ventricular média neste traçado: cerca de {n} bpm.",
 hits:"Acertos",streak:"Sequência",review:"Para revisar: {list}. Esses achados aparecem com mais frequência.",
 reset:"Zerar progresso",reset_real:"Zerar progresso dos casos reais",disc:"Ferramenta de estudo. Não use para diagnóstico.",
-src_demo:"Demonstração ({n})",hint_measure:"Compasso ativo: toque no traçado para posicionar A e B, e arraste para ajustar.",hint_zoom:"Amplie com + e −, pinça ou dois toques, e arraste o traçado para mover. A tela cheia mostra ainda maior.",adv_sum:"Opções avançadas: importar ou exportar ECGs",pack_loading:"Carregando os casos reais… (só na primeira vez)",
+src_demo:"Demonstração ({n})",hint_measure:"Compasso ativo: toque no traçado para posicionar A e B, e arraste para ajustar. Toque no compasso de novo para voltar a mover o traçado.",hint_zoom:"Amplie com + e −, pinça ou dois toques, e arraste o traçado para mover. A tela cheia mostra ainda maior.",adv_sum:"Opções avançadas: importar ou exportar ECGs",pack_loading:"Carregando os casos reais… (só na primeira vez)",
 skip:"Pular",next:"Próximo",result:"Ver resultado",see_expl:"Ver explicação",hide_expl:"Ocultar explicação",answer_is:"Resposta: {l}",
 laudo_h:"Laudo completo deste ECG (todos os achados, não só a resposta)",axis_calc:"Eixo medido no traçado: cerca de {n}°.",bank_q:"Casos selecionados só entre laudos validados por cardiologista, com diagnóstico marcado como certo e traçado sem ruído.",orig:"Laudo original:",hr_auto:"FC estimada automaticamente: cerca de {n} bpm.",
 sess_done:"Sessão concluída",of:"{a} de {b}",msg90:"Excelente leitura.",msg70:"Bom resultado. Revise os casos que errou.",msg50:"No caminho certo. Os diagnósticos que você errou vão aparecer com mais frequência.",msg0:"Vale revisar a aba Aprender antes da próxima sessão. Os diagnósticos que você errou vão aparecer com mais frequência.",
@@ -523,7 +590,7 @@ guide_list:"<li>¿El ritmo es regular o irregular?</li><li>¿Hay onda P antes de
 correct:"¡Correcto!",was:"Era",next_ecg:"Siguiente ECG",hr_est:"FC ventricular media en este trazado: unos {n} lpm.",
 hits:"Aciertos",streak:"Racha",review:"Para repasar: {list}. Estos hallazgos aparecerán con más frecuencia.",
 reset:"Reiniciar progreso",reset_real:"Reiniciar progreso de los casos reales",disc:"Herramienta de estudio. No la uses para diagnóstico.",
-src_demo:"Demostración ({n})",hint_measure:"Compás activo: toca el trazado para colocar A y B, y arrastra para ajustar.",hint_zoom:"Amplía con + y −, pellizcando o tocando dos veces, y arrastra el trazado para moverlo. La pantalla completa lo muestra aún más grande.",adv_sum:"Opciones avanzadas: importar o exportar ECG",pack_loading:"Cargando los casos reales… (solo la primera vez)",
+src_demo:"Demostración ({n})",hint_measure:"Compás activo: toca el trazado para colocar A y B, y arrastra para ajustar. Toca el compás de nuevo para volver a mover el trazado.",hint_zoom:"Amplía con + y −, pellizcando o tocando dos veces, y arrastra el trazado para moverlo. La pantalla completa lo muestra aún más grande.",adv_sum:"Opciones avanzadas: importar o exportar ECG",pack_loading:"Cargando los casos reales… (solo la primera vez)",
 skip:"Saltar",next:"Siguiente",result:"Ver resultado",see_expl:"Ver explicación",hide_expl:"Ocultar explicación",answer_is:"Respuesta: {l}",
 laudo_h:"Informe completo de este ECG (todos los hallazgos, no solo la respuesta)",axis_calc:"Eje medido en el trazado: unos {n}°.",bank_q:"Casos seleccionados solo entre informes validados por cardiólogo, con diagnóstico marcado como seguro y trazado sin ruido.",orig:"Informe original:",hr_auto:"FC estimada automáticamente: unos {n} lpm.",
 sess_done:"Sesión completada",of:"{a} de {b}",msg90:"Excelente lectura.",msg70:"Buen resultado. Repasa los casos que fallaste.",msg50:"Vas por buen camino. Los diagnósticos que fallaste aparecerán con más frecuencia.",msg0:"Conviene repasar la pestaña Aprender antes de la próxima sesión. Los diagnósticos que fallaste aparecerán con más frecuencia.",
@@ -883,7 +950,7 @@ var DEMO_INFO={
 
 /* ---- códigos SCP-ECG do PTB-XL: [pt, es] ---- */
 var T={NORM:["ECG normal","ECG normal"],IMI:["Infarto inferior","Infarto inferior"],ASMI:["Infarto anterosseptal","Infarto anteroseptal"],AMI:["Infarto anterior","Infarto anterior"],ALMI:["Infarto anterolateral","Infarto anterolateral"],LMI:["Infarto lateral","Infarto lateral"],ILMI:["Infarto inferolateral","Infarto inferolateral"],IPLMI:["Infarto inferoposterolateral","Infarto inferoposterolateral"],IPMI:["Infarto inferoposterior","Infarto inferoposterior"],PMI:["Infarto posterior","Infarto posterior"],
-INJAS:["Lesão subepicárdica anterosseptal","Lesión subepicárdica anteroseptal"],INJAL:["Lesão subepicárdica anterolateral","Lesión subepicárdica anterolateral"],INJIN:["Lesão subepicárdica inferior","Lesión subepicárdica inferior"],INJLA:["Lesão subepicárdica lateral","Lesión subepicárdica lateral"],INJIL:["Lesão subepicárdica inferolateral","Lesión subepicárdica inferolateral"],
+INJAS:["Lesão subendocárdica anterosseptal","Lesión subendocárdica anteroseptal"],INJAL:["Lesão subendocárdica anterolateral","Lesión subendocárdica anterolateral"],INJIN:["Lesão subendocárdica inferior","Lesión subendocárdica inferior"],INJLA:["Lesão subendocárdica lateral","Lesión subendocárdica lateral"],INJIL:["Lesão subendocárdica inferolateral","Lesión subendocárdica inferolateral"],
 ISCAL:["Isquemia anterolateral","Isquemia anterolateral"],ISCIN:["Isquemia inferior","Isquemia inferior"],ISCIL:["Isquemia inferolateral","Isquemia inferolateral"],ISCAS:["Isquemia anterosseptal","Isquemia anteroseptal"],ISCLA:["Isquemia lateral","Isquemia lateral"],ISCAN:["Isquemia anterior","Isquemia anterior"],"ISC_":["Isquemia (ST-T isquêmico)","Isquemia (ST-T isquémico)"],
 NST_:["Alteração inespecífica de ST","Alteración inespecífica del ST"],LVH:["Hipertrofia ventricular esquerda","Hipertrofia ventricular izquierda"],RVH:["Hipertrofia ventricular direita","Hipertrofia ventricular derecha"],SEHYP:["Hipertrofia septal","Hipertrofia septal"],"LAO/LAE":["Sobrecarga atrial esquerda","Crecimiento auricular izquierdo"],"RAO/RAE":["Sobrecarga atrial direita","Crecimiento auricular derecho"],
 CLBBB:["Bloqueio de ramo esquerdo","Bloqueo de rama izquierda"],ILBBB:["Bloqueio incompleto de ramo esquerdo","Bloqueo incompleto de rama izquierda"],CRBBB:["Bloqueio de ramo direito","Bloqueo de rama derecha"],IRBBB:["Bloqueio incompleto de ramo direito","Bloqueo incompleto de rama derecha"],LAFB:["Bloqueio divisional anterossuperior esquerdo","Hemibloqueo anterior izquierdo"],LPFB:["Bloqueio divisional posteroinferior esquerdo","Hemibloqueo posterior izquierdo"],IVCD:["Distúrbio de condução intraventricular","Trastorno de la conducción intraventricular"],
@@ -893,7 +960,7 @@ PVC:["Extrassístoles ventriculares","Extrasístoles ventriculares"],PAC:["Extra
 var QL={AFIB:["Fibrilação atrial","Fibrilación auricular","ritmo"],AFLT:["Flutter atrial","Flutter auricular","ritmo"],PACE:["Ritmo de marca-passo","Ritmo de marcapasos","mp"],SVTAC:["Taquicardia supraventricular","Taquicardia supraventricular","ritmo"],PSVT:["Taquicardia supraventricular paroxística","Taquicardia supraventricular paroxística","ritmo"],STACH:["Taquicardia sinusal","Taquicardia sinusal","ritmo"],SBRAD:["Bradicardia sinusal","Bradicardia sinusal","ritmo"],
 CLBBB:["Bloqueio de ramo esquerdo","Bloqueo de rama izquierda","ramo"],CRBBB:["Bloqueio de ramo direito","Bloqueo de rama derecha","ramo"],"3AVB":["BAV total (3º grau)","Bloqueo AV completo (tercer grado)","bav"],"2AVB":["BAV de 2º grau","Bloqueo AV de segundo grado","bav"],WPW:["Pré-excitação (Wolff-Parkinson-White)","Preexcitación (Wolff-Parkinson-White)","wpw"],
 IMI:["Infarto inferior","Infarto inferior","iam"],ASMI:["Infarto anterosseptal","Infarto anteroseptal","iam"],AMI:["Infarto anterior","Infarto anterior","iam"],ALMI:["Infarto anterolateral","Infarto anterolateral","iam"],LMI:["Infarto lateral","Infarto lateral","iam"],ILMI:["Infarto inferolateral","Infarto inferolateral","iam"],IPLMI:["Infarto inferoposterolateral","Infarto inferoposterolateral","iam"],IPMI:["Infarto inferoposterior","Infarto inferoposterior","iam"],PMI:["Infarto posterior","Infarto posterior","iam"],
-INJ:["Lesão subepicárdica (supra de ST)","Lesión subepicárdica (elevación del ST)","lesao"],LVH:["Hipertrofia ventricular esquerda","Hipertrofia ventricular izquierda","hip"],RVH:["Hipertrofia ventricular direita","Hipertrofia ventricular derecha","hip"],
+INJ:["Lesão subendocárdica (infra de ST, isquemia)","Lesión subendocárdica (descenso del ST, isquemia)","lesao"],LVH:["Hipertrofia ventricular esquerda","Hipertrofia ventricular izquierda","hip"],RVH:["Hipertrofia ventricular direita","Hipertrofia ventricular derecha","hip"],
 "1AVB":["BAV de 1º grau","Bloqueo AV de primer grado","bav"],LAFB:["Bloqueio divisional anterossuperior esquerdo","Hemibloqueo anterior izquierdo","divis"],IRBBB:["Bloqueio incompleto de ramo direito","Bloqueo incompleto de rama derecha","ramo"],
 LNGQT:["QT longo","QT largo","qt"],ISC:["Isquemia (alteração isquêmica de ST-T)","Isquemia (alteración isquémica del ST-T)","isq"],PVC:["Extrassístoles ventriculares","Extrasístoles ventriculares","extra"],NORM:["ECG normal","ECG normal","normal"]};
 var AXOPT={normal:["Eixo normal","Eje normal"],esq:["Desvio do eixo para a esquerda","Desviación del eje a la izquierda"],dir:["Desvio do eixo para a direita","Desviación del eje a la derecha"],ind:["Eixo extremo ou indeterminado","Eje extremo o indeterminado"]};
@@ -1192,6 +1259,15 @@ function drawStrips(cv,S,o){
   });
   c.fillStyle=PAPER.label;c.font="500 10px Figtree,system-ui,sans-serif";c.textAlign="right";c.textBaseline="alphabetic";
   c.fillText("25 mm/s · 10 mm/mV",W-8,H-5);
+  drawMarks(c,o.markers,ppm,H);
+}
+function drawMarks(c,mk,ppm,H){
+  (mk||[]).forEach(function(m){
+    var x=(10+25*m.t)*ppm;
+    c.save();c.setLineDash([5,4]);c.strokeStyle=PAPER.acc;c.lineWidth=1.6;c.beginPath();c.moveTo(x,24);c.lineTo(x,H);c.stroke();c.restore();
+    c.fillStyle=PAPER.acc;c.beginPath();c.arc(x,13,11,0,Math.PI*2);c.fill();
+    c.fillStyle="#fff";c.font="700 12px Figtree,system-ui,sans-serif";c.textAlign="center";c.textBaseline="middle";c.fillText(m.l,x,13.5);
+  });
 }
 
 var GBY={};GAL.forEach(function(x,i){x.i=i;GBY[x.id]=x;});
@@ -1840,7 +1916,7 @@ function renderGalList(){
   renderRefs();
   box.querySelectorAll("[data-g]").forEach(function(b){b.addEventListener("click",function(){openGal(b.getAttribute("data-g"));});});
 }
-function openGal(id,seed){GD.id=id;GD.S=genItem(id,6,seed);$("galList").hidden=true;$("galDetail").hidden=false;window.scrollTo(0,0);ZG.reset();renderGal();}
+function openGal(id,seed){GD.id=id;GD.S=genItem(id,6,seed);$("galList").hidden=true;$("galDetail").hidden=false;window.scrollTo(0,0);ZG.reset();CG.clear();renderGal();}
 function renderGal(){
   if(tab!=="aprender"||sub!=="achados")return;
   if(!GD.id){$("galList").hidden=false;$("galDetail").hidden=true;renderGalList();return;}
@@ -1858,7 +1934,7 @@ function renderGal(){
   $("gdPrev").disabled=x.i===0;$("gdNext").disabled=x.i===GAL.length-1;
 }
 $("galBack").addEventListener("click",function(){GD.id=null;renderGal();window.scrollTo(0,0);});
-$("gdAgain").addEventListener("click",function(){GD.S=genItem(GD.id,6);renderGal();});
+$("gdAgain").addEventListener("click",function(){GD.S=genItem(GD.id,6);CG.clear();renderGal();});
 $("gdPrev").addEventListener("click",function(){var x=GBY[GD.id];if(x.i>0)openGal(GAL[x.i-1].id);});
 $("gdNext").addEventListener("click",function(){var x=GBY[GD.id];if(x.i<GAL.length-1)openGal(GAL[x.i+1].id);});
 
@@ -1880,7 +1956,7 @@ function newQ(){
   var rest=shuffle(GAL.map(function(y){return y.id;}).filter(function(k){return opts.indexOf(k)<0;}));
   while(opts.length<4)opts.push(rest.pop());
   q={key:key,S:S,opts:shuffle(opts),answered:false,chosen:null};
-  ZQ.reset();drawQuiz();$("dica").hidden=true;$("btnDica").hidden=false;
+  ZQ.reset();CQ.clear();drawQuiz();$("dica").hidden=true;$("btnDica").hidden=false;
   renderQuiz();
 }
 function drawQuiz(){if(q&&tab==="quiz")ZQ.render();}
@@ -1982,7 +2058,7 @@ function dimsOf(C){
   var dur=Math.min(10,n/C.fs),is12=C.leads.length===12,rowH=is12?28:32,rows=is12?4:C.leads.length;
   return {dur:dur,is12:is12,rowH:rowH,rows:rows,wmm:10+dur*25,hmm:rows*rowH+2};
 }
-function drawMulti(cv,C,ppm,markers){
+function drawMulti(cv,C,ppm,markers,hl){
   var D=dimsOf(C),dur=D.dur,is12=D.is12,rowH=D.rowH,rows=D.rows,wmm=D.wmm,hmm=D.hmm;
   var W=wmm*ppm,H=hmm*ppm,dpr=capDpr(W,H);
   cv.style.width=W+"px";cv.style.height=H+"px";cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
@@ -2004,6 +2080,16 @@ function drawMulti(cv,C,ppm,markers){
   }
   function label(txt,xmm,ytop){c.fillStyle="#6b3a38";c.font="700 "+(ppm<2.4?9:Math.max(11,ppm*2.8))+"px Figtree,system-ui,sans-serif";c.textAlign="left";c.textBaseline="top";c.fillText(txt,xmm*ppm+3,ytop+3);}
   c.lineJoin="round";c.lineCap="round";
+  if(hl&&is12){
+    c.fillStyle="rgba(245,158,11,0.20)";c.strokeStyle="rgba(217,119,6,0.9)";c.lineWidth=1.5;
+    for(var hr2=0;hr2<rows;hr2++){
+      for(var hc=0;hc<(hr2<3?4:1);hc++){
+        var hn=hr2<3?LAYOUT[hr2][hc]:"II";if(!hl[hn])continue;
+        var hx=hr2<3?(10+25*hc*dur/4)*ppm:10*ppm,hw=hr2<3?25*dur/4*ppm:25*dur*ppm,hy=hr2*rowH*ppm;
+        c.fillRect(hx,hy+1,hw,rowH*ppm-2);c.strokeRect(hx+0.5,hy+1.5,hw-1,rowH*ppm-3);
+      }
+    }
+  }
   for(var r=0;r<rows;r++){
     var ytop=r*rowH*ppm,y0=(r*rowH+rowH*0.6)*ppm;
     c.strokeStyle=PAPER.trace;c.lineWidth=lw;
@@ -2056,7 +2142,7 @@ var rstats=(function(){try{var s=JSON.parse(localStorage.getItem("ecglab:reais")
 function saveR(){try{localStorage.setItem("ecglab:reais",JSON.stringify(rstats));}catch(e){}}
 function renderSrcBar(){
   var bar=$("srcBar");bar.innerHTML="";
-  if(!RS.bank.length){bar.hidden=true;return;}
+  if(!RS.bank.length||RS.mode!=="quiz"){bar.hidden=true;return;}
   bar.hidden=false;
   [["bank","PTB-XL ("+RS.bank.length+")"],["demo",t("src_demo",{n:DEMO.length})]].forEach(function(o){
     var b=document.createElement("button");b.className="chip"+(RS.src===o[0]?" sel":"");b.textContent=o[1];
@@ -2071,6 +2157,7 @@ function renderBankInfo(){
   $("rExportBox").hidden=!RS.bank.length;
 }
 function renderRStats(){
+  if(RS.mode&&RS.mode!=="quiz"){renderGameStats();return;}
   var pct=rstats.total?Math.round(100*rstats.ok/rstats.total):0;
   $("rStat").innerHTML=t("hits")+": <b>"+rstats.ok+"/"+rstats.total+"</b>"+(rstats.total?" ("+pct+"%)":"");
   $("rStreak").innerHTML=RS.streak>1?t("streak")+": <b>"+RS.streak+"</b>":"";
@@ -2280,6 +2367,7 @@ function placeMarker(x,start){
     if(tab!=="reais"||e.target.tagName==="INPUT"||e.metaKey||e.ctrlKey||e.altKey)return;
     var k=e.key.toLowerCase();
     if(k==="escape"&&RS.full){closeFull();return;}
+    if(RS.mode!=="quiz"){if(k==="f"&&RS.cur){if(RS.full)closeFull();else openFull();}return;}
     if(!$("rQuiz").hidden&&RS.cur){
       var ix="abcd".indexOf(k);if(ix<0)ix="1234".indexOf(k);
       if(ix>=0&&ix<RS.cur.keys.length&&!RS.cur.answered){answerReal(ix);e.preventDefault();return;}
@@ -2315,7 +2403,7 @@ function drawFull(){
   if(!RS.full||!RS.cur)return;
   var fs=$("fullScroll"),w=fs.clientWidth-2,h=fs.clientHeight-2;if(w<50||h<50)return;
   RS.fppm=zoomPpm(fitPpmOf(RS.cur.C,w,h),RS.fzv||0);
-  RS.dur=drawMulti($("cvFull"),RS.cur.C,RS.fppm,markers());
+  RS.dur=drawMulti($("cvFull"),RS.cur.C,RS.fppm,markers(),RS.hl);
   $("fullRead").textContent=readout(true)||t(RS.measure?"full_tap":"full_drag");
 }
 
@@ -2493,8 +2581,9 @@ function applyLang(){
   renderPapel();renderNormal();renderGal();
   if(q)renderQuiz();
   renderSrcBar();renderBankInfo();renderRStats();
-  if(RS.cur)renderRQ();
+  if(RS.cur){if(RS.mode==="quiz")renderRQ();else renderGame();}else if(RS.mode!=="quiz"&&!G&&!RS.bank.length)startGame();
   if(!$("rSummary").hidden&&RS.sess)renderSummary();
+  CALS.forEach(function(c){c.ui();});
   renderActive();if(RS.full)drawFull();
 }
 document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",function(){
@@ -2577,6 +2666,39 @@ function ZoomView(o){
   return z;
 }
 function tAt(cv,e,dur){var r=cv.getBoundingClientRect(),ppm=r.width/(10+dur*25);return {t:Math.max(0,Math.min(dur,(((e.clientX-r.left)/ppm)-10)/25)),ppm:ppm};}
+/* ---- compasso no ECG normal, nos achados e nos simulados ---- */
+function rdHTML(tA,tB){
+  if(tA==null||tB==null)return "";
+  var dt=Math.abs(tB-tA),mm=dt*25;
+  return "<b>"+fmt(mm,1)+" mm</b> = "+fmt(dt,2)+" s"+(mm>2?'<span class="small">'+t("rd_rr",{mm:fmt(mm,0),bpm:Math.round(1500/mm)})+"</span>":"");
+}
+var CALS=[];
+function Caliper(o){
+  var c={on:false,tA:null,tB:null,drag:null};
+  c.marks=function(){var m=[];if(!c.on)return m;if(c.tA!=null)m.push({t:c.tA,l:"A"});if(c.tB!=null)m.push({t:c.tB,l:"B"});return m;};
+  c.ui=function(){
+    o.btn.classList.toggle("sel",c.on);o.btn.setAttribute("aria-pressed",c.on?"true":"false");
+    o.wrap.classList.toggle("measure",c.on);
+    o.hint.textContent=t(c.on?"hint_measure":o.hintOff);
+    var r=c.on?rdHTML(c.tA,c.tB):"";o.read.hidden=!r;if(r)o.read.innerHTML=r;
+  };
+  c.redraw=function(){o.render();c.ui();};
+  c.clear=function(){c.tA=null;c.tB=null;c.drag=null;c.ui();};
+  c.toggle=function(){c.on=!c.on;if(!c.on){c.tA=null;c.tB=null;}c.redraw();};
+  function place(x,start){
+    if(start){if(c.tA!=null&&c.tB!=null)c.drag=Math.abs(x-c.tA)<=Math.abs(x-c.tB)?"A":"B";else c.drag=c.tA==null?"A":"B";}
+    if(c.drag==="A")c.tA=x;else if(c.drag==="B")c.tB=x;
+  }
+  c.grab=function(e){var S=o.S();if(!c.on||!S)return false;place(tAt(o.cv,e,S.dur).t,true);c.redraw();return true;};
+  c.move=function(e){var S=o.S();if(!c.drag||!S)return;place(tAt(o.cv,e,S.dur).t);c.redraw();};
+  c.up=function(){c.drag=null;};
+  o.btn.addEventListener("click",c.toggle);
+  CALS.push(c);c.ui();
+  return c;
+}
+var CN=Caliper({btn:$("nMeasure"),wrap:$("normalWrap"),hint:$("nHint"),read:$("nRead"),cv:$("cvNormal"),hintOff:"swipe",S:function(){return N.S;},render:function(){if(tab==="aprender"&&sub==="normal")ZN.render();}});
+var CG=Caliper({btn:$("gMeasure"),wrap:$("gdScroll"),hint:$("gHint"),read:$("gRead"),cv:$("cvGal"),hintOff:"swipe",S:function(){return GD.S;},render:function(){if(GD.S&&tab==="aprender"&&sub==="achados")ZG.render();}});
+var CQ=Caliper({btn:$("qMeasure"),wrap:$("quizScroll"),hint:$("qHint"),read:$("qRead"),cv:$("cvQuiz"),hintOff:"swipe",S:function(){return q&&q.S;},render:function(){if(q&&tab==="quiz")ZQ.render();}});
 ZP=ZoomView({wrap:$("papelWrap"),cv:$("cvPapel"),slider:$("zPapel"),zin:$("zPapelIn"),zout:$("zPapelOut"),
   base:function(w){return w/(10+3*25);},max:function(b){return Math.max(b*4,16);},
   draw:function(ppm){var a=Math.min(P.tA,P.tB),b=Math.max(P.tA,P.tB);draw($("cvPapel"),P.S,{ppm:ppm,hmm:32,markers:[{t:P.tA,l:"A"},{t:P.tB,l:"B"}],band:{a:a,b:b,label:fmt((b-a)*25,1)+" mm"}});},
@@ -2588,16 +2710,19 @@ ZP=ZoomView({wrap:$("papelWrap"),cv:$("cvPapel"),slider:$("zPapel"),zin:$("zPape
   up:function(){P.drag=null;}});
 ZN=ZoomView({wrap:$("normalWrap"),cv:$("cvNormal"),slider:$("zNormal"),zin:$("zNormalIn"),zout:$("zNormalOut"),
   base:function(w){return w/(10+2.6*25);},max:function(b){return Math.max(b*4,16);},
-  draw:function(ppm){var bts=visible(N.S),b=bts[1]||bts[0],p=PARTS[N.sel],r=p.reg(b);draw($("cvNormal"),N.S,{ppm:ppm,hmm:32,band:{a:r[0],b:r[1],label:L(p.chip)}});}});
+  draw:function(ppm){var bts=visible(N.S),b=bts[1]||bts[0],p=PARTS[N.sel],r=p.reg(b);draw($("cvNormal"),N.S,{ppm:ppm,hmm:32,band:{a:r[0],b:r[1],label:L(p.chip)},markers:CN.marks()});},
+  grab:CN.grab,move:CN.move,up:CN.up});
 ZG=ZoomView({wrap:$("gdScroll"),cv:$("cvGal"),slider:$("zGal"),zin:$("zGalIn"),zout:$("zGalOut"),
   base:function(){return 4.5;},max:function(){return 16;},
-  draw:function(ppm){drawStrips($("cvGal"),GD.S,{ppm:ppm});}});
+  draw:function(ppm){drawStrips($("cvGal"),GD.S,{ppm:ppm,markers:CG.marks()});},
+  grab:CG.grab,move:CG.move,up:CG.up});
 ZQ=ZoomView({wrap:$("quizScroll"),cv:$("cvQuiz"),slider:$("zQuiz"),zin:$("zQuizIn"),zout:$("zQuizOut"),
   base:function(){return 5;},max:function(){return 16;},
-  draw:function(ppm){drawStrips($("cvQuiz"),q.S,{ppm:ppm});}});
+  draw:function(ppm){drawStrips($("cvQuiz"),q.S,{ppm:ppm,markers:CQ.marks()});},
+  grab:CQ.grab,move:CQ.move,up:CQ.up});
 ZR=ZoomView({wrap:$("rScroll"),cv:$("cvReal"),slider:$("rZoom"),zin:$("rZoomIn"),zout:$("rZoomOut"),
-  base:function(w){return fitPpmOf(RS.cur.C,w-2);},max:function(b){return Math.max(b*2.5,12);},
-  draw:function(ppm){RS.ppm=ppm;RS.dur=drawMulti($("cvReal"),RS.cur.C,ppm,markers());},
+  base:function(w){return RS.cur?fitPpmOf(RS.cur.C,w-2):0;},max:function(b){return Math.max(b*2.5,12);},
+  draw:function(ppm){if(!RS.cur)return;RS.ppm=ppm;RS.dur=drawMulti($("cvReal"),RS.cur.C,ppm,markers(),RS.hl);},
   grab:function(e){if(!RS.measure||!RS.cur)return false;placeMarker(tAt($("cvReal"),e,RS.dur||10).t,true);drawReal();return true;},
   move:function(e){if(!RS.drag)return;placeMarker(tAt($("cvReal"),e,RS.dur||10).t);drawReal();},
   up:function(){RS.drag=null;}});
@@ -2632,7 +2757,7 @@ function autoPack(){
 
 
 /* ---------- reportar erro (Google Forms pré-preenchido) e links que reabrem o caso ---------- */
-var APP_V="2026-10-01";
+var APP_V="2026-10-22";
 var REPORT={url:"https://docs.google.com/forms/d/e/1FAIpQLSfpAkurZKNCXO5wx5_XI8l106OqjC3oRtqgpL9tOg27yvqjqA/viewform",f:{sec:"entry.172935300",item:"entry.1063208790",det:"entry.1116867491",link:"entry.1185269790"}};   // formulário "ECG Lab - Reportar erro"
 function siteURL(){return /^https?:/.test(location.protocol)?location.origin+location.pathname:"https://italoneri.github.io/ecg-lab/";}
 function openReport(sec,item,det,link){
@@ -2657,29 +2782,652 @@ function reportReal(){
   openReport("Casos reais",(isBank?"PTB-XL ":"")+qq.id,det.join(" | "),isBank?siteURL()+"#caso="+qq.id:siteURL());
 }
 $("gdReport").addEventListener("click",function(){reportSim(GD.S,null);});
-$("rReport").addEventListener("click",reportReal);
+$("rReport").addEventListener("click",function(){if(RS.mode!=="quiz")reportGame();else reportReal();});
 function applyHash(){
   var h=decodeURIComponent(location.hash.slice(1));if(!h)return;
   var m=/^sim=([a-z0-9_]+)\.(\d+)$/.exec(h);
   if(m&&GBY[m[1]]){setTab("aprender");setSub("achados");openGal(m[1],+m[2]);return;}
   m=/^caso=(\d+)$/.exec(h);
-  if(m){var id=+m[1];if(RS.bank.some(function(b){return b.id===id;})){setTab("reais");RS.src="bank";RS.force=id;renderSrcBar();startSession();}}
+  if(m){var id=+m[1];if(RS.bank.some(function(b){return b.id===id;})){setTab("reais");if(RS.mode!=="quiz"){RS.mode="quiz";applyModeUI();}RS.src="bank";RS.force=id;renderSrcBar();startSession();}}
 }
 window.addEventListener("hashchange",applyHash);
+
+/* ================= MODO PRÓ E ECG DO DIA: vocabulário, gabarito e textos ================= */
+function nrm(s){return String(s==null?"":s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[º°ª]/g,"").replace(/[^a-z0-9:]+/g," ").trim();}
+var VOC=[],VBY={};
+/* V(id, categorias ("r" ritmo, "a" achado), família, nome pt, nome es, sinônimos, abreviações, extras) */
+function V(id,cat,fam,pt,es,al,ab,x){
+  var o={id:id,cat:cat,fam:fam,pt:pt,es:es,names:[nrm(pt),nrm(es)],ab:[]};
+  (al||"").split("|").forEach(function(a){if(a)o.names.push(nrm(a));});
+  (ab||"").split("|").forEach(function(a){if(a)o.ab.push(nrm(a));});
+  if(x)for(var k in x)o[k]=x[k];
+  VOC.push(o);VBY[id]=o;
+}
+/* ritmos */
+V("r_sinus","r","sinus","Ritmo sinusal","Ritmo sinusal","ritmo sinusal normal|sinusal","RS|RSN|RSR",{rf:"sinus"});
+V("r_stach","r","sinus","Taquicardia sinusal","Taquicardia sinusal","","TS",{rf:"sinus"});
+V("r_sbrad","r","sinus","Bradicardia sinusal","Bradicardia sinusal","","BS",{rf:"sinus"});
+V("r_sarrh","r","sinus","Arritmia sinusal","Arritmia sinusal","arritmia sinusal respiratoria","",{rf:"sinus"});
+V("r_afib","r","sv","Fibrilação atrial","Fibrilación auricular","fibrilacao auricular","FA|AF|ACFA",{rf:"sv"});
+V("r_aflt","r","sv","Flutter atrial","Flutter auricular","flutter","FLA|FLUTTER",{rf:"sv"});
+V("r_svt","r","sv","Taquicardia supraventricular","Taquicardia supraventricular","taquicardia paroxistica supraventricular|taquicardia por reentrada nodal|reentrada nodal|taquicardia supraventricular paroxistica|taquicardia por reentrada atrioventricular","TSV|TPSV|TRN|TRAV|TRNAV|SVT",{rf:"sv"});
+V("r_svarr","r","sv","Arritmia supraventricular","Arritmia supraventricular","","",{rf:"sv"});
+V("r_at","r","sv","Taquicardia atrial","Taquicardia auricular","taquicardia atrial focal|taquicardia auricular focal","TA",{rf:"sv"});
+V("r_mat","r","sv","Taquicardia atrial multifocal","Taquicardia auricular multifocal","","TAM",{rf:"sv"});
+V("r_atr","r","sv","Ritmo atrial ectópico","Ritmo auricular ectópico","ritmo atrial baixo|ritmo ectopico atrial","",{rf:"sv"});
+V("r_junc","r","sv","Ritmo juncional","Ritmo de la unión","ritmo nodal|ritmo juncional de escape|ritmo de la union|ritmo nodal de escape","",{rf:"sv"});
+V("r_pace","r","pace","Ritmo de marca-passo","Ritmo de marcapasos","marcapasso|marca passo|marcapasos|ritmo de marcapasso|estimulacao artificial|estimulacion artificial","MP|MCP",{rf:"pace"});
+V("r_vt","r","vent","Taquicardia ventricular","Taquicardia ventricular","","TV|VT|TVM",{rf:"vent"});
+V("r_vf","r","vent","Fibrilação ventricular","Fibrilación ventricular","fibrilacao ventricular","FV|VF",{rf:"vent"});
+V("r_aivr","r","vent","Ritmo idioventricular acelerado","Ritmo idioventricular acelerado","ritmo idioventricular","RIVA|AIVR",{rf:"vent"});
+V("r_tdp","r","vent","Torsades de pointes","Torsades de pointes","torsade|torsades|tv polimorfica|taquicardia ventricular polimorfica","",{rf:"vent"});
+V("r_asys","r","vent","Assistolia","Asistolia","","",{rf:"vent"});
+/* bloqueios AV (valem como ritmo e como achado) */
+V("bav1","ra","bav","BAV de 1º grau","Bloqueo AV de primer grado","bloqueio av de primeiro grau|bloqueio atrioventricular de primeiro grau|pr longo|pr prolongado|bav primeiro grau|bloqueo av 1","BAV1|BAV 1|1AVB",{rf:"bav"});
+V("bav2","ra","bav","BAV de 2º grau","Bloqueo AV de segundo grado","bloqueio av de segundo grau|mobitz|mobitz i|mobitz ii|wenckebach|bav 2:1|bloqueo av 2|bav segundo grau","BAV2|BAV 2|2AVB",{rf:"bav"});
+V("bav3","ra","bav","BAV total (3º grau)","Bloqueo AV completo (3.er grado)","bav total|bloqueio av total|bloqueio av completo|bloqueio atrioventricular total|bav de terceiro grau|dissociacao atrioventricular|disociacion auriculoventricular|bloqueo av completo|bloqueo av de tercer grado","BAVT|BAV3|BAV 3|3AVB",{rf:"bav"});
+/* infarto / área inativa (paredes: inf, ant, sept, lat, post) */
+V("iam_inf","a","iam","Infarto inferior","Infarto inferior","iam inferior|area inativa inferior|necrose inferior|infarto de parede inferior|infarto diafragmatico|zona inactiva inferior|necrosis inferior|infarto inferior antigo","IMI",{walls:["inf"]});
+V("iam_asept","a","iam","Infarto anterosseptal","Infarto anteroseptal","iam anterosseptal|area inativa anterosseptal|necrose anterosseptal|infarto septal|zona inactiva anteroseptal|area inativa septal","ASMI",{walls:["sept","ant"]});
+V("iam_ant","a","iam","Infarto anterior","Infarto anterior","iam anterior|area inativa anterior|necrose anterior|infarto de parede anterior|zona inactiva anterior","AMI",{walls:["ant"]});
+V("iam_antlat","a","iam","Infarto anterolateral","Infarto anterolateral","iam anterolateral|area inativa anterolateral|necrose anterolateral|zona inactiva anterolateral","ALMI",{walls:["ant","lat"]});
+V("iam_ext","a","iam","Infarto anterior extenso","Infarto anterior extenso","iam anterior extenso|area inativa anterior extensa|anterior extenso","",{walls:["sept","ant","lat"]});
+V("iam_lat","a","iam","Infarto lateral","Infarto lateral","iam lateral|area inativa lateral|lateral alto|infarto lateral alto|necrose lateral|zona inactiva lateral","LMI",{walls:["lat"]});
+V("iam_inflat","a","iam","Infarto inferolateral","Infarto inferolateral","iam inferolateral|area inativa inferolateral","ILMI",{walls:["inf","lat"]});
+V("iam_infpost","a","iam","Infarto inferoposterior (inferodorsal)","Infarto inferoposterior (inferodorsal)","iam inferoposterior|inferodorsal|area inativa inferoposterior|infarto inferodorsal","IPMI",{walls:["inf","post"]});
+V("iam_infpostlat","a","iam","Infarto inferoposterolateral","Infarto inferoposterolateral","iam inferoposterolateral|inferolateral e posterior","IPLMI",{walls:["inf","post","lat"]});
+V("iam_post","a","iam","Infarto posterior (dorsal)","Infarto posterior (dorsal)","iam posterior|iam dorsal|area inativa posterior|area inativa dorsal|infarto dorsal","PMI",{walls:["post"]});
+V("iam","a","iam","Infarto (sem definir a parede)","Infarto (sin definir la pared)","infarto|area inativa|necrose|infarto antigo|infarto previo|zona inactiva|necrosis|infarto do miocardio|infarto agudo do miocardio|area eletricamente inativa","IAM|IM|IMA",{walls:[]});
+V("qpat","a","iam","Ondas Q patológicas","Ondas Q patológicas","onda q patologica|ondas q|q patologica|onda q","",{walls:[]});
+V("iam_supra","a","iam","IAM com supra de ST","IAM con elevación del ST","infarto com supra|iamcsst|stemi|infarto agudo com supra","IAMCSST|STEMI",{walls:[]});
+V("aneur","a","aneur","Aneurisma ventricular","Aneurisma ventricular","aneurisma de ventriculo esquerdo|aneurisma de ve|aneurisma del ventriculo izquierdo","",{});
+/* ST-T (st:true = vale para o item "alteração de ST-T/isquemia") */
+V("isq","a","isq","Isquemia (alteração isquêmica de ST-T)","Isquemia (alteración isquémica del ST-T)","isquemia|alteracao isquemica|isquemia miocardica|isquemia subendocardica|isquemia subepicardica|isquemia miocardica","",{st:1});
+V("lesao_sub","a","isq","Lesão subendocárdica","Lesión subendocárdica","corrente de lesao subendocardica|lesao subendocardica|lesion subendocardica","",{st:1});
+V("std","a","isq","Infradesnivelamento do ST","Descenso del segmento ST","infra|infra de st|infradesnivelamento|infradesnivel do st|depressao do st|descenso del st|infradesnivel","",{st:1});
+V("invt","a","isq","Ondas T invertidas","Ondas T negativas","t invertida|t negativa|inversao da onda t|onda t invertida|onda t negativa|inversion de la onda t","",{st:1});
+V("lowt","a","isq","Ondas T achatadas (baixa amplitude)","Ondas T aplanadas (bajo voltaje)","t achatada|t aplanada|t de baixa amplitude|t plana|t retificada|aplanamiento de la onda t","",{st:1});
+V("stt","a","isq","Alteração da repolarização (ST-T)","Alteración de la repolarización (ST-T)","alteracao de st t|alteracao da repolarizacao ventricular|alteracao difusa da repolarizacao|alteracao inespecifica da repolarizacao|alteracion del st t|alteracion inespecifica de la repolarizacion|alteracao de st|alteracao de onda t|repolarizacao","ARV|ST-T",{st:1});
+V("strain","a","isq","Padrão de strain","Patrón de sobrecarga (strain)","strain|sobrecarga sistolica|padrao strain","",{st:1});
+V("supra","a","st","Supradesnivelamento do ST","Elevación del segmento ST","supra|supra de st|supradesnivelamento|supradesnivel|elevacao do st|elevacion del st|supradesnivel del st","",{});
+V("avr","a","st","Supra de ST em aVR","Elevación del ST en aVR","supra em avr|supradesnivelamento em avr|elevacion en avr","",{});
+V("wellens","a","isq","Padrão de Wellens","Patrón de Wellens","wellens|sindrome de wellens","",{});
+V("dewinter","a","isq","Padrão de de Winter","Patrón de de Winter","de winter|dewinter","",{});
+V("hypt","a","isq","Ondas T hiperagudas","Ondas T hiperagudas","t hiperaguda|t hiperagudas","",{});
+V("peric","a","st","Pericardite","Pericarditis","pericardite aguda|infra de pr|pericarditis aguda","",{});
+V("erepol","a","st","Repolarização precoce","Repolarización precoz","repolarizacao precoce|repolarizacion precoz|repol precoce","",{});
+V("brugada","a","st","Padrão de Brugada","Patrón de Brugada","brugada|sindrome de brugada","",{});
+/* condução intraventricular e fascículos */
+V("brd","a","ramo","Bloqueio de ramo direito","Bloqueo de rama derecha","bloqueio completo de ramo direito|bloqueo completo de rama derecha|bloqueio do ramo direito","BRD|BCRD|BRDHH|RBBB|BRDFH",{});
+V("brdi","a","ramo","Bloqueio incompleto de ramo direito","Bloqueo incompleto de rama derecha","brd incompleto|atraso final de conducao|atraso de conducao pelo ramo direito|disturbio de conducao do ramo direito|retraso de conduccion por la rama derecha","BIRD|BIRDHH|IRBBB|BRDI",{});
+V("bre","a","ramo","Bloqueio de ramo esquerdo","Bloqueo de rama izquierda","bloqueio completo de ramo esquerdo|bloqueo completo de rama izquierda|bloqueio do ramo esquerdo","BRE|BCRE|BREHH|LBBB|BRIHH|BRI",{});
+V("brei","a","ramo","Bloqueio incompleto de ramo esquerdo","Bloqueo incompleto de rama izquierda","bre incompleto","BIRE|ILBBB",{});
+V("dciv","a","ramo","Distúrbio de condução intraventricular","Trastorno de la conducción intraventricular","atraso de conducao intraventricular|bloqueio intraventricular inespecifico|retraso de la conduccion intraventricular|qrs alargado|qrs largo|qrs ancho|disturbio de conducao","DCIV|IVCD|TCIV",{});
+V("bdas","a","divis","Bloqueio divisional anterossuperior esquerdo","Hemibloqueo anterior izquierdo","hemibloqueio anterior esquerdo|bloqueio fascicular anterior esquerdo|bloqueio divisional anterior|bloqueo fascicular anterior izquierdo|hemibloqueio anterior","BDAS|BDASE|HBAE|HBAI|LAFB|BFAE|BFAI",{});
+V("bdpi","a","divis","Bloqueio divisional posteroinferior esquerdo","Hemibloqueo posterior izquierdo","hemibloqueio posterior esquerdo|bloqueio fascicular posterior esquerdo|bloqueio divisional posterior|bloqueo fascicular posterior izquierdo|hemibloqueio posterior","BDPI|HBPE|HBPI|LPFB|BFPE|BFPI",{});
+V("bifasc","a","ramo","Bloqueio bifascicular","Bloqueo bifascicular","bloqueio bifascicular|bloqueo bifascicular|brd mais bdas","",{});
+V("wpw","a","wpw","Pré-excitação (Wolff-Parkinson-White)","Preexcitación (Wolff-Parkinson-White)","wolff parkinson white|wolff|pre excitacao ventricular|preexcitacion|onda delta|via acessoria|via accesoria","WPW",{});
+/* sobrecargas */
+V("hve","a","hip","Sobrecarga (hipertrofia) ventricular esquerda","Hipertrofia ventricular izquierda","hipertrofia ventricular esquerda|sobrecarga ventricular esquerda|crecimiento ventricular izquierdo|sokolow|cornell","HVE|SVE|HVI|LVH|CVI",{});
+V("hvd","a","hip","Sobrecarga (hipertrofia) ventricular direita","Hipertrofia ventricular derecha","hipertrofia ventricular direita|sobrecarga ventricular direita|crecimiento ventricular derecho","HVD|SVD|RVH|CVD",{});
+V("sae","a","atrio","Sobrecarga atrial esquerda","Crecimiento auricular izquierdo","aumento atrial esquerdo|dilatacao atrial esquerda|p mitrale|agrandamiento auricular izquierdo|anormalidade atrial esquerda","SAE|AAE|CAI|LAE",{});
+V("sad","a","atrio","Sobrecarga atrial direita","Crecimiento auricular derecho","aumento atrial direito|dilatacao atrial direita|p pulmonale|agrandamiento auricular derecho|anormalidade atrial direita","SAD|AAD|CAD|RAE",{});
+V("sbiat","a","atrio","Sobrecarga biatrial","Crecimiento biauricular","aumento biatrial|crecimiento biauricular","",{});
+/* extrassístoles */
+V("esv","a","extra","Extrassístoles ventriculares","Extrasístoles ventriculares","extrassistole ventricular|extrasistole ventricular|contracao ventricular prematura|batimento ectopico ventricular|ectopia ventricular|complejo ventricular prematuro","ESV|EV|PVC|CVP|EEV",{});
+V("esa","a","extra","Extrassístoles supraventriculares (atriais)","Extrasístoles supraventriculares (auriculares)","extrassistole atrial|extrassistole supraventricular|extrasistole auricular|extrasistole supraventricular|batimento ectopico atrial|ectopia atrial|complejo auricular prematuro","ESA|ESSV|PAC|CAP|EA",{});
+V("bigem","a","extra","Bigeminismo","Bigeminismo","bigeminismo ventricular|bigeminia","",{});
+V("trigem","a","extra","Trigeminismo","Trigeminismo","trigeminismo ventricular|trigeminia","",{});
+/* QT, voltagem, eletrólitos e outros */
+V("qtl","a","qt","QT longo","QT largo","qt prolongado|qtc longo|qtc prolongado|intervalo qt longo","QTL|LQT|QT",{});
+V("qtc","a","qt","QT curto","QT corto","qt encurtado|qtc curto","QT",{});
+V("lowv","a","volt","Baixa voltagem do QRS","Bajo voltaje del QRS","baixa voltagem|bajo voltaje|complexos de baixa voltagem|baixa amplitude do qrs","",{});
+V("alt","a","volt","Alternância elétrica","Alternancia eléctrica","alternancia eletrica","",{});
+V("dig","a","drug","Efeito digitálico","Efecto digitálico","digital|digitalico|digoxina|st em colher|st en cubeta|cubeta digitalica|impregnacao digitalica","",{});
+V("el","a","drug","Distúrbio eletrolítico ou efeito de fármaco","Trastorno electrolítico o efecto farmacológico","disturbio eletrolitico|trastorno electrolitico|efeito de droga|efeito medicamentoso","",{});
+V("hiperk","a","drug","Hipercalemia","Hiperpotasemia","hiperpotassemia|hipercaliemia|t apiculada|t em tenda|t picuda","",{});
+V("hipok","a","drug","Hipocalemia","Hipopotasemia","hipopotassemia|onda u|ondas u","",{});
+V("hipercal","a","drug","Hipercalcemia","Hipercalcemia","","",{});
+V("hipocal","a","drug","Hipocalcemia","Hipocalcemia","","",{});
+V("hipot","a","drug","Hipotermia (onda de Osborn)","Hipotermia (onda de Osborn)","osborn|onda j|onda de osborn","",{});
+V("tep","a","rv","Padrão de embolia pulmonar (S1Q3T3)","Patrón de embolia pulmonar (S1Q3T3)","tep|embolia pulmonar|tromboembolismo pulmonar|s1q3t3|mcginn white","TEP|S1Q3T3",{});
+V("leadrev","a","tech","Troca de eletrodos","Inversión de electrodos","troca de eletrodos dos bracos|eletrodos invertidos|electrodos invertidos","",{});
+V("dextro","a","tech","Dextrocardia","Dextrocardia","","",{});
+V("normal","a","normal","Sem outras alterações (ECG normal)","Sin otras alteraciones (ECG normal)","normal|ecg normal|sem alteracoes|sem achados|dentro da normalidade|sin alteraciones|sem outras alteracoes|nenhum achado|ecg dentro dos limites da normalidade","",{});
+function vName(v){return LANG==="es"?v.es:v.pt;}
+function vSearch(q,cat){
+  q=nrm(q);if(!q)return [];
+  var res=[],qt=q.split(" ");
+  VOC.forEach(function(v){
+    if(v.cat.indexOf(cat)<0)return;
+    var best=0;
+    v.ab.forEach(function(a){if(a===q)best=Math.max(best,100);else if(q.length>=3&&a.indexOf(q)===0)best=Math.max(best,70);});
+    if(q.length>=3)v.names.forEach(function(n){
+      if(n===q)best=Math.max(best,95);
+      else if(n.indexOf(q)===0)best=Math.max(best,85);
+      else{var ws=n.split(" ");if(qt.every(function(tk){return tk.length<2||ws.some(function(w){return w.indexOf(tk)===0;});}))best=Math.max(best,60+Math.min(20,q.length));}
+    });
+    if(best)res.push({v:v,s:best});
+  });
+  res.sort(function(a,b){return b.s-a.s||vName(a.v).length-vName(b.v).length;});
+  return res.slice(0,6).map(function(r){return r.v;});
+}
+
+/* gabarito a partir dos códigos do PTB-XL */
+var MIW={IMI:["inf"],ASMI:["sept","ant"],AMI:["ant"],ALMI:["ant","lat"],LMI:["lat"],ILMI:["inf","lat"],IPLMI:["inf","post","lat"],IPMI:["inf","post"],PMI:["post"]};
+var MI2V={IMI:"iam_inf",ASMI:"iam_asept",AMI:"iam_ant",ALMI:"iam_antlat",LMI:"iam_lat",ILMI:"iam_inflat",IPLMI:"iam_infpostlat",IPMI:"iam_infpost",PMI:"iam_post"};
+var C2V={LVH:"hve",VCLVH:"hve",HVOLT:"hve",SEHYP:"hve",RVH:"hvd","LAO/LAE":"sae","RAO/RAE":"sad",CLBBB:"bre",ILBBB:"brei",CRBBB:"brd",IRBBB:"brdi",LAFB:"bdas",LPFB:"bdpi",IVCD:"dciv","1AVB":"bav1",LPR:"bav1","2AVB":"bav2","3AVB":"bav3",WPW:"wpw",LNGQT:"qtl",DIG:"dig",EL:"el",ANEUR:"aneur",PVC:"esv",PAC:"esa",BIGU:"bigem",TRIGU:"trigem",LVOLT:"lowv",STE_:"supra",QWAVE:"qpat"};
+var ALWAYS={PVC:1,PAC:1,BIGU:1,TRIGU:1};
+var FORMONLY={VCLVH:1,HVOLT:1,LPR:1,STE_:1,QWAVE:1,LVOLT:1};
+var STT={STD_:1,INVT:1,LOWT:1,NT_:1,TAB_:1,NDT:1,NST_:1};
+var RC={SR:["r_sinus"],STACH:["r_stach","r_sinus"],SBRAD:["r_sbrad","r_sinus"],SARRH:["r_sarrh","r_sinus"],AFIB:["r_afib"],AFLT:["r_aflt"],SVTAC:["r_svt","r_at"],PSVT:["r_svt"],SVARR:["r_svarr","r_svt"],PACE:["r_pace"]};
+var ISCL={AL:["I","aVL","V3","V4","V5","V6"],IN:["II","III","aVF"],IL:["II","III","aVF","V5","V6"],AS:["V1","V2","V3","V4"],LA:["I","aVL","V5","V6"],AN:["V2","V3","V4"]};
+var HL={iam_inf:["II","III","aVF"],iam_asept:["V1","V2","V3","V4"],iam_ant:["V2","V3","V4"],iam_antlat:["I","aVL","V3","V4","V5","V6"],iam_lat:["I","aVL","V5","V6"],iam_inflat:["II","III","aVF","V5","V6"],iam_infpost:["II","III","aVF","V1","V2","V3"],iam_infpostlat:["II","III","aVF","V1","V2","V5","V6"],iam_post:["V1","V2","V3"],
+  brd:["I","V1","V2","V6"],brdi:["V1","V2"],bre:["I","aVL","V1","V6"],brei:["I","aVL","V1","V6"],dciv:["V1","V6"],bdas:["I","aVL","II","III","aVF"],bdpi:["I","aVL","II","III","aVF"],
+  bav1:["II","V1"],bav2:["II","V1"],bav3:["II","V1"],wpw:["I","II","V1","V2"],hve:["aVL","V1","V2","V5","V6"],hvd:["V1","V6","I"],sae:["II","V1"],sad:["II","V1"],
+  esv:["II"],esa:["II"],bigem:["II"],trigem:["II"],qtl:["II","V5"],dig:["II","V4","V5","V6"],normal:[]};
+var GALOF={iam_inf:"iam_inf",iam_asept:"iam_ant",iam_ant:"iam_ant",iam_antlat:"iam_ant",iam_lat:"iam_lat",iam_inflat:"iam_inf",iam_infpost:"iam_post",iam_infpostlat:"iam_post",iam_post:"iam_post",isq:"stdep",
+  brd:"rbbb",brdi:"irbbb",bre:"lbbb",bdas:"lafb",bdpi:"lpfb",bav1:"bav1",bav2:"mob1",bav3:"bav3",wpw:"wpw",hve:"lvh",hvd:"rvh",sae:"lae",sad:"rae",esv:"pvc",esa:"pac",bigem:"bigem",qtl:"lqt",dig:"dig",lowv:"lowv",normal:"nsr",
+  r_sinus:"nsr",r_stach:"stach",r_sbrad:"sbrad",r_sarrh:"sarrh",r_afib:"afib",r_aflt:"aflt",r_svt:"svt",r_svarr:"svt",r_at:"svt",r_pace:"pace"};
+function rrStats(C){
+  var li=C.leads.indexOf("II");if(li<0)li=0;var pk=detectR(C.sig[li],C.fs);
+  if(pk.length<2)return {pk:pk,hr:null,cv:0};
+  var rr=[];for(var i=1;i<pk.length;i++)rr.push((pk[i]-pk[i-1])/C.fs);
+  var m=rr.reduce(function(a,b){return a+b;},0)/rr.length,sd=Math.sqrt(rr.reduce(function(a,b){return a+(b-m)*(b-m);},0)/rr.length);
+  return {pk:pk,hr:60/m,cv:sd/m};
+}
+function buildKey(M,rr){
+  var codes=M.codes,req=[],opt={},pos={},seen={};
+  function add(it){if(seen[it.id])return;seen[it.id]=1;req.push(it);}
+  Object.keys(codes).forEach(function(c){
+    var v=codes[c]||0;
+    if(MIW[c]){var it={id:MI2V[c],kind:"iam",walls:MIW[c],code:c};if(v>=100)add(it);else pos[it.id]=it;return;}
+    if(c.indexOf("ISC")===0||c.indexOf("INJ")===0){var w=ISCL[c.slice(3)];if(v>=100){add({id:"isq",kind:"isq",leads:w});if(w&&seen.isq)req.forEach(function(r){if(r.id==="isq"&&!r.leads)r.leads=w;});}else pos.isq={id:"isq",kind:"isq"};return;}
+    if(STT[c]){if((c==="NDT"||c==="NST_")&&v>=100)add({id:"isq",kind:"isq"});else opt.isq={id:"isq",kind:"isq"};return;}
+    var id=C2V[c];if(!id)return;
+    if(FORMONLY[c]){opt[id]={id:id};return;}
+    if(ALWAYS[c]||v>=100)add({id:id});else pos[id]={id:id};
+  });
+  if(!req.length)add({id:"normal"});
+  else if(codes.NORM!=null)pos.normal={id:"normal"};
+  req.forEach(function(r){delete opt[r.id];delete pos[r.id];});
+  Object.keys(opt).forEach(function(k){delete pos[k];});
+  if(seen.brd&&(seen.bdas||seen.bdpi))opt.bifasc={id:"bifasc"};
+  if(opt.qpat&&!req.some(function(r){return r.kind==="iam";}))opt.iam={id:"iam"};
+  /* ritmo */
+  var ok={},rc=[];
+  Object.keys(codes).forEach(function(c){if(RC[c]){rc.push(c);RC[c].forEach(function(x){ok[x]=1;});}});
+  var rh=null;
+  if(rc.length){
+    if(ok.r_sinus&&rr.hr){if(rr.hr>=100)ok.r_stach=1;if(rr.hr<60)ok.r_sbrad=1;if(rr.cv>0.12)ok.r_sarrh=1;}
+    if(codes["2AVB"]!=null)ok.bav2=1;if(codes["3AVB"]!=null)ok.bav3=1;
+    rh={ok:ok,codes:rc};
+  }
+  return {req:req,opt:opt,pos:pos,rh:rh};
+}
+function jac(a,b){var i=0,u={};a.forEach(function(x){u[x]=1;if(b.indexOf(x)>=0)i++;});b.forEach(function(x){u[x]=1;});var n=Object.keys(u).length;return n?i/n:0;}
+/* classifica um achado digitado: g verde, y amarelo, o aceito, p possível, x não consta, d repetido */
+function judgeFinding(id,K,found){
+  var v=VBY[id],i,r;
+  for(i=0;i<K.req.length;i++){r=K.req[i];if(found[i])continue;if(greenFor(v,r))return {s:"g",i:i};}
+  for(i=0;i<K.req.length;i++){r=K.req[i];if(found[i]&&greenFor(v,r))return {s:"d",i:i};}
+  if(K.opt[id]||(v.st&&K.opt.isq))return {s:"o"};
+  if(K.pos[id]||(v.st&&K.pos.isq)||(v.fam==="iam"&&v.walls&&v.walls.length&&Object.keys(K.pos).some(function(k){return K.pos[k].kind==="iam"&&jac(v.walls,K.pos[k].walls)>=0.5;})))return {s:"p"};
+  for(i=0;i<K.req.length;i++){r=K.req[i];if(found[i])continue;if(VBY[r.id]&&VBY[r.id].fam===v.fam)return {s:"y",i:i};}
+  return {s:"x"};
+}
+function greenFor(v,r){
+  if(r.kind==="iam")return v.fam==="iam"&&v.walls&&v.walls.length>0&&jac(v.walls,r.walls)>=0.5;
+  if(r.kind==="isq")return !!v.st;
+  if(r.id==="bigem")return v.id==="bigem"||v.id==="esv";
+  if(r.id==="trigem")return v.id==="trigem"||v.id==="esv";
+  if(r.id==="sae"||r.id==="sad")return v.id===r.id||v.id==="sbiat";
+  return v.id===r.id;
+}
+function judgeRhythm(id,K){
+  if(K.rh.ok[id])return "g";
+  var v=VBY[id];return Object.keys(K.rh.ok).some(function(k){return VBY[k]&&VBY[k].rf===v.rf;})?"y":"x";
+}
+function reqName(r){
+  if(r.id==="isq")return LANG==="es"?"Alteración isquémica / de la repolarización (ST-T)":"Alteração isquêmica / da repolarização (ST-T)";
+  return vName(VBY[r.id]);
+}
+var FAMLBL={iam:["infarto / área inativa","infarto / zona inactiva"],isq:["alteração de ST-T (repolarização)","alteración del ST-T (repolarización)"],ramo:["bloqueio de ramo / condução intraventricular","bloqueo de rama / conducción intraventricular"],
+  divis:["bloqueio divisional (fascicular)","hemibloqueo (fascicular)"],bav:["bloqueio atrioventricular","bloqueo auriculoventricular"],hip:["hipertrofia ventricular","hipertrofia ventricular"],atrio:["sobrecarga atrial","crecimiento auricular"],
+  extra:["extrassístoles","extrasístoles"],wpw:["pré-excitação","preexcitación"],qt:["intervalo QT","intervalo QT"],drug:["efeito de fármaco ou eletrólito","efecto de fármaco o electrolito"],volt:["voltagem do QRS","voltaje del QRS"],normal:["nenhuma: o ECG não tem outras alterações","ninguna: el ECG no tiene otras alteraciones"],aneur:["aneurisma","aneurisma"]};
+function famOfReq(r){return r.kind==="iam"?"iam":r.kind==="isq"?"isq":(VBY[r.id]?VBY[r.id].fam:"");}
+function leadsOfReq(r){return r.leads||HL[r.id]||(r.kind==="isq"?["I","II","aVL","V4","V5","V6"]:[]);}
+
+/* dicas do ritmo */
+function rhythmHint2(K){
+  var c=K.rh.codes,s;
+  if(c.indexOf("AFIB")>=0)s=["Não há ondas P organizadas; a linha de base entre os QRS é irregular.","No hay ondas P organizadas; la línea de base entre los QRS es irregular."];
+  else if(c.indexOf("AFLT")>=0)s=["Procure ondas atriais rápidas e regulares, em serrote, em D2, D3, aVF e V1.","Busca ondas auriculares rápidas y regulares, en dientes de sierra, en DII, DIII, aVF y V1."];
+  else if(c.indexOf("PACE")>=0)s=["Procure espículas finas logo antes dos complexos.","Busca espigas finas justo antes de los complejos."];
+  else if(c.indexOf("SVTAC")>=0||c.indexOf("PSVT")>=0||c.indexOf("SVARR")>=0)s=["QRS estreito e rápido, sem uma P sinusal normal antes de cada QRS.","QRS estrecho y rápido, sin una P sinusal normal antes de cada QRS."];
+  else s=["Há uma onda P positiva em D2 antes dos QRS, sempre com o mesmo aspecto.","Hay una onda P positiva en DII antes de los QRS, siempre con el mismo aspecto."];
+  var x=s[LI()];
+  if(K.rh.ok.bav3)x+=" "+(LANG==="es"?"Pero las P y los QRS no guardan una relación fija.":"Mas as P e os QRS não têm relação fixa entre si.");
+  else if(K.rh.ok.bav2)x+=" "+(LANG==="es"?"Pero no toda P va seguida de un QRS.":"Mas nem toda P é seguida de um QRS.");
+  return x;
+}
+function rhythmHint3(K){
+  var c=K.rh.codes;
+  if(c.indexOf("PACE")>=0)return LANG==="es"?"El ritmo es artificial (dispositivo).":"O ritmo é artificial (dispositivo).";
+  if(c.some(function(x){return ["SR","STACH","SBRAD","SARRH"].indexOf(x)>=0;}))return LANG==="es"?"El ritmo se origina en el nodo sinusal.":"O ritmo nasce no nó sinusal.";
+  return LANG==="es"?"El ritmo es supraventricular, pero no sinusal.":"O ritmo é supraventricular, mas não sinusal.";
+}
+
+/* cenário fictício para a dica de contexto */
+var SCN=[
+ [["3AVB"],["Tonturas e um desmaio nesta semana. Ao exame, pulso lento e regular.","Cansaço progressivo e pré-síncope ao se levantar. Pulso em torno de 40 por minuto."],["Mareos y un desmayo esta semana. A la exploración, pulso lento y regular.","Cansancio progresivo y presíncope al levantarse. Pulso de unos 40 por minuto."]],
+ [["2AVB"],["Tonturas intermitentes. Ao exame, pulso lento com pausas.","Em investigação de síncope. Usa betabloqueador há anos."],["Mareos intermitentes. A la exploración, pulso lento con pausas.","En estudio por síncope. Toma betabloqueantes desde hace años."]],
+ [["PACE"],["Tem um dispositivo implantado há alguns anos, depois de episódios de síncope.","Retorno de rotina. Há uma cicatriz e um volume sob a clavícula esquerda."],["Tiene un dispositivo implantado desde hace años, tras episodios de síncope.","Control de rutina. Tiene una cicatriz y un bulto bajo la clavícula izquierda."]],
+ [["WPW"],["Episódios de palpitação rápida, de início e fim súbitos, desde a adolescência.","ECG pré-participação esportiva. Relata crises raras de taquicardia."],["Episodios de palpitaciones rápidas, de inicio y fin bruscos, desde la adolescencia.","ECG de aptitud deportiva. Refiere crisis raras de taquicardia."]],
+ [["AFIB"],["Palpitações irregulares há dois dias. Hipertensão de longa data.","Cansaço e pulso irregular ao exame."],["Palpitaciones irregulares desde hace dos días. Hipertensión de larga evolución.","Cansancio y pulso irregular a la exploración."]],
+ [["AFLT"],["Palpitações e cansaço há uma semana. Tem DPOC.","Pós-operatório de cirurgia cardíaca, com taquicardia regular."],["Palpitaciones y cansancio desde hace una semana. Tiene EPOC.","Posoperatorio de cirugía cardíaca, con taquicardia regular."]],
+ [["SVTAC","PSVT","SVARR"],["Palpitação regular e rápida, de início súbito há 30 minutos.","Crises de taquicardia que às vezes cedem com manobra vagal."],["Palpitaciones regulares y rápidas, de inicio brusco hace 30 minutos.","Crisis de taquicardia que a veces ceden con maniobras vagales."]],
+ [["ISC","INJ"],["Dor torácica aos esforços nas últimas semanas, que melhora com o repouso.","Diabetes e hipertensão. Desconforto torácico e falta de ar aos esforços."],["Dolor torácico de esfuerzo en las últimas semanas, que mejora con el reposo.","Diabetes e hipertensión. Molestia torácica y disnea de esfuerzo."]],
+ [["IMI","ASMI","AMI","ALMI","LMI","ILMI","IPLMI","IPMI","PMI"],["Antecedente de doença coronariana. Em acompanhamento ambulatorial.","Ex-tabagista, com colesterol alto e história de dor torácica no passado."],["Antecedente de enfermedad coronaria. En seguimiento ambulatorio.","Exfumador, con colesterol alto e historia de dolor torácico en el pasado."]],
+ [["LNGQT"],["Em uso de antibiótico e antipsicótico. Teve um episódio de pré-síncope.","Internação por vômitos e diarreia há vários dias."],["Toma un antibiótico y un antipsicótico. Tuvo un episodio de presíncope.","Ingreso por vómitos y diarrea de varios días."]],
+ [["CLBBB"],["Hipertensão de longa data e falta de ar aos esforços.","Insuficiência cardíaca em acompanhamento."],["Hipertensión de larga evolución y disnea de esfuerzo.","Insuficiencia cardíaca en seguimiento."]],
+ [["LVH"],["Hipertensão arterial de longa data, mal controlada.","Sopro sistólico em foco aórtico ao exame."],["Hipertensión arterial de larga evolución, mal controlada.","Soplo sistólico en foco aórtico a la exploración."]],
+ [["RVH"],["DPOC grave, com falta de ar aos mínimos esforços.","Em investigação de hipertensão pulmonar."],["EPOC grave, con disnea a mínimos esfuerzos.","En estudio por hipertensión pulmonar."]],
+ [["LAFB","LPFB"],["Hipertensão, consulta de rotina.","Natural de área endêmica para doença de Chagas, sem queixas."],["Hipertensión, consulta de rutina.","Procedente de una zona endémica de enfermedad de Chagas, sin síntomas."]],
+ [["CRBBB","IRBBB","IVCD"],["Sem queixas, ECG de check-up.","Falta de ar crônica, em investigação."],["Sin síntomas, ECG de chequeo.","Disnea crónica, en estudio."]],
+ [["1AVB"],["Usa betabloqueador para hipertensão. Sem queixas.","ECG de rotina, sem sintomas."],["Toma betabloqueantes por hipertensión. Sin síntomas.","ECG de rutina, sin síntomas."]],
+ [["PVC","PAC","BIGU"],["Queixa de \"falhas\" no batimento e palpitações isoladas.","Toma muito café e percebe batimentos \"pulados\"."],["Refiere \"fallos\" en el latido y palpitaciones aisladas.","Toma mucho café y nota latidos \"saltados\"."]],
+ [["DIG"],["Insuficiência cardíaca em uso de digoxina.","Fibrilação atrial crônica em uso de digoxina."],["Insuficiencia cardíaca en tratamiento con digoxina.","Fibrilación auricular crónica en tratamiento con digoxina."]],
+ [["STACH"],["Febre e tosse há três dias.","Ansiedade e palpitações; bebeu pouca água nas últimas 24 horas."],["Fiebre y tos desde hace tres días.","Ansiedad y palpitaciones; ha bebido poca agua en las últimas 24 horas."]],
+ [["SBRAD"],["Sem queixas. Corre quase todos os dias.","Usa betabloqueador. ECG de rotina."],["Sin síntomas. Corre casi todos los días.","Toma betabloqueantes. ECG de rutina."]],
+ [["NORM","SARRH","SR"],["Avaliação pré-operatória de cirurgia eletiva. Sem queixas.","ECG de rotina antes de iniciar atividade física."],["Valoración preoperatoria de cirugía programada. Sin síntomas.","ECG de rutina antes de empezar a hacer ejercicio."]]
+];
+function scenario(M){
+  var cs=Object.keys(M.codes).filter(function(c){return M.codes[c]>=100||!isDiag(c);}),pick2=null;
+  for(var i=0;i<SCN.length&&!pick2;i++){if(SCN[i][0].some(function(k){return cs.some(function(c){return c===k||((k==="ISC"||k==="INJ")&&c.indexOf(k)===0);});}))pick2=SCN[i];}
+  if(!pick2)pick2=SCN[SCN.length-1];
+  var v=pick2[LANG==="es"?2:1][M.id%2],who;
+  var es=LANG==="es",age=M.age>=120?(es?"más de 89":"mais de 89"):Math.round(M.age);
+  if(M.sex===1)who=es?"Mujer de "+age+" años.":"Mulher de "+age+" anos.";else who=es?"Hombre de "+age+" años.":"Homem de "+age+" anos.";
+  return who+" "+v;
+}
+
+/* ================= MODO PRÓ E ECG DO DIA: jogo ================= */
+var PRO_UI={pt:{
+ m_quiz:"Quiz",m_pro:"Pró",m_daily:"ECG do dia",
+ pro_title:"Modo pró",daily_title:"ECG do dia nº {n}",g_loading:"Carregando os casos reais (cerca de 7,5 MB, só na primeira vez)...",g_nobank:"Os casos reais ainda não foram carregados. Use o modo Quiz enquanto isso.",g_fail:"Não foi possível carregar os casos reais. Eles ficam no arquivo data/ptbxl.js, que precisa estar na pasta data, ao lado do index.html. Se você abriu só o index.html (por exemplo, numa pré-visualização ou num anexo), abra pelo site.",g_site:"Abrir o site",g_toquiz:"Usar o modo Quiz",
+ st_fc:"Frequência",st_rh:"Ritmo",st_ax:"Eixo",st_fd:"Achados",
+ q_fc:"Qual é a frequência cardíaca, em bpm? Use o compasso se quiser.",q_rh:"Qual é o ritmo?",q_ax:"Qual é o eixo do QRS no plano frontal, em graus? Exemplos: +60, −45, +120.",
+ q_fd:"Quais são os achados deste ECG, além do ritmo? Adicione um por vez e toque em Enviar. Se não houver nenhum, adicione “Sem outras alterações”.",
+ ph_fc:"Ex.: 75",ph_ax:"Ex.: +60",ph_txt:"Digite pelo menos 3 letras ou uma sigla (ex.: BRD)",
+ send:"Enviar",hint_btn:"Dica (−{n} pts)",hint_ctx:"Contexto clínico (−{n} pts)",no_more:"Sem mais dicas",
+ try_n:"Tentativa {a} de 3",left:"Faltam {n} achado(s).",left1:"Falta 1 achado.",all_found:"Você encontrou todos os achados do laudo!",
+ none_match:"Nenhum termo encontrado. Tente outra palavra ou sigla.",
+ fb_up:"O valor real é maior.",fb_down:"O valor real é menor.",fb_cw:"O eixo real tem mais graus (gire no sentido horário).",fb_ccw:"O eixo real tem menos graus (gire no sentido anti-horário).",
+ h_fc1:"Divida 1500 pelo número de quadradinhos (mm) entre dois R. Ou conte os QRS da tira longa (10 s) e multiplique por 6.",
+ h_fc2:"O compasso marcou dois R seguidos: veja a distância abaixo do traçado.",h_fc3:"A frequência está entre {a} e {b} bpm.",
+ h_rh_reg:"Os intervalos RR são regulares.",h_rh_irr:"Os intervalos RR são irregulares.",
+ h_ax1:"O QRS em D1 é predominantemente {s}.",h_ax2:"O QRS em aVF é predominantemente {s}.",h_ax3:"O eixo está entre {a}° e {b}°.",pos:"positivo",neg:"negativo",
+ h_fd1:"O que falta é da categoria: {c}.",h_fd2:"Olhe com atenção as derivações destacadas: {l}.",h_fd2n:"Olhe o traçado inteiro: nada além do ritmo chama atenção.",h_fd3:"Contexto (fictício): {s}",
+ lbl_hint:"Dica",lbl_you:"Você",
+ res_ok:"Acertou na {n}ª tentativa",res_fail:"Resposta: {a}",res_fd:"{a} de {b} achados",
+ legend:"Verde: está no laudo. Amarelo: família certa, detalhe errado. Cinza: não consta no laudo. Tracejado: aceito ou possível, não conta.",
+ s_o:"aceito",s_p:"possível no laudo",s_d:"repetido",
+ fin_h:"Caso concluído",share:"Compartilhar resultado",copied:"Resultado copiado. É só colar no grupo.",next_case:"Próximo caso",train:"Treinar no modo pró",
+ msg_a:"Leitura de especialista!",msg_b:"Muito bom!",msg_c:"Bom caminho.",msg_d:"Cada erro ensina: veja o gabarito abaixo.",
+ daily_next:"Próximo ECG do dia em {h} h {m} min.",daily_done:"Você já fez o ECG do dia de hoje.",streak_d:"Sequência: {n} dia(s)",best_d:"Melhor: {n}",
+ avg_p:"Média: {a} pts em {n} caso(s)",
+ key_h:"Gabarito",key_fc:"Frequência medida pelo app: {n} bpm",key_rh:"Ritmo do laudo: {a}",key_ax:"Eixo medido no traçado: {n}°",key_fd:"Achados do laudo",key_opt:"Também aceitos",key_pos:"Possíveis no laudo (não contam)",
+ understand:"Entenda ›",ctx_h:"Cenário usado na dica",ctx_note:"Cenário fictício, criado para o jogo a partir do laudo. A idade e o sexo são reais.",
+ key_note:"O laudo do PTB-XL nem sempre lista tudo. Por isso, achados que não constam no laudo não tiram pontos.",
+ you_said:"você: {a}",
+ rep_game:"Etapas: {s}"
+},es:{
+ m_quiz:"Quiz",m_pro:"Pro",m_daily:"ECG del día",
+ pro_title:"Modo pro",daily_title:"ECG del día n.º {n}",g_loading:"Cargando los casos reales (unos 7,5 MB, solo la primera vez)...",g_nobank:"Los casos reales aún no se han cargado. Usa el modo Quiz mientras tanto.",g_fail:"No se pudieron cargar los casos reales. Están en el archivo data/ptbxl.js, que debe estar en la carpeta data, junto al index.html. Si abriste solo el index.html (por ejemplo, en una vista previa o un adjunto), ábrelo desde el sitio.",g_site:"Abrir el sitio",g_toquiz:"Usar el modo Quiz",
+ st_fc:"Frecuencia",st_rh:"Ritmo",st_ax:"Eje",st_fd:"Hallazgos",
+ q_fc:"¿Cuál es la frecuencia cardíaca, en lpm? Usa el compás si quieres.",q_rh:"¿Cuál es el ritmo?",q_ax:"¿Cuál es el eje del QRS en el plano frontal, en grados? Ejemplos: +60, −45, +120.",
+ q_fd:"¿Cuáles son los hallazgos de este ECG, además del ritmo? Añade uno por vez y toca Enviar. Si no hay ninguno, añade “Sin otras alteraciones”.",
+ ph_fc:"P. ej.: 75",ph_ax:"P. ej.: +60",ph_txt:"Escribe al menos 3 letras o una sigla (p. ej.: BRD)",
+ send:"Enviar",hint_btn:"Pista (−{n} pts)",hint_ctx:"Contexto clínico (−{n} pts)",no_more:"No hay más pistas",
+ try_n:"Intento {a} de 3",left:"Faltan {n} hallazgo(s).",left1:"Falta 1 hallazgo.",all_found:"¡Encontraste todos los hallazgos del informe!",
+ none_match:"No se encontró ningún término. Prueba otra palabra o sigla.",
+ fb_up:"El valor real es mayor.",fb_down:"El valor real es menor.",fb_cw:"El eje real tiene más grados (gira en sentido horario).",fb_ccw:"El eje real tiene menos grados (gira en sentido antihorario).",
+ h_fc1:"Divide 1500 entre el número de cuadritos (mm) entre dos R. O cuenta los QRS de la tira larga (10 s) y multiplica por 6.",
+ h_fc2:"El compás marcó dos R seguidas: mira la distancia debajo del trazado.",h_fc3:"La frecuencia está entre {a} y {b} lpm.",
+ h_rh_reg:"Los intervalos RR son regulares.",h_rh_irr:"Los intervalos RR son irregulares.",
+ h_ax1:"El QRS en DI es predominantemente {s}.",h_ax2:"El QRS en aVF es predominantemente {s}.",h_ax3:"El eje está entre {a}° y {b}°.",pos:"positivo",neg:"negativo",
+ h_fd1:"Lo que falta es de la categoría: {c}.",h_fd2:"Mira con atención las derivaciones resaltadas: {l}.",h_fd2n:"Mira todo el trazado: nada además del ritmo llama la atención.",h_fd3:"Contexto (ficticio): {s}",
+ lbl_hint:"Pista",lbl_you:"Tú",
+ res_ok:"Acertaste en el {n}.º intento",res_fail:"Respuesta: {a}",res_fd:"{a} de {b} hallazgos",
+ legend:"Verde: está en el informe. Amarillo: familia correcta, detalle equivocado. Gris: no consta en el informe. Discontinuo: aceptado o posible, no cuenta.",
+ s_o:"aceptado",s_p:"posible en el informe",s_d:"repetido",
+ fin_h:"Caso terminado",share:"Compartir resultado",copied:"Resultado copiado. Solo pégalo en el grupo.",next_case:"Siguiente caso",train:"Entrenar en modo pro",
+ msg_a:"¡Lectura de especialista!",msg_b:"¡Muy bien!",msg_c:"Buen camino.",msg_d:"Cada error enseña: mira la solución abajo.",
+ daily_next:"Próximo ECG del día en {h} h {m} min.",daily_done:"Ya hiciste el ECG del día de hoy.",streak_d:"Racha: {n} día(s)",best_d:"Mejor: {n}",
+ avg_p:"Media: {a} pts en {n} caso(s)",
+ key_h:"Solución",key_fc:"Frecuencia medida por la app: {n} lpm",key_rh:"Ritmo del informe: {a}",key_ax:"Eje medido en el trazado: {n}°",key_fd:"Hallazgos del informe",key_opt:"También aceptados",key_pos:"Posibles en el informe (no cuentan)",
+ understand:"Entiende ›",ctx_h:"Escenario usado en la pista",ctx_note:"Escenario ficticio, creado para el juego a partir del informe. La edad y el sexo son reales.",
+ key_note:"El informe de PTB-XL no siempre lo enumera todo. Por eso, los hallazgos que no constan en el informe no restan puntos.",
+ you_said:"tú: {a}",
+ rep_game:"Etapas: {s}"
+}};
+Object.keys(PRO_UI).forEach(function(l){Object.keys(PRO_UI[l]).forEach(function(k){UI[l][k]=PRO_UI[l][k];});});
+
+RS.mode=(function(){try{var m=localStorage.getItem("ecglab:mode");if(m==="pro"||m==="daily")return m;}catch(e){}return "quiz";})();
+var G=null,GRECENT=[],GSUG=[],GACT=0;
+function lsGet(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v||d;}catch(e){return d;}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function dayNumber(){var d=new Date();return Math.max(1,Math.floor((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-Date.UTC(2026,9,22))/864e5)+1);}
+function dailyId(n){
+  var ids=RS.bank.map(function(m){return m.id;}).sort(function(a,b){return a-b;}),r=seeded(20261022);
+  for(var i=ids.length-1;i>0;i--){var j=Math.floor(r()*(i+1)),x=ids[i];ids[i]=ids[j];ids[j]=x;}
+  return ids[(n-1)%ids.length];
+}
+function setMode(m){
+  RS.mode=m;try{localStorage.setItem("ecglab:mode",m);}catch(e){}
+  applyModeUI();
+  if(m==="quiz"){G=null;RS.hl=null;setTraceVisible(true);startSession();}else startGame();
+}
+function applyModeUI(){
+  var q=RS.mode==="quiz";
+  document.querySelectorAll("#rMode button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-m")===RS.mode);b.setAttribute("aria-pressed",b.getAttribute("data-m")===RS.mode);});
+  ["rSess","rOpts","rExplRow","rFb"].forEach(function(id){if(!q)$(id).hidden=true;});
+  $("rNextBtn").parentNode.hidden=!q;$("rGame").hidden=q;
+  if(!q){$("rSummary").hidden=true;$("rQuiz").hidden=false;$("rSess").hidden=true;}else{$("rSess").hidden=false;$("rOpts").hidden=false;}
+  renderSrcBar();renderRStats();
+}
+function setTraceVisible(on){var sc=$("rScroll");sc.hidden=!on;sc.nextElementSibling.hidden=!on;$("rHint").hidden=!on;if(!on){$("rRead").hidden=true;if(RS.full)closeFull();}}
+function startReal(){applyModeUI();if(RS.mode==="quiz")startSession();else startGame();}
+function loadCase(M){
+  return tx("sig","readonly",function(s){return s.get(M.id);}).then(function(S){
+    if(!S)throw new Error("sinal ausente");
+    var n=S.n,sig=[];for(var k=0;k<12;k++){var f=new Float32Array(n);for(var j=0;j<n;j++)f[j]=S.data[k*n+j]/1000;sig.push(f);}
+    return {id:M.id,fs:S.fs,leads:LEADS12,sig:sig};
+  });
+}
+function startGame(){
+  if(!RS.bank.length){
+    G=null;RS.cur=null;setTraceVisible(false);
+    $("rPrompt").textContent=t(RS.mode==="daily"?"m_daily":"pro_title");$("rSrc").textContent="";
+    var fail=RS.packFailed&&!RS.loadingPack;
+    $("rGame").innerHTML='<p class="lead" style="margin-top:6px">'+t(RS.loadingPack?"g_loading":fail?"g_fail":"g_nobank")+'</p><div class="gbtns">'+
+      (fail&&!/^https?:\/\/italoneri\.github\.io/.test(location.href)?'<a class="btn primary" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none" href="https://italoneri.github.io/ecg-lab/" target="_blank" rel="noopener">'+t("g_site")+"</a>":"")+
+      '<button class="btn" id="gToQuiz">'+t("g_toquiz")+"</button></div>";
+    $("gToQuiz").addEventListener("click",function(){setMode("quiz");});
+    return;
+  }
+  setTraceVisible(true);
+  var M,n=null;
+  if(RS.mode==="daily"){n=dayNumber();var id=dailyId(n);M=RS.bank.filter(function(m){return m.id===id;})[0];}
+  else{var pool=RS.bank.filter(function(m){return GRECENT.indexOf(m.id)<0;});if(!pool.length){GRECENT=[];pool=RS.bank;}M=pool[Math.floor(Math.random()*pool.length)];GRECENT.push(M.id);if(GRECENT.length>60)GRECENT.shift();}
+  var mode=RS.mode;
+  return loadCase(M).then(function(C){
+    if(RS.mode!==mode)return;
+    var rr=rrStats(C),K=buildKey(M,rr),st=[];
+    if(rr.hr)st.push({id:"fc",V:15});
+    if(K.rh)st.push({id:"rh",V:20});
+    if(M.axdeg!=null)st.push({id:"ax",V:15});
+    var fd={id:"fd",V:100};st.forEach(function(s){fd.V-=s.V;});st.push(fd);
+    st.forEach(function(s){s.att=[];s.hints=0;s.paid=0;s.done=false;s.ok=false;s.score=0;});
+    G={mode:mode,n:n,M:M,C:C,K:K,rr:rr,hr:rr.hr?Math.round(rr.hr):null,st:st,si:0,chips:[],found:{},rows:[],sel:null,done:false};
+    RS.cur={C:C,id:M.id,game:true};RS.tA=null;RS.tB=null;RS.hl=null;ZR.reset();
+    if(mode==="daily"){var D=lsGet("ecglab:daily",{hist:{}});if(D.hist&&D.hist[n]){G.done=true;G.replay=D.hist[n];}}
+    renderGame();drawReal();if(RS.full)drawFull();
+  }).catch(function(e){console.error(e);$("rGame").innerHTML='<p class="lead">'+t("g_nobank")+"</p>";});
+}
+function stName(id){return t("st_"+id);}
+function curSt(){return G&&!G.done?G.st[G.si]:null;}
+function hintCost(s){if(s.id==="fd"&&s.hints===2)return Math.round(s.V/5);return Math.round(s.V/6);}
+function wrongCount(s){return s.att.filter(function(a){return a.s!=="g";}).length;}
+function stageScore(s){
+  if(s.id==="fd"){var n=G.K.req.length,sum=0;Object.keys(G.found).forEach(function(i){sum+=(4-G.found[i])/3;});return Math.max(0,Math.round(s.V*sum/n-s.paid));}
+  if(!s.ok)return 0;return Math.max(0,Math.round(s.V*(4-s.att.length)/3-s.paid));
+}
+function totalScore(){var x=0;G.st.forEach(function(s){x+=s.score;});return Math.max(5,Math.min(100,x));}
+function fmtAx(a){a=Math.round(a);return (a>0?"+":a<0?"−":"")+Math.abs(a);}
+function axDiff(u,a){return ((u-a+540)%360)-180;}
+
+/* ---- dicas ---- */
+function hintText(s,h){
+  var K=G.K,M=G.M;
+  if(s.id==="fc"){if(h===1)return t("h_fc1");if(h===2)return t("h_fc2");var a=Math.round(G.hr*0.85/5)*5,b=Math.round(G.hr*1.15/5)*5;return t("h_fc3",{a:a,b:b});}
+  if(s.id==="rh"){if(h===1)return t(G.rr.cv>0.12?"h_rh_irr":"h_rh_reg");if(h===2)return rhythmHint2(K);return rhythmHint3(K);}
+  if(s.id==="ax"){var ax=M.axdeg;if(h===1)return t("h_ax1",{s:t(Math.abs(ax)<90?"pos":"neg")});if(h===2)return t("h_ax2",{s:t(ax>0&&ax<180?"pos":"neg")});var lo=Math.floor(ax/30)*30;return t("h_ax3",{a:fmtAx(lo),b:fmtAx(lo+30)});}
+  var miss=K.req.filter(function(r,i){return !G.found[i];});
+  if(h===1){var fams={};miss.forEach(function(r){var f=famOfReq(r);if(FAMLBL[f])fams[FAMLBL[f][LI()]]=1;});return t("h_fd1",{c:Object.keys(fams).join("; ")});}
+  if(h===2){var ls=hlLeads(miss);return ls.length?t("h_fd2",{l:ls.map(leadName).join(", ")}):t("h_fd2n");}
+  return t("h_fd3",{s:scenario(M)});
+}
+function hlLeads(miss){var o={};miss.forEach(function(r){leadsOfReq(r).forEach(function(l){o[l]=1;});});return LEADS12.filter(function(l){return o[l];});}
+function applyHintAction(s,h){
+  if(s.id==="fc"&&h===2){var pk=G.rr.pk,fs=G.C.fs,i=0;while(i<pk.length-2&&pk[i]/fs<1)i++;if(pk.length>1){setMeasure(true);RS.tA=pk[i]/fs;RS.tB=pk[i+1]/fs;drawReal();if(RS.full)drawFull();}}
+  if(s.id==="rh"&&h===2){RS.hl={II:1};drawReal();}
+  if(s.id==="fd"&&h===2){var o={};hlLeads(G.K.req.filter(function(r,i){return !G.found[i];})).forEach(function(l){o[l]=1;});RS.hl=o;drawReal();if(RS.full)drawFull();}
+}
+function showHint(s,paid){
+  if(s.hints>=3)return;
+  if(paid)s.paid+=hintCost(s);
+  s.hints++;s.paidHints=(s.paidHints||0)+(paid?1:0);applyHintAction(s,s.hints);
+}
+
+/* ---- respostas ---- */
+function submitStage(){
+  var s=curSt();if(!s)return;var inp=$("gIn"),k=s.att.length+1;
+  if(s.id==="fc"||s.id==="ax"){
+    var raw=(inp&&inp.value||"").replace(/[−–]/g,"-").replace(",",".").replace(/[^0-9.+-]/g,"");var u=parseFloat(raw);if(isNaN(u))return;
+    if(s.id==="ax"&&G.axNeg&&u>0)u=-u;
+    var a,st2,fb;
+    if(s.id==="fc"){var tol=Math.max(5,0.1*G.hr),d=u-G.hr;st2=Math.abs(d)<=tol?"g":Math.abs(d)<=0.25*G.hr?"y":"x";fb=st2==="g"?"":t(d<0?"fb_up":"fb_down");a={v:Math.round(u)+" bpm",s:st2,fb:fb};}
+    else{u=((u+540)%360)-180;var dd=axDiff(u,G.M.axdeg);st2=Math.abs(dd)<=30?"g":Math.abs(dd)<=60?"y":"x";fb=st2==="g"?"":t(dd<0?"fb_cw":"fb_ccw");a={v:fmtAx(u)+"°",s:st2,fb:fb};}
+    s.att.push(a);
+  }else if(s.id==="rh"){
+    if(!G.sel)return;var j=judgeRhythm(G.sel,G.K);s.att.push({v:vName(VBY[G.sel]),id:G.sel,s:j});G.sel=null;
+  }else{
+    var news=G.chips.filter(function(c){return !c.s;});if(!news.length)return;
+    var before=Object.keys(G.found).length,row=[];
+    G.chips.forEach(function(c){if(c.s)return;var r=judgeFinding(c.id,G.K,G.found);c.s=r.s;if(r.s==="g")G.found[r.i]=k;row.push({id:c.id,s:r.s});});
+    G.chips=G.chips.filter(function(c){return c.s==="g"||c.s==="o"||c.s==="p";});
+    var after=Object.keys(G.found).length,all=after===G.K.req.length;
+    s.att.push({row:row,s:all?"g":after>before?"y":"x"});
+    if(all){s.done=true;s.ok=true;}
+    else if(s.att.length>=3){s.done=true;}
+    else if(s.hints<s.att.length)showHint(s,false);
+    if(s.done){s.score=stageScore(s);nextStage();}
+    renderGame(true);return;
+  }
+  var last=s.att[s.att.length-1];
+  if(last.s==="g"){s.done=true;s.ok=true;}else if(s.att.length>=3)s.done=true;else if(s.hints<s.att.length)showHint(s,false);
+  if(s.done){s.score=stageScore(s);nextStage();}
+  renderGame(true);
+}
+function nextStage(){
+  RS.hl=null;
+  if(G.si<G.st.length-1){G.si++;}else finishGame();
+  drawReal();if(RS.full)drawFull();
+}
+function finishGame(){
+  G.done=true;G.total=totalScore();
+  var grid=shareGrid();
+  if(G.mode==="daily"){
+    var D=lsGet("ecglab:daily",{hist:{},streak:0,best:0});D.hist=D.hist||{};
+    if(!D.hist[G.n]){var prev=D.hist[G.n-1];D.streak=prev?(D.streak||0)+1:1;D.best=Math.max(D.best||0,D.streak);D.hist[G.n]={s:G.total,g:grid,id:G.M.id};D.last=G.n;lsSet("ecglab:daily",D);}
+  }else{var P=lsGet("ecglab:pro",{n:0,sum:0,best:0});P.n++;P.sum+=G.total;P.best=Math.max(P.best,G.total);lsSet("ecglab:pro",P);}
+  renderRStats();
+}
+var EMO={g:"🟩",y:"🟨",x:"⬜"};
+function shareGrid(){
+  return G.st.map(function(s){return stName(s.id)+" "+s.att.map(function(a){return EMO[a.s];}).join("")+(s.paidHints?"💡":"")+(s.done&&!s.ok&&s.id!=="fd"?"❌":"");}).join("\n");
+}
+function shareText(){
+  var head=G.mode==="daily"?"ECG Lab · "+t("daily_title",{n:G.n}):"ECG Lab · "+t("pro_title");
+  var sc=G.replay?G.replay.s:G.total,grid=G.replay?G.replay.g:shareGrid();
+  return head+"\n"+sc+"/100\n"+grid+"\n"+siteURL();
+}
+function doShare(){
+  var txt=shareText();
+  if(navigator.share&&/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)){navigator.share({text:txt}).catch(function(){});return;}
+  var done=function(){toast(t("copied"));};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done,function(){fallbackCopy(txt);done();});else{fallbackCopy(txt);done();}
+}
+function fallbackCopy(txt){var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");}catch(e){}document.body.removeChild(ta);}
+function toast(msg){var el=document.createElement("div");el.className="toast";el.setAttribute("role","status");el.textContent=msg;document.body.appendChild(el);setTimeout(function(){el.remove();},2600);}
+
+/* ---- desenho da interface ---- */
+function chipHTML(id,s,removable,idx){
+  var ic={g:"✓ ",y:"≈ ",x:"✕ ",o:"+ ",p:"? ",d:"= "}[s]||"",tip=s==="o"?t("s_o"):s==="p"?t("s_p"):s==="d"?t("s_d"):"";
+  return '<span class="gc '+(s||"n")+'"'+(tip?' title="'+esc(tip)+'"':"")+">"+ic+esc(vName(VBY[id]))+(tip?' <small>('+esc(tip)+")</small>":"")+(removable?'<button type="button" data-rm="'+idx+'" aria-label="remover">×</button>':"")+"</span>";
+}
+function attHTML(s){
+  if(!s.att.length)return "";
+  return '<div class="grows">'+s.att.map(function(a,i){
+    var lab="<small>"+(i+1)+".</small>";
+    if(a.row)return '<div class="rowl">'+lab+a.row.map(function(c){return chipHTML(c.id,c.s);}).join("")+"</div>";
+    return '<div class="rowl">'+lab+'<span class="gc '+a.s+'">'+({g:"✓ ",y:"≈ ",x:"✕ "}[a.s])+esc(a.v)+"</span>"+(a.fb?'<small class="fbm">'+esc(a.fb)+"</small>":"")+"</div>";
+  }).join("")+"</div>";
+}
+function stepsHTML(){
+  return '<div class="gsteps">'+G.st.map(function(s,i){var c=s.done?(s.ok||(s.id==="fd"&&s.score>0)?"ok":"fail"):(i===G.si&&!G.done?"cur":"");return '<span class="'+c+'">'+(i+1)+". "+stName(s.id)+"</span>";}).join("")+"</div>";
+}
+function truthOf(s){
+  if(s.id==="fc")return G.hr+" bpm";if(s.id==="ax")return fmtAx(G.M.axdeg)+"°";
+  if(s.id==="rh")return G.K.rh.codes.map(function(c){return T[c]?T[c][LI()]:c;}).join(" + ");
+  return "";
+}
+function doneRowHTML(s,i){
+  var res;
+  if(s.id==="fd")res=t("res_fd",{a:Object.keys(G.found).length,b:G.K.req.length});
+  else res=s.ok?t("res_ok",{n:s.att.length})+" ("+truthOf(s)+")":t("res_fail",{a:truthOf(s)});
+  return '<div class="gdone"><span><b>'+(i+1)+". "+stName(s.id)+"</b> · "+esc(res)+'</span><span class="e">'+s.att.map(function(a){return EMO[a.s];}).join("")+(s.paidHints?"💡":"")+" "+s.score+"/"+s.V+"</span></div>";
+}
+function stageHTML(s){
+  var h='<div class="gstage"><div class="ghead"><b>'+(G.si+1)+". "+stName(s.id)+'</b><span class="gtries">'+t("try_n",{a:Math.min(3,s.att.length+1)})+"</span></div>";
+  h+='<p class="gq">'+t("q_"+s.id)+"</p>";
+  if(s.id==="fc")h+='<div class="grow2"><input class="ginput" id="gIn" inputmode="numeric" autocomplete="off" placeholder="'+t("ph_fc")+'" aria-label="'+t("st_fc")+'"><span class="unit">bpm</span></div>';
+  else if(s.id==="ax")h+='<div class="grow2"><button type="button" class="btn sgnbtn'+(G.axNeg?" sel":"")+'" id="gSign" aria-label="±">'+(G.axNeg?"−":"+")+'</button><input class="ginput" id="gIn" inputmode="numeric" autocomplete="off" placeholder="'+t("ph_ax")+'" aria-label="'+t("st_ax")+'"><span class="unit">°</span></div>';
+  else{
+    h+='<div class="ac"><input class="ginput" id="gIn" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="'+t("ph_txt")+'" role="combobox" aria-expanded="false" aria-controls="gList" aria-label="'+stName(s.id)+'"><ul class="aclist" id="gList" role="listbox" hidden></ul></div>';
+    if(s.id==="rh"&&G.sel)h+='<div class="gchips">'+chipHTML(G.sel,"",true,-1)+"</div>";
+    if(s.id==="fd"&&G.chips.length)h+='<div class="gchips">'+G.chips.map(function(c,i){return chipHTML(c.id,c.s,!c.s,i);}).join("")+"</div>";
+  }
+  var canSend=s.id==="rh"?!!G.sel:s.id==="fd"?G.chips.some(function(c){return !c.s;}):true;
+  var hb=s.hints>=3?'<button class="btn ghost" disabled>'+t("no_more")+"</button>":'<button class="btn ghost" id="gmHint">'+t(s.id==="fd"&&s.hints===2?"hint_ctx":"hint_btn",{n:hintCost(s)})+"</button>";
+  h+='<div class="gbtns"><button class="btn primary" id="gSend"'+(canSend?"":" disabled")+">"+t("send")+"</button>"+hb+"</div>";
+  if(s.id==="fd"&&s.att.length){var left=G.K.req.length-Object.keys(G.found).length;h+='<p class="gleft">'+(left===1?t("left1"):t("left",{n:left}))+"</p>";}
+  h+=attHTML(s);
+  if(s.id==="fd"&&s.att.length)h+='<p class="gnote">'+t("legend")+"</p>";
+  if(s.hints){h+='<ul class="ghints">';for(var i=1;i<=s.hints;i++)h+="<li><b>"+t("lbl_hint")+" "+i+".</b> "+esc(hintText(s,i))+"</li>";h+="</ul>";}
+  return h+"</div>";
+}
+function keyHTML(){
+  var K=G.K,M=G.M,h='<div class="gkey"><h3>'+t("key_h")+"</h3><ul>";
+  if(G.hr)h+="<li>"+t("key_fc",{n:G.hr})+"</li>";
+  if(K.rh)h+="<li>"+esc(t("key_rh",{a:truthOf({id:"rh"})}))+"</li>";
+  if(M.axdeg!=null)h+="<li>"+t("key_ax",{n:fmtAx(M.axdeg)})+"</li>";
+  h+="</ul><h4>"+t("key_fd")+"</h4><ul>";
+  K.req.forEach(function(r,i){var ok=!G.replay&&G.found[i],gal=GALOF[r.id];
+    h+="<li>"+(G.replay?"":ok?'<span class="mk ok">✓</span> ':'<span class="mk no">✕</span> ')+esc(reqName(r))+(gal&&GBY[gal]?'<button class="lnk" data-gal="'+gal+'">'+t("understand")+"</button>":"")+"</li>";});
+  h+="</ul>";
+  var o=Object.keys(K.opt).map(function(k){return k==="isq"?reqName(K.opt[k]):vName(VBY[k]);}),p=Object.keys(K.pos).map(function(k){var x=K.pos[k];return x.kind==="isq"?reqName(x):vName(VBY[x.id]);});
+  if(o.length)h+="<h4>"+t("key_opt")+"</h4><p>"+esc(o.join("; "))+"</p>";
+  if(p.length)h+="<h4>"+t("key_pos")+"</h4><p>"+esc(p.join("; "))+"</p>";
+  var laudo=Object.keys(M.codes).map(function(c){var x=T[c]?T[c][LI()]:c;return isDiag(c)&&M.codes[c]<50?x+" ("+t("possible")+")":x;});
+  h+="<h4>"+t("laudo_h")+'</h4><ul class="laudo">'+laudo.map(function(x){return "<li>"+esc(x)+"</li>";}).join("")+"</ul>";
+  if(M.report)h+='<p class="orig">'+t("orig")+" "+esc(M.report)+"</p>";
+  h+='<p class="gnote">'+t("key_note")+"</p>";
+  h+="<h4>"+t("ctx_h")+"</h4><p>"+esc(scenario(M))+'</p><p class="gnote">'+t("ctx_note")+"</p>";
+  return h+"</div>";
+}
+function finalHTML(){
+  var sc=G.replay?G.replay.s:G.total,grid=G.replay?G.replay.g:shareGrid();
+  var msg=t(sc>=90?"msg_a":sc>=70?"msg_b":sc>=50?"msg_c":"msg_d");
+  var h='<div class="gfinal"><h3>'+t(G.replay?"daily_done":"fin_h")+'</h3><p class="gscore">'+sc+"<small>/100</small></p><p>"+msg+'</p><pre class="ggrid">'+esc(grid)+"</pre>";
+  if(G.mode==="daily"){var D=lsGet("ecglab:daily",{streak:0,best:0}),now=new Date(),mid=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1),ms=mid-now;
+    h+='<p class="gnote">'+t("daily_next",{h:Math.floor(ms/36e5),m:Math.floor(ms%36e5/6e4)})+" "+t("streak_d",{n:D.streak||0})+".</p>";}
+  h+='<div class="gbtns"><button class="btn primary" id="gShare">'+t("share")+'</button><button class="btn" id="gNext">'+t(G.mode==="daily"?"train":"next_case")+"</button></div></div>";
+  return h+keyHTML();
+}
+function renderGame(keepFocus){
+  if(RS.mode==="quiz")return;
+  if(!G){if(!RS.bank.length)startGame();return;}
+  $("rPrompt").textContent=G.mode==="daily"?t("daily_title",{n:G.n}):t("pro_title");
+  var M=G.M,meta=[];if(M.sex===0||M.sex===1)meta.push(t(M.sex===1?"woman":"man"));if(M.age&&M.age<120)meta.push(t("years",{n:Math.round(M.age)}));else if(M.age>=120)meta.push(t("over89"));
+  $("rSrc").textContent=t("record",{id:String(M.id).padStart(5,"0"),fs:G.C.fs})+(meta.length?". "+meta.join(", "):"");
+  $("fullTitle").textContent=$("rPrompt").textContent;
+  var h=G.replay?"":stepsHTML();
+  if(!G.replay)G.st.forEach(function(s,i){if(s.done)h+=doneRowHTML(s,i);});
+  if(G.done)h+=finalHTML();else h+=stageHTML(G.st[G.si]);
+  var box=$("rGame");box.innerHTML=h;bindGame();
+  var inp=$("gIn");if(inp&&keepFocus&&!/Mobile|Android|iPhone/i.test(navigator.userAgent))inp.focus();
+  $("rHint").textContent=t(RS.measure?"hint_measure":"hint_zoom");
+}
+function bindGame(){
+  var inp=$("gIn"),s=curSt();
+  if($("gSend"))$("gSend").addEventListener("click",submitStage);
+  if($("gmHint"))$("gmHint").addEventListener("click",function(){var s2=curSt();showHint(s2,true);renderGame();});
+  if($("gSign"))$("gSign").addEventListener("click",function(){G.axNeg=!G.axNeg;var v=$("gIn").value;renderGame();$("gIn").value=v;});
+  if($("gShare"))$("gShare").addEventListener("click",doShare);
+  if($("gNext"))$("gNext").addEventListener("click",function(){if(G.mode==="daily")setMode("pro");else startGame();window.scrollTo({top:0,behavior:"smooth"});});
+  $("rGame").querySelectorAll("[data-gal]").forEach(function(b){b.addEventListener("click",function(){var g=b.getAttribute("data-gal");setTab("aprender");setSub("achados");openGal(g);});});
+  $("rGame").querySelectorAll("[data-rm]").forEach(function(b){b.addEventListener("click",function(){var i=+b.getAttribute("data-rm");if(i<0)G.sel=null;else G.chips.splice(i,1);renderGame(true);});});
+  if(!inp||!s)return;
+  if(s.id==="fc"||s.id==="ax"){inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();submitStage();}});return;}
+  inp.addEventListener("input",function(){updateSug(inp.value,s.id==="rh"?"r":"a");});
+  inp.addEventListener("keydown",function(e){
+    var L2=$("gList");
+    if(e.key==="ArrowDown"||e.key==="ArrowUp"){if(!GSUG.length)return;e.preventDefault();GACT=(GACT+(e.key==="ArrowDown"?1:GSUG.length-1))%GSUG.length;paintSug();return;}
+    if(e.key==="Enter"){e.preventDefault();if(GSUG.length&&!L2.hidden)pickSug(GSUG[GACT].id);else if(!$("gSend").disabled)submitStage();return;}
+    if(e.key==="Escape"){L2.hidden=true;inp.setAttribute("aria-expanded","false");}
+  });
+}
+function updateSug(q,cat){
+  var L2=$("gList"),inp=$("gIn"),nq=nrm(q);
+  if(!nq){GSUG=[];L2.hidden=true;inp.setAttribute("aria-expanded","false");return;}
+  GSUG=vSearch(q,cat);GACT=0;
+  if(!GSUG.length){var ok=nq.length>=3;L2.innerHTML=ok?'<li class="none">'+t("none_match")+"</li>":"";L2.hidden=!ok;inp.setAttribute("aria-expanded",ok?"true":"false");return;}
+  paintSug();
+}
+function paintSug(){
+  var L2=$("gList"),inp=$("gIn");
+  L2.innerHTML=GSUG.map(function(v,i){return '<li role="option" id="gOpt'+i+'" data-id="'+v.id+'"'+(i===GACT?' class="on" aria-selected="true"':"")+">"+esc(vName(v))+"</li>";}).join("");
+  L2.hidden=false;inp.setAttribute("aria-expanded","true");inp.setAttribute("aria-activedescendant","gOpt"+GACT);
+  L2.querySelectorAll("li[data-id]").forEach(function(li){li.addEventListener("mousedown",function(e){e.preventDefault();});li.addEventListener("click",function(){pickSug(li.getAttribute("data-id"));});});
+}
+function pickSug(id){
+  var s=curSt();if(!s)return;
+  if(s.id==="rh")G.sel=id;
+  else if(!G.chips.some(function(c){return c.id===id;}))G.chips.push({id:id});
+  GSUG=[];renderGame(true);
+}
+function reportGame(){
+  if(!G)return;var det=[t(G.mode==="daily"?"m_daily":"pro_title")+(G.n?" #"+G.n:"")];
+  det.push(t("rep_game",{s:G.st.map(function(s){return stName(s.id)+" "+s.att.map(function(a){return a.v||(a.row||[]).map(function(c){return c.id+":"+c.s;}).join(",");}).join(" / ");}).join(" | ")}));
+  det.push(t("key_fd")+": "+G.K.req.map(reqName).join("; "));
+  det.push("lang: "+LANG,"v: "+APP_V);
+  openReport("Casos reais > "+(G.mode==="daily"?"ECG do dia":"Modo pró"),"PTB-XL "+G.M.id,det.join(" | "),siteURL()+"#caso="+G.M.id);
+}
+function renderGameStats(){
+  if(RS.mode==="daily"){var D=lsGet("ecglab:daily",{streak:0,best:0}),last=D.last,today=dayNumber(),stk=(last===today||last===today-1)?(D.streak||0):0;
+    $("rStat").innerHTML=t("streak_d",{n:"<b>"+stk+"</b>"});$("rStreak").innerHTML=t("best_d",{n:"<b>"+(D.best||0)+"</b>"});return;}
+  var P=lsGet("ecglab:pro",{n:0,sum:0});$("rStat").innerHTML=t("avg_p",{a:"<b>"+(P.n?Math.round(P.sum/P.n):0)+"</b>",n:P.n});$("rStreak").innerHTML="";
+}
+document.querySelectorAll("#rMode button").forEach(function(b){b.addEventListener("click",function(){var m=b.getAttribute("data-m");if(m!==RS.mode)setMode(m);});});
 
 /* ---------- início ---------- */
 newPapel();newNormal();newQ();
 applyLang();setSub("papel");
 loadBank().then(function(){
-  if(RS.bank.length)RS.src="bank";renderSrcBar();renderBankInfo();startSession();
+  if(RS.bank.length)RS.src="bank";RS.loadingPack=true;renderSrcBar();renderBankInfo();startReal();
   return autoPack().then(function(did){
-    if(!did)return;
+    RS.loadingPack=false;
+    if(!did){if(RS.mode!=="quiz"&&!G)startGame();return;}
     return loadBank().then(function(){
       var fresh=RS.src==="demo"&&RS.sess&&RS.sess.i===0&&!(RS.cur&&RS.cur.answered)&&!RS.full;
       if(fresh)RS.src="bank";
-      renderSrcBar();renderBankInfo();if(fresh)startSession();
+      renderSrcBar();renderBankInfo();
+      if(RS.mode!=="quiz"){if(!G)startGame();}else if(fresh)startSession();
     });
-  }).then(applyHash,applyHash);
+  },function(e){RS.loadingPack=false;RS.packFailed=true;RS.packErr=e&&e.message?e.message:String(e);renderBankInfo();if(RS.mode!=="quiz"&&!G)startGame();}).then(applyHash,applyHash);
 }).catch(function(e){console.warn("ECG Lab:",e&&e.message?e.message:e);renderBankInfo();});
 
 })();
